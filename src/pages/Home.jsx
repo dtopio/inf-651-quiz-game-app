@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import {
   Card,
   CardHeader,
@@ -8,15 +9,21 @@ import {
 } from '@/components/ui'
 
 const categories = [
-  { id: 1, title: 'Science', description: 'Test your knowledge of physics, chemistry, and biology', icon: '🔬' },
-  { id: 2, title: 'History', description: 'Explore events that shaped our world', icon: '📜' },
-  { id: 3, title: 'Art', description: 'Discover famous artists and masterpieces', icon: '🎨' },
-  { id: 4, title: 'Geography', description: 'Journey through countries and capitals', icon: '🌍' },
-  { id: 5, title: 'Technology', description: 'Challenge yourself with tech trivia', icon: '💻' },
-  { id: 6, title: 'Sports', description: 'Score big with sports knowledge', icon: '⚽' },
+  { id: 1, key: 'science', title: 'Science', description: 'Test your knowledge of physics, chemistry, and biology', icon: '🔬' },
+  { id: 2, key: 'history', title: 'History', description: 'Explore events that shaped our world', icon: '📜' },
+  { id: 3, key: 'art', title: 'Art', description: 'Discover famous artists and masterpieces', icon: '🎨' },
+  { id: 4, key: 'geography', title: 'Geography', description: 'Journey through countries and capitals', icon: '🌍' },
+  { id: 5, key: 'technology', title: 'Technology', description: 'Challenge yourself with tech trivia', icon: '💻' },
+  { id: 6, key: 'sports', title: 'Sports', description: 'Score big with sports knowledge', icon: '⚽' },
 ]
 
 export default function Home() {
+  const navigate = useNavigate();
+
+  const handleStartQuiz = (category) => {
+    navigate("/quiz", { state: { category } });
+  };
+
   return (
     <>
       {/* Title */}
@@ -53,7 +60,10 @@ export default function Home() {
             </CardHeader>
 
             <CardFooter className="p-6 pt-0 flex justify-center">
-              <button className="px-6 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-sm font-semibold rounded-lg shadow-md hover:shadow-xl hover:scale-105 transition-all duration-200">
+              <button 
+                className="px-6 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-sm font-semibold rounded-lg shadow-md hover:shadow-xl hover:scale-105 transition-all duration-200"
+                onClick={() => handleStartQuiz(category)}
+              >
                 Start Quiz →
               </button>
             </CardFooter>
