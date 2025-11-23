@@ -39,8 +39,9 @@ export const Sidebar = React.forwardRef(({ className, ...props }, ref) => {
             ? "fixed top-0 left-0 translate-x-0"
             : "fixed top-0 left-0 -translate-x-full",
 
-          // --- DESKTOP: static (not fixed), grows with page ---
-          "md:static md:translate-x-0",
+          // --- DESKTOP: fixed -- keeps sidebar pinned and prevents layout shift ---
+          "md:fixed md:top-0 md:left-0 md:translate-x-0",
+
 
           // --- TRANSITIONS ---
           "transition-transform duration-300",
