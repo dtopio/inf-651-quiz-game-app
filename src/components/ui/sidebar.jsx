@@ -28,7 +28,7 @@ export const Sidebar = React.forwardRef(({ className, ...props }, ref) => {
         ref={ref}
         className={cn(
           // --- SIZE ---
-          "w-64 min-h-screen shadow-2xl",
+          "w-64 h-full shadow-2xl",
 
           // --- BACKGROUND STYLING ---
           "bg-gradient-to-b from-purple-700/70 to-purple-900/70 backdrop-blur-xl",
@@ -39,8 +39,9 @@ export const Sidebar = React.forwardRef(({ className, ...props }, ref) => {
             ? "fixed top-0 left-0 translate-x-0"
             : "fixed top-0 left-0 -translate-x-full",
 
-          // --- DESKTOP: static (not fixed), grows with page ---
-          "md:static md:translate-x-0",
+          // --- DESKTOP: fixed sidebar always visible ---
+          "md:fixed md:top-0 md:left-0 md:translate-x-0",
+
 
           // --- TRANSITIONS ---
           "transition-transform duration-300",
