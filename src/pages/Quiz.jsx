@@ -1,10 +1,49 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { QUESTION_BANK } from '@/data/questions';
 import { useQuizHistory } from "@/context/QuizHistory.jsx";
 import { CATEGORIES } from "@/data/categories";
 
+
+
+const PROGRESS_KEY_PREFIX = "quizProgress-";
+
+function getProgressKey(categoryKey) {
+  return `${PROGRESS_KEY_PREFIX}${categoryKey}`;
+}
+
+function loadProgress(categoryKey) {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = window.localStorage.getItem(getProgressKey(categoryKey));
+    if (!raw) return null;
+    return JSON.parse(raw);
+  } catch {
+    return null;
+  }
+}
+
+function saveProgress(categoryKey, data) {
+  if (typeof window === "undefined") return;
+  try {
+    window.localStorage.setItem(
+      getProgressKey(categoryKey),
+      JSON.stringify(data)
+    );
+  } catch {
+    // ignore
+  }
+}
+
+function clearProgress(categoryKey) {
+  if (typeof window === "undefined") return;
+  try {
+    window.localStorage.removeItem(getProgressKey(categoryKey));
+  } catch {
+    // ignore
+  }
+}
 
 
 export default function Quiz() {
@@ -26,32 +65,75 @@ export default function Quiz() {
   const [answers, setAnswers] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  const [showResumePrompt, setShowResumePrompt] = useState(false);
+
   const currentQuestion = questions[currentIndex];
+
+  useEffect(() => {
+    if (isSubmitted) return;
+    const saved = loadProgress(categoryKey);
+    if (saved && typeof saved.currentIndex === "number") {
+      setShowResumePrompt(true);
+    }
+  }, [categoryKey, isSubmitted]);
 
   const handleOptionSelect = (optionIndex) => {
     if (isSubmitted) return;
-    setAnswers((prev) => ({ ...prev, [currentIndex]: optionIndex }));
+    setAnswers((prev) => {
+      const updated = { ...prev, [currentIndex]: optionIndex };
+      saveProgress(categoryKey, {
+        currentIndex,
+        answers: updated,
+      });
+      return updated;
+    });
   };
+
 
   const handleNext = () => {
     if (isSubmitted) return;
-
-    if (currentIndex >= totalQuestions - 1) {
-      handleSubmit();
-      return;
+    if (currentIndex < totalQuestions - 1) {
+      const newIndex = currentIndex + 1;
+      setCurrentIndex(newIndex);
+      saveProgress(categoryKey, {
+        currentIndex: newIndex,
+        answers,
+      });
     }
-
-    setCurrentIndex((prev) => prev + 1);
   };
 
   const handlePrevious = () => {
     if (isSubmitted) return;
     if (currentIndex > 0) {
-      setCurrentIndex((prev) => prev - 1);
+      const newIndex = currentIndex - 1;
+      setCurrentIndex(newIndex);
+      saveProgress(categoryKey, {
+        currentIndex: newIndex,
+        answers,
+      });
     }
   };
 
+
+  const handleResume = () => {
+    const saved = loadProgress(categoryKey);
+    if (saved) {
+      setCurrentIndex(saved.currentIndex || 0);
+      setAnswers(saved.answers || {});
+    }
+    setShowResumePrompt(false);
+  };
+
+  const handleStartOver = () => {
+    clearProgress(categoryKey);
+    setCurrentIndex(0);
+    setAnswers({});
+    setShowResumePrompt(false);
+  };
+
+
   const handleSubmit = () => {
+    clearProgress(categoryKey);
     setIsSubmitted(true);
 
     // Save the result to global history + localStorage
@@ -64,6 +146,21 @@ export default function Quiz() {
       answers: answers,
       timestamp: Date.now()
     });
+  };
+  const handleBackClick = () => {
+    const hasAnswers = Object.keys(answers).length > 0;
+
+    if (hasAnswers && !isSubmitted) {
+      setShowResumePrompt(true);
+    } else {
+      navigate(-1);
+    }
+  };
+
+
+  const handleQuit = () => {
+    clearProgress(categoryKey);
+    navigate("/");
   };
 
 
@@ -79,14 +176,14 @@ export default function Quiz() {
   return (
     <div className="flex justify-center">
       <div className="w-full max-w-2xl">
-        {/* Header: back + title */}
         <div className="flex items-center mb-6 gap-3">
           <button
-            onClick={() => navigate(-1)}
+            onClick={handleBackClick}
             className="p-2 rounded-full bg-white shadow-sm border hover:shadow-md transition"
           >
             <ArrowLeftIcon className="w-5 h-5 text-slate-700" />
           </button>
+
           <div>
             <h1 className="text-2xl font-bold text-slate-900 flex items-center gap-2">
               <span className="text-3xl">{categoryIcon}</span>
@@ -96,29 +193,48 @@ export default function Quiz() {
           </div>
         </div>
 
-        {/* If submitted → show results instead of the main card */}
-        {!isSubmitted ? (
-          // -------- QUIZ VIEW --------
+        {showResumePrompt && !isSubmitted ? (
           <div className="bg-white rounded-3xl shadow-xl border border-slate-100 px-6 py-6 md:px-10 md:py-8">
-            {/* Top row: progress + quit */}
+            <h2 className="text-xl font-semibold text-slate-900 mb-3">
+              Continue your {categoryTitle} quiz?
+            </h2>
+            <p className="text-sm text-slate-600 mb-6">
+              We found an unfinished {categoryTitle} quiz. Do you want to continue
+              where you left off or start a new quiz?
+            </p>
+            <div className="flex gap-3">
+              <button
+                onClick={handleResume}
+                className="flex-1 rounded-xl px-4 py-3 font-semibold text-sm md:text-base border bg-indigo-600 text-white border-indigo-600 hover:bg-indigo-700"
+              >
+                Continue
+              </button>
+              <button
+                onClick={handleStartOver}
+                className="flex-1 rounded-xl px-4 py-3 font-semibold text-sm md:text-base border bg-white text-slate-800 border-slate-300 hover:bg-slate-50"
+              >
+                Start Over
+              </button>
+            </div>
+          </div>
+        ) : !isSubmitted ? (
+          <div className="bg-white rounded-3xl shadow-xl border border-slate-100 px-6 py-6 md:px-10 md:py-8">
             <div className="flex items-center justify-between mb-4 text-sm">
               <p className="text-indigo-700 font-semibold">
                 Question: {currentIndex + 1}/{totalQuestions}
               </p>
               <button
-                onClick={() => navigate("/")}
+                onClick={handleQuit}
                 className="text-red-500 font-medium hover:underline"
               >
                 Quit
               </button>
             </div>
 
-            {/* Question text */}
             <h2 className="text-xl md:text-2xl font-semibold text-slate-900 mb-6 leading-relaxed">
               {currentQuestion.question}
             </h2>
 
-            {/* Options */}
             <div className="space-y-3 mb-4">
               {currentQuestion.options.map((option, index) => {
                 const isSelected = answers[currentIndex] === index;
@@ -140,9 +256,7 @@ export default function Quiz() {
               })}
             </div>
 
-            {/* Navigation buttons */}
             <div className="mt-4 flex justify-between gap-4">
-              {/* PREVIOUS */}
               <button
                 type="button"
                 onClick={handlePrevious}
@@ -157,7 +271,6 @@ export default function Quiz() {
                 Previous
               </button>
 
-              {/* NEXT or SUBMIT on last question */}
               {isLast ? (
                 <button
                   type="button"
@@ -190,9 +303,7 @@ export default function Quiz() {
             </div>
           </div>
         ) : (
-          // -------- RESULTS VIEW --------
           <div>
-            {/* Summary card */}
             <div className="mb-6 bg-white rounded-2xl shadow border border-slate-100 px-6 py-4">
               <h2 className="text-xl font-semibold text-slate-900 mb-1">
                 Your Result
@@ -207,26 +318,21 @@ export default function Quiz() {
               </p>
             </div>
 
-            {/* Question-by-question feedback */}
             <div className="space-y-4">
               {questions.map((q, index) => {
                 const selectedIndex = answers[index];
                 const isCorrect = selectedIndex === q.answerIndex;
 
-                // Fallbacks for categories without explanations
                 const explanationCorrect =
-                  q.explanationCorrect ||
-                  "Nice! That is the correct answer.";
+                  q.explanationCorrect || "Nice! That is the correct answer.";
                 const explanationGenericWrong =
-                  q.explanationGenericWrong ||
-                  "This option is not the correct answer.";
+                  q.explanationGenericWrong || "This option is not the correct answer.";
 
                 return (
                   <div
                     key={q.id}
                     className="bg-white rounded-2xl shadow border border-slate-100 px-6 py-5"
                   >
-                    {/* Question header */}
                     <div className="flex items-center justify-between mb-2">
                       <p className="text-xs font-medium text-slate-500">
                         Question {index + 1} / {totalQuestions}
@@ -246,7 +352,6 @@ export default function Quiz() {
                       {q.question}
                     </h3>
 
-                    {/* Options — read-only */}
                     <div className="space-y-2 mb-4">
                       {q.options.map((option, optIndex) => {
                         const isSelected = selectedIndex === optIndex;
@@ -256,17 +361,14 @@ export default function Quiz() {
                           "w-full text-left rounded-xl border px-4 py-3 text-sm md:text-base";
 
                         if (isSelected && isCorrect) {
-                          styles +=
-                            " bg-emerald-600 text-white border-emerald-600";
+                          styles += " bg-emerald-600 text-white border-emerald-600";
                         } else if (isSelected && !isCorrect) {
-                          styles +=
-                            " bg-rose-600 text-white border-rose-600";
+                          styles += " bg-rose-600 text-white border-rose-600";
                         } else if (!isSelected && isAnswer && !isCorrect) {
                           styles +=
                             " bg-emerald-50 text-emerald-800 border-emerald-300";
                         } else {
-                          styles +=
-                            " bg-white text-slate-800 border-slate-200";
+                          styles += " bg-white text-slate-800 border-slate-200";
                         }
 
                         return (
@@ -277,7 +379,6 @@ export default function Quiz() {
                       })}
                     </div>
 
-                    {/* Feedback box */}
                     <div className="rounded-xl bg-slate-50 border border-slate-200 px-4 py-3 text-sm">
                       <p className="font-semibold mb-1">Feedback</p>
                       {isCorrect ? (
