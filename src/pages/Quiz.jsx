@@ -2,6 +2,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { QUESTION_BANK } from '@/data/questions';
+import { useQuizHistory } from "@/context/QuizHistory.jsx";
+import { CATEGORIES } from "@/data/categories";
+
+
 
 const PROGRESS_KEY_PREFIX = "quizProgress-";
 
@@ -45,10 +49,14 @@ function clearProgress(categoryKey) {
 export default function Quiz() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { addQuizResult } = useQuizHistory();
 
   const passedCategory = location.state?.category;
   const categoryKey = passedCategory?.key || "science";
   const categoryTitle = passedCategory?.title || "Science";
+
+  const categoryInfo = CATEGORIES.find(c => c.key === categoryKey);
+  const categoryIcon = categoryInfo?.icon;
 
   const questions = QUESTION_BANK[categoryKey] || QUESTION_BANK.science;
   const totalQuestions = questions.length;
@@ -127,6 +135,17 @@ export default function Quiz() {
   const handleSubmit = () => {
     clearProgress(categoryKey);
     setIsSubmitted(true);
+
+    // Save the result to global history + localStorage
+    addQuizResult({
+      category: categoryTitle,
+      categoryKey: categoryKey,
+      score: correctCount,
+      total: totalQuestions,
+      percentage: Math.round((correctCount / totalQuestions) * 100),
+      answers: answers,
+      timestamp: Date.now()
+    });
   };
   const handleBackClick = () => {
     const hasAnswers = Object.keys(answers).length > 0;
@@ -143,6 +162,7 @@ export default function Quiz() {
     clearProgress(categoryKey);
     navigate("/");
   };
+
 
   const correctCount = questions.reduce((sum, q, index) => {
     const chosen = answers[index];
@@ -165,7 +185,8 @@ export default function Quiz() {
           </button>
 
           <div>
-            <h1 className="text-2xl font-bold text-slate-900">
+            <h1 className="text-2xl font-bold text-slate-900 flex items-center gap-2">
+              <span className="text-3xl">{categoryIcon}</span>
               {categoryTitle}
             </h1>
             <p className="text-sm text-slate-500">{totalQuestions} Questions</p>

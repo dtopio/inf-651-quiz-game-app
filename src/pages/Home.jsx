@@ -8,14 +8,8 @@ import {
   CardFooter,
 } from '@/components/ui'
 
-const categories = [
-  { id: 1, key: 'science', title: 'Science', description: 'Test your knowledge of physics, chemistry, and biology', icon: '🔬' },
-  { id: 2, key: 'history', title: 'History', description: 'Explore events that shaped our world', icon: '📜' },
-  { id: 3, key: 'art', title: 'Art', description: 'Discover famous artists and masterpieces', icon: '🎨' },
-  { id: 4, key: 'geography', title: 'Geography', description: 'Journey through countries and capitals', icon: '🌍' },
-  { id: 5, key: 'technology', title: 'Technology', description: 'Challenge yourself with tech trivia', icon: '💻' },
-  { id: 6, key: 'sports', title: 'Sports', description: 'Score big with sports knowledge', icon: '⚽' },
-]
+import { CATEGORIES as categories } from "@/data/categories";
+
 
 export default function Home() {
   const navigate = useNavigate();
