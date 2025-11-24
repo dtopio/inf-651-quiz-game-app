@@ -9,14 +9,13 @@ import About from "./pages/About.jsx";
 
 function App() {
   return (
-    <div className="flex min-h-screen">
-      {/* Sidebar on the left */}
+    <div className="flex">
+      {/* Sidebar is fixed on the left */}
       <Sidebar />
 
-      {/* Main content area */}
-      <main className="flex-1 min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
-        {/* This wrapper centers content and limits width */}
-        <div className="mx-auto max-w-6xl px-6 py-12">
+      {/* Main content */}
+      <main className="flex-1 min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 ml-64">
+        <div className="max-w-6xl mx-auto px-6 py-12">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/quiz" element={<Quiz />} />

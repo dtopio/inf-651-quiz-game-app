@@ -1,16 +1,23 @@
-// src/pages/Quiz.jsx
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { QUESTION_BANK } from '@/data/questions';
+import { useQuizHistory } from "@/context/QuizHistory.jsx";
+import { CATEGORIES } from "@/data/categories";
+
+
 
 export default function Quiz() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { addQuizResult } = useQuizHistory();
 
   const passedCategory = location.state?.category;
   const categoryKey = passedCategory?.key || "science";
   const categoryTitle = passedCategory?.title || "Science";
+
+  const categoryInfo = CATEGORIES.find(c => c.key === categoryKey);
+  const categoryIcon = categoryInfo?.icon;
 
   const questions = QUESTION_BANK[categoryKey] || QUESTION_BANK.science;
   const totalQuestions = questions.length;
@@ -46,7 +53,19 @@ export default function Quiz() {
 
   const handleSubmit = () => {
     setIsSubmitted(true);
+
+    // Save the result to global history + localStorage
+    addQuizResult({
+      category: categoryTitle,
+      categoryKey: categoryKey,
+      score: correctCount,
+      total: totalQuestions,
+      percentage: Math.round((correctCount / totalQuestions) * 100),
+      answers: answers,
+      timestamp: Date.now()
+    });
   };
+
 
   const correctCount = questions.reduce((sum, q, index) => {
     const chosen = answers[index];
@@ -69,7 +88,8 @@ export default function Quiz() {
             <ArrowLeftIcon className="w-5 h-5 text-slate-700" />
           </button>
           <div>
-            <h1 className="text-2xl font-bold text-slate-900">
+            <h1 className="text-2xl font-bold text-slate-900 flex items-center gap-2">
+              <span className="text-3xl">{categoryIcon}</span>
               {categoryTitle}
             </h1>
             <p className="text-sm text-slate-500">{totalQuestions} Questions</p>
