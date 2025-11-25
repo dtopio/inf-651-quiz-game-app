@@ -2,7 +2,7 @@ export const CATEGORIES = [
   {
     key: "science",
     title: "Science",
-    description: "Test your knowledge of physics, chemistry, and biology",
+    description: "Fun questions from nature to space",
     icon: "🔬",
   },
   {

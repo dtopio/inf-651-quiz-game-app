@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Sidebar } from "./components/ui/sidebar.jsx";
 import { Routes, Route } from "react-router-dom";
 
@@ -8,13 +9,27 @@ import Settings from "./pages/Settings.jsx";
 import About from "./pages/About.jsx";
 
 function App() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
   return (
-    <div className="flex">
-      {/* Sidebar is fixed on the left */}
-      <Sidebar />
+    <div className="flex h-screen overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50">
+
+      {/* Sidebar */}
+      <Sidebar
+        isOpen={isSidebarOpen}
+        onToggle={() => setIsSidebarOpen((prev) => !prev)}
+      />
 
       {/* Main content */}
-      <main className="flex-1 min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 ml-64">
+      <main
+        className={`
+          flex-1 
+          h-screen
+          overflow-y-auto
+          transition-all duration-300
+          ${isSidebarOpen ? "md:ml-64" : "ml-0"}
+        `}
+      >
         <div className="max-w-6xl mx-auto px-6 py-12">
           <Routes>
             <Route path="/" element={<Home />} />

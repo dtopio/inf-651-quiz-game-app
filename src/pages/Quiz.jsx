@@ -4,8 +4,15 @@ import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { QUESTION_BANK } from '@/data/questions';
 import { useQuizHistory } from "@/context/QuizHistory.jsx";
 import { CATEGORIES } from "@/data/categories";
+import { useSettings } from "@/context/SettingsContext.jsx";
 
-
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardFooter,
+} from "@/components/ui";
 
 const PROGRESS_KEY_PREFIX = "quizProgress-";
 
@@ -51,11 +58,13 @@ export default function Quiz() {
   const location = useLocation();
   const { addQuizResult } = useQuizHistory();
 
-  const passedCategory = location.state?.category;
-  const categoryKey = passedCategory?.key || "science";
-  const categoryTitle = passedCategory?.title || "Science";
+  const passedCategory = location.state?.category || null;
+  const [selectedCategory, setSelectedCategory] = useState(passedCategory);
+  const activeCategory = selectedCategory || passedCategory;
+  const categoryKey = activeCategory?.key || "science";
+  const categoryTitle = activeCategory?.title || "Science";
 
-  const categoryInfo = CATEGORIES.find(c => c.key === categoryKey);
+  const categoryInfo = CATEGORIES.find((c) => c.key === categoryKey);
   const categoryIcon = categoryInfo?.icon;
 
   const questions = QUESTION_BANK[categoryKey] || QUESTION_BANK.science;
@@ -64,18 +73,23 @@ export default function Quiz() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
-
+  
   const [showResumePrompt, setShowResumePrompt] = useState(false);
 
   const currentQuestion = questions[currentIndex];
 
+  const { listView } = useSettings();
+
+
   useEffect(() => {
+    if (!activeCategory) return;
     if (isSubmitted) return;
+
     const saved = loadProgress(categoryKey);
     if (saved && typeof saved.currentIndex === "number") {
       setShowResumePrompt(true);
     }
-  }, [categoryKey, isSubmitted]);
+  }, [activeCategory, categoryKey, isSubmitted]);
 
   const handleOptionSelect = (optionIndex) => {
     if (isSubmitted) return;
@@ -173,6 +187,122 @@ export default function Quiz() {
   const isLast = currentIndex === totalQuestions - 1;
   const allAnswered = Object.keys(answers).length === totalQuestions;
 
+  // Choose category screen (if none selected yet)
+  const hasCategory = !!activeCategory;
+
+  if (!hasCategory) {
+    return (
+      <div className="flex justify-center">
+        <div className="w-full max-w-6xl">
+          <div className="mb-12 text-center">
+            <h1 className="mb-4 text-5xl font-extrabold leading-[1.2] pb-1 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+              Pick a Category
+            </h1>
+            <p className="text-lg text-gray-600">
+              Choose a quiz to get started.
+            </p>
+          </div>
+
+          <div
+            className={
+              listView
+                ? "flex flex-col gap-4" // list view
+                : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10" // grid view
+            }
+          >
+            {CATEGORIES.map((category) => {
+              const description =
+                category.description ||
+                `Test your knowledge in ${category.title.toLowerCase()}.`;
+
+              return listView ? (
+                // ----- LIST MODE -----
+                <button
+                  key={category.key}
+                  onClick={() => {
+                    setSelectedCategory(category);
+                    setIsSubmitted(false);
+                    setCurrentIndex(0);
+                    setAnswers({});
+                    setShowResumePrompt(false);
+                  }}
+                  className="
+                    w-full flex items-center gap-4 p-4 
+                    bg-white border border-slate-200 rounded-xl 
+                    shadow-sm hover:shadow-md hover:-translate-y-[2px]
+                    transition-all
+                    text-left
+                  "
+                >
+                  <span className="text-3xl">{category.icon}</span>
+
+                  <div>
+                    <p className="text-lg font-semibold text-slate-900">
+                      {category.title}
+                    </p>
+                    <p className="text-sm text-slate-600">{description}</p>
+                  </div>
+
+                  <span className="ml-auto text-indigo-600 font-semibold">
+                    →
+                  </span>
+                </button>
+              ) : (
+                // ----- GRID MODE -----
+                <Card
+                  key={category.key}
+                  className="group h-80 flex flex-col bg-white border 
+                  border-gray-200 rounded-2xl shadow-lg hover:shadow-2xl 
+                  hover:-translate-y-2 transition-all duration-300 cursor-pointer w-full"
+                >
+                  <CardHeader className="flex-1 flex flex-col items-center justify-between p-6">
+                    <div className="w-20 h-20 flex items-center justify-center rounded-2xl 
+                      bg-gradient-to-br from-indigo-500 to-purple-600 shadow-lg 
+                      transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3"
+                    >
+                      <span className="text-4xl">{category.icon}</span>
+                    </div>
+
+                    <div className="flex flex-col items-center">
+                      <CardTitle className="text-2xl font-bold text-center text-gray-900 
+                        group-hover:text-indigo-600 transition-colors"
+                      >
+                        {category.title}
+                      </CardTitle>
+
+                      <CardDescription className="text-sm text-center text-gray-600 leading-relaxed mt-1">
+                        {description}
+                      </CardDescription>
+                    </div>
+                  </CardHeader>
+
+                  <CardFooter className="p-6 pt-0 flex justify-center">
+                    <button
+                      className="px-6 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 
+                      text-white text-sm font-semibold rounded-lg shadow-md 
+                      hover:shadow-xl hover:scale-105 transition-all duration-200"
+                      onClick={() => {
+                        setSelectedCategory(category);
+                        setIsSubmitted(false);
+                        setCurrentIndex(0);
+                        setAnswers({});
+                        setShowResumePrompt(false);
+                      }}
+                    >
+                      Start Quiz →
+                    </button>
+                  </CardFooter>
+                </Card>
+              );
+            })}
+          </div>
+
+        </div>
+      </div>
+    );
+  }
+
+  // Quiz 
   return (
     <div className="flex justify-center">
       <div className="w-full max-w-2xl">
