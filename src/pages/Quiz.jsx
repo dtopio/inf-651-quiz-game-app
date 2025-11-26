@@ -179,48 +179,68 @@ export default function Quiz() {
         <div className="flex items-center mb-6 gap-3">
           <button
             onClick={handleBackClick}
-            className="p-2 rounded-full bg-white shadow-sm border hover:shadow-md transition"
+            className="p-2 rounded-full shadow-sm border hover:shadow-md transition"
+            style={{ 
+              background: 'var(--card-bg)',
+              borderColor: 'var(--border)',
+              color: 'var(--text)'
+            }}
           >
-            <ArrowLeftIcon className="w-5 h-5 text-slate-700" />
+            <ArrowLeftIcon className="w-5 h-5" />
           </button>
 
           <div>
-            <h1 className="text-2xl font-bold text-slate-900 flex items-center gap-2">
+            <h1 className="text-2xl font-bold flex items-center gap-2" style={{ color: 'var(--text)' }}>
               <span className="text-3xl">{categoryIcon}</span>
               {categoryTitle}
             </h1>
-            <p className="text-sm text-slate-500">{totalQuestions} Questions</p>
+            <p className="text-sm text-muted-foreground">{totalQuestions} Questions</p>
           </div>
         </div>
 
         {showResumePrompt && !isSubmitted ? (
-          <div className="bg-white rounded-3xl shadow-xl border border-slate-100 px-6 py-6 md:px-10 md:py-8">
-            <h2 className="text-xl font-semibold text-slate-900 mb-3">
+          <div className="rounded-3xl shadow-xl border px-6 py-6 md:px-10 md:py-8"
+            style={{ 
+              background: 'var(--card-bg)',
+              borderColor: 'var(--border)'
+            }}
+          >
+            <h2 className="text-xl font-semibold mb-3" style={{ color: 'var(--text)' }}>
               Continue your {categoryTitle} quiz?
             </h2>
-            <p className="text-sm text-slate-600 mb-6">
+            <p className="text-sm text-muted-foreground mb-6">
               We found an unfinished {categoryTitle} quiz. Do you want to continue
               where you left off or start a new quiz?
             </p>
             <div className="flex gap-3">
               <button
                 onClick={handleResume}
-                className="flex-1 rounded-xl px-4 py-3 font-semibold text-sm md:text-base border bg-indigo-600 text-white border-indigo-600 hover:bg-indigo-700"
+                className="btn flex-1 rounded-xl px-4 py-3 font-semibold text-sm md:text-base"
               >
                 Continue
               </button>
               <button
                 onClick={handleStartOver}
-                className="flex-1 rounded-xl px-4 py-3 font-semibold text-sm md:text-base border bg-white text-slate-800 border-slate-300 hover:bg-slate-50"
+                className="flex-1 rounded-xl px-4 py-3 font-semibold text-sm md:text-base border hover:opacity-80 transition"
+                style={{ 
+                  background: 'var(--card-bg)',
+                  color: 'var(--text)',
+                  borderColor: 'var(--border)'
+                }}
               >
                 Start Over
               </button>
             </div>
           </div>
         ) : !isSubmitted ? (
-          <div className="bg-white rounded-3xl shadow-xl border border-slate-100 px-6 py-6 md:px-10 md:py-8">
+          <div className="rounded-3xl shadow-xl border px-6 py-6 md:px-10 md:py-8"
+            style={{ 
+              background: 'var(--card-bg)',
+              borderColor: 'var(--border)'
+            }}
+          >
             <div className="flex items-center justify-between mb-4 text-sm">
-              <p className="text-indigo-700 font-semibold">
+              <p className="font-semibold" style={{ color: 'var(--accent-1)' }}>
                 Question: {currentIndex + 1}/{totalQuestions}
               </p>
               <button
@@ -231,7 +251,7 @@ export default function Quiz() {
               </button>
             </div>
 
-            <h2 className="text-xl md:text-2xl font-semibold text-slate-900 mb-6 leading-relaxed">
+            <h2 className="text-xl md:text-2xl font-semibold mb-6 leading-relaxed" style={{ color: 'var(--text)' }}>
               {currentQuestion.question}
             </h2>
 
@@ -243,12 +263,14 @@ export default function Quiz() {
                     key={index}
                     type="button"
                     onClick={() => handleOptionSelect(index)}
-                    className={`w-full text-left rounded-xl border px-4 py-3 md:px-5 md:py-3.5 text-sm md:text-base transition-all shadow-sm
-                      ${
-                        isSelected
-                          ? "bg-indigo-600 text-white border-indigo-600 shadow-md scale-[1.01]"
-                          : "bg-white text-slate-800 border-slate-200 hover:border-indigo-400 hover:shadow-md"
-                      }`}
+                    className={`w-full text-left rounded-xl border px-4 py-3 md:px-5 md:py-3.5 text-sm md:text-base transition-all shadow-sm ${
+                      isSelected ? "btn shadow-md scale-[1.01]" : "hover:shadow-md"
+                    }`}
+                    style={!isSelected ? { 
+                      background: 'var(--card-bg)',
+                      color: 'var(--text)',
+                      borderColor: 'var(--border)'
+                    } : {}}
                   >
                     {option}
                   </button>
@@ -261,12 +283,14 @@ export default function Quiz() {
                 type="button"
                 onClick={handlePrevious}
                 disabled={isFirst}
-                className={`flex-1 md:flex-none md:w-40 rounded-xl px-4 py-3 font-semibold text-sm md:text-base border transition
-                  ${
-                    isFirst
-                      ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed"
-                      : "bg-white text-indigo-700 border-indigo-600 hover:bg-indigo-50"
-                  }`}
+                className={`flex-1 md:flex-none md:w-40 rounded-xl px-4 py-3 font-semibold text-sm md:text-base border transition ${
+                  isFirst ? "cursor-not-allowed opacity-50" : "btn"
+                }`}
+                style={isFirst ? { 
+                  background: 'var(--card-bg)',
+                  color: 'var(--muted)',
+                  borderColor: 'var(--border)'
+                } : {}}
               >
                 Previous
               </button>
@@ -276,12 +300,14 @@ export default function Quiz() {
                   type="button"
                   onClick={handleSubmit}
                   disabled={!allAnswered}
-                  className={`flex-1 md:flex-none md:w-40 rounded-xl px-4 py-3 font-semibold text-sm md:text-base border transition
-                    ${
-                      !allAnswered
-                        ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed"
-                        : "bg-indigo-600 text-white border-indigo-600 hover:bg-indigo-700"
-                    }`}
+                  className={`flex-1 md:flex-none md:w-40 rounded-xl px-4 py-3 font-semibold text-sm md:text-base border transition ${
+                    !allAnswered ? "cursor-not-allowed opacity-50" : "btn"
+                  }`}
+                  style={!allAnswered ? { 
+                    background: 'var(--card-bg)',
+                    color: 'var(--muted)',
+                    borderColor: 'var(--border)'
+                  } : {}}
                 >
                   Submit Quiz
                 </button>
@@ -290,12 +316,14 @@ export default function Quiz() {
                   type="button"
                   onClick={handleNext}
                   disabled={typeof answers[currentIndex] === "undefined"}
-                  className={`flex-1 md:flex-none md:w-40 rounded-xl px-4 py-3 font-semibold text-sm md:text-base border transition
-                    ${
-                      typeof answers[currentIndex] === "undefined"
-                        ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed"
-                        : "bg-indigo-600 text-white border-indigo-600 hover:bg-indigo-700"
-                    }`}
+                  className={`flex-1 md:flex-none md:w-40 rounded-xl px-4 py-3 font-semibold text-sm md:text-base border transition ${
+                    typeof answers[currentIndex] === "undefined" ? "cursor-not-allowed opacity-50" : "btn"
+                  }`}
+                  style={typeof answers[currentIndex] === "undefined" ? { 
+                    background: 'var(--card-bg)',
+                    color: 'var(--muted)',
+                    borderColor: 'var(--border)'
+                  } : {}}
                 >
                   Next
                 </button>
@@ -304,11 +332,16 @@ export default function Quiz() {
           </div>
         ) : (
           <div>
-            <div className="mb-6 bg-white rounded-2xl shadow border border-slate-100 px-6 py-4">
-              <h2 className="text-xl font-semibold text-slate-900 mb-1">
+            <div className="mb-6 rounded-2xl shadow border px-6 py-4"
+              style={{ 
+                background: 'var(--card-bg)',
+                borderColor: 'var(--border)'
+              }}
+            >
+              <h2 className="text-xl font-semibold mb-1" style={{ color: 'var(--text)' }}>
                 Your Result
               </h2>
-              <p className="text-slate-700">
+              <p style={{ color: 'var(--text)' }}>
                 You answered{" "}
                 <span className="font-semibold">
                   {correctCount} / {totalQuestions}
@@ -331,10 +364,14 @@ export default function Quiz() {
                 return (
                   <div
                     key={q.id}
-                    className="bg-white rounded-2xl shadow border border-slate-100 px-6 py-5"
+                    className="rounded-2xl shadow border px-6 py-5"
+                    style={{ 
+                      background: 'var(--card-bg)',
+                      borderColor: 'var(--border)'
+                    }}
                   >
                     <div className="flex items-center justify-between mb-2">
-                      <p className="text-xs font-medium text-slate-500">
+                      <p className="text-xs font-medium text-muted-foreground">
                         Question {index + 1} / {totalQuestions}
                       </p>
                       <span
@@ -348,7 +385,7 @@ export default function Quiz() {
                       </span>
                     </div>
 
-                    <h3 className="text-base md:text-lg font-semibold text-slate-900 mb-4">
+                    <h3 className="text-base md:text-lg font-semibold mb-4" style={{ color: 'var(--text)' }}>
                       {q.question}
                     </h3>
 
@@ -368,23 +405,34 @@ export default function Quiz() {
                           styles +=
                             " bg-emerald-50 text-emerald-800 border-emerald-300";
                         } else {
-                          styles += " bg-white text-slate-800 border-slate-200";
+                          styles += " border-slate-200";
                         }
 
                         return (
-                          <div key={optIndex} className={styles}>
+                          <div key={optIndex} className={styles}
+                            style={!isSelected && !isAnswer ? { 
+                              background: 'var(--card-bg)',
+                              color: 'var(--text)',
+                              borderColor: 'var(--border)'
+                            } : {}}
+                          >
                             {option}
                           </div>
                         );
                       })}
                     </div>
 
-                    <div className="rounded-xl bg-slate-50 border border-slate-200 px-4 py-3 text-sm">
-                      <p className="font-semibold mb-1">Feedback</p>
+                    <div className="rounded-xl border px-4 py-3 text-sm"
+                      style={{ 
+                        background: 'var(--surface)',
+                        borderColor: 'var(--border)'
+                      }}
+                    >
+                      <p className="font-semibold mb-1" style={{ color: 'var(--text)' }}>Feedback</p>
                       {isCorrect ? (
-                        <p className="text-slate-800">{explanationCorrect}</p>
+                        <p style={{ color: 'var(--text)' }}>{explanationCorrect}</p>
                       ) : (
-                        <div className="space-y-1 text-slate-800">
+                        <div className="space-y-1" style={{ color: 'var(--text)' }}>
                           <p>
                             You chose:{" "}
                             <span className="font-semibold">

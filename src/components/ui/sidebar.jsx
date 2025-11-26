@@ -28,7 +28,7 @@ export const Sidebar = React.forwardRef(({ className, ...props }, ref) => {
         ref={ref}
         className={cn(
           // --- SIZE ---
-          "w-64 min-h-screen shadow-2xl",
+          "sidebar w-64 min-h-screen shadow-2xl",
 
           // --- BACKGROUND STYLING ---
           "bg-gradient-to-b from-purple-700/70 to-purple-900/70 backdrop-blur-xl",
@@ -93,7 +93,7 @@ export const SidebarHeader = React.forwardRef(
     <div
       ref={ref}
       className={cn(
-        "p-6 text-2xl font-bold tracking-wide text-white/90",
+        "p-6 text-2xl font-bold tracking-wide text-white/90 sidebar-header",
         "border-b border-white/20",
         className
       )}

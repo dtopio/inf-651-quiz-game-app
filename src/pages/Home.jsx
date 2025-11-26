@@ -25,7 +25,7 @@ export default function Home() {
         <h1 className="mb-4 text-5xl font-extrabold leading-[1.2] pb-1 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
           Quiz Categories
         </h1>
-        <p className="text-lg text-gray-600">
+        <p className="text-lg text-muted-foreground">
           Choose a category and test your knowledge!
         </p>
       </div>
@@ -35,27 +35,33 @@ export default function Home() {
         {categories.map((category) => (
           <Card
             key={category.id}
-            className="group h-80 flex flex-col bg-white border border-gray-200 rounded-2xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 cursor-pointer w-full"
+            className="group h-80 flex flex-col bg-card border hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 cursor-pointer w-full"
+            style={{ 
+              background: 'var(--card-bg)',
+              borderColor: 'var(--border)'
+            }}
           >
             <CardHeader className="flex-1 flex flex-col items-center justify-between p-6">
-              <div className="w-20 h-20 flex items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+              <div className="w-20 h-20 flex items-center justify-center rounded-2xl category-icon shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3"
+                style={{ background: 'var(--accent-1)' }}
+              >
                 <span className="text-4xl">{category.icon}</span>
               </div>
 
               <div className="flex flex-col items-center">
-                <CardTitle className="text-2xl font-bold text-center text-gray-900 group-hover:text-indigo-600 transition-colors">
+                <CardTitle className="card-title text-2xl font-bold text-center transition-colors text-card-foreground">
                   {category.title}
                 </CardTitle>
 
-                <CardDescription className="text-sm text-center text-gray-600 leading-relaxed mt-1">
+                <CardDescription className="text-sm text-center text-muted-foreground leading-relaxed mt-1">
                   {category.description}
                 </CardDescription>
               </div>
             </CardHeader>
 
             <CardFooter className="p-6 pt-0 flex justify-center">
-              <button 
-                className="px-6 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-sm font-semibold rounded-lg shadow-md hover:shadow-xl hover:scale-105 transition-all duration-200"
+              <button
+                className="btn px-6 py-2 text-sm font-semibold rounded-lg hover:shadow-xl hover:scale-105 transition-all duration-200"
                 onClick={() => handleStartQuiz(category)}
               >
                 Start Quiz →

@@ -14,7 +14,7 @@ function App() {
       <Sidebar />
 
       {/* Main content */}
-      <main className="flex-1 min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 ml-64">
+      <main className="flex-1 min-h-screen ml-64" style={{ background: 'var(--surface)' }}>
         <div className="max-w-6xl mx-auto px-6 py-12">
           <Routes>
             <Route path="/" element={<Home />} />

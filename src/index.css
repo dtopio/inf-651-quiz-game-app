@@ -1,1 +1,219 @@
 @import "tailwindcss";
+
+/* Theme variables and helper classes
+	 - We use CSS variables to control colors across components.
+	 - Theme classes are applied to <html> as `theme-ash`, `theme-dark`, `theme-white`.
+*/
+
+:root {
+	--bg: #ffffff;
+	--surface: #ffffff;
+	--text: #0f172a;
+	--muted: #6b7280;
+	--card-bg: #ffffff;
+	--card-foreground: #0f172a;
+	--accent-1: linear-gradient(90deg,#6366f1,#8b5cf6);
+	--accent-2: linear-gradient(90deg,#06b6d4,#3b82f6);
+	--btn-gradient: linear-gradient(90deg,#6366f1,#8b5cf6);
+
+	/* button specifics (defaults) */
+	--btn-bg: var(--btn-gradient);
+	--btn-text: #ffffff;
+	--btn-border: rgba(2,6,23,0.06);
+	--btn-hover: linear-gradient(90deg,#4f46e5,#7c3aed);
+
+	/* sidebar and border variables */
+	--sidebar-bg: linear-gradient(180deg, rgba(124,58,237,0.85), rgba(79,70,229,0.85));
+	--sidebar-border: rgba(167,139,250,0.2);
+	--sidebar-text: rgba(255,255,255,0.95);
+	--sidebar-link-active: rgba(255,255,255,0.20);
+	--border: rgba(226,232,240,1);
+
+	/* title colors */
+	--title-color: #0f172a;
+	--title-hover: #4f46e5; /* default indigo-ish */
+}
+
+/* Ash theme - muted/light */
+.theme-ash {
+	--bg: #eef2f6;
+	--surface: #f8fafc;
+	--text: #071024;
+	--muted: #475569;
+	--card-bg: linear-gradient(180deg,#ffffff,#f8fafc);
+	--card-foreground: #0b1220;
+	--accent-1: linear-gradient(90deg,#334155,#475569);
+	--accent-2: linear-gradient(90deg,#64748b,#94a3b8);
+	--btn-gradient: linear-gradient(90deg,#334155,#475569);
+
+	/* Ash-specific button colors: muted, readable, subtle hover */
+	--btn-bg: linear-gradient(90deg,#475569,#334155);
+	--btn-text: #ffffff;
+	--btn-border: rgba(255,255,255,0.06);
+	--btn-hover: linear-gradient(90deg,#5b6774,#3d4752);
+
+	--sidebar-bg: linear-gradient(180deg,#1f2937,#334155);
+	--sidebar-border: rgba(255,255,255,0.06);
+	--sidebar-text: rgba(255,255,255,0.95);
+	--sidebar-link-active: rgba(255,255,255,0.12);
+	--border: rgba(203,213,225,1);
+
+	/* Ash theme title colors - muted but visible on light background */
+	--title-color: #0b1220;
+	--title-hover: #64748b; /* slate-500: muted/ash hover */
+}
+
+/* Dark theme */
+.theme-dark {
+	--bg: #071024;
+	--surface: #0f172a;
+	--text: #e6eef8;
+	--muted: #94a3b8;
+	--card-bg: linear-gradient(180deg,#1e293b,#0f172a);
+	--card-foreground: #e6eef8;
+	--accent-1: linear-gradient(90deg,#0ea5b7,#7c3aed);
+	--accent-2: linear-gradient(90deg,#7c3aed,#db2777);
+	--btn-gradient: linear-gradient(90deg,#0ea5b7,#7c3aed);
+
+	--btn-bg: linear-gradient(90deg,#0ea5b7,#7c3aed);
+	--btn-text: #ffffff;
+	--btn-border: rgba(255,255,255,0.04);
+	--btn-hover: linear-gradient(90deg,#16a39a,#9b5cf6);
+
+	--sidebar-bg: linear-gradient(180deg,#1e1b4b,#312e81);
+	--sidebar-border: rgba(139,92,246,0.15);
+	--sidebar-text: rgba(255,255,255,0.95);
+	--sidebar-link-active: rgba(139,92,246,0.25);
+	--border: rgba(51,65,85,1);
+
+	/* Dark theme title colors - brighter on dark bg */
+	--title-color: #e6eef8;
+	--title-hover: #7c3aed; /* purple accent hover in dark */
+}
+
+/* White theme (default) */
+.theme-white {
+	--bg: #f8fafc;
+	--surface: #ffffff;
+	--text: #0f172a;
+	--muted: #6b7280;
+	--card-bg: linear-gradient(180deg,#ffffff,#f8fafc);
+	--card-foreground: #0f172a;
+	--accent-1: linear-gradient(90deg,#6366f1,#8b5cf6);
+	--accent-2: linear-gradient(90deg,#06b6d4,#3b82f6);
+	--btn-gradient: linear-gradient(90deg,#6366f1,#8b5cf6);
+
+	--btn-bg: linear-gradient(90deg,#6366f1,#8b5cf6);
+	--btn-text: #ffffff;
+	--btn-border: rgba(226,232,240,1);
+	--btn-hover: linear-gradient(90deg,#4f46e5,#7c3aed);
+
+	--sidebar-bg: linear-gradient(180deg, rgba(124,58,237,0.85), rgba(79,70,229,0.85));
+	--sidebar-border: rgba(167,139,250,0.2);
+	--sidebar-text: rgba(255,255,255,0.95);
+	--sidebar-link-active: rgba(255,255,255,0.20);
+	--border: rgba(226,232,240,1);
+
+	/* White theme title colors - similar to original */
+	--title-color: #0f172a;
+	--title-hover: #4f46e5;
+}
+
+/* Apply base page background and text color */
+html.theme-ash, html.theme-dark, html.theme-white {
+	background: var(--bg);
+	color: var(--text);
+}
+
+/* Ensure the main content background (Tailwind utility on main) is overridden by theme surface */
+html.theme-ash main,
+html.theme-dark main,
+html.theme-white main {
+	background: var(--surface) !important;
+}
+
+/* Sidebar styling */
+.sidebar {
+	background: var(--sidebar-bg) !important;
+	border-right-color: var(--sidebar-border) !important;
+	color: var(--sidebar-text) !important;
+}
+.sidebar .sidebar-header {
+	color: var(--sidebar-text) !important;
+	border-bottom-color: rgba(255,255,255,0.08) !important;
+}
+.sidebar a {
+	color: var(--sidebar-text) !important;
+}
+.sidebar a:hover {
+	color: var(--sidebar-text) !important;
+}
+.sidebar .active,
+.sidebar a[aria-current="page"] {
+	background: var(--sidebar-link-active) !important;
+	font-weight: 600 !important;
+}
+
+/* Buttons and clickable elements */
+.btn, button.btn {
+	background: var(--btn-bg) !important;
+	color: var(--btn-text) !important;
+	border: 1px solid var(--btn-border) !important;
+	box-shadow: 0 6px 18px rgba(2,6,23,0.06);
+	transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+}
+.btn:hover, .btn:focus {
+	background: var(--btn-hover) !important;
+	transform: translateY(-2px) scale(1.01);
+	box-shadow: 0 10px 30px rgba(2,6,23,0.12);
+}
+.btn:focus {
+	outline: 3px solid rgba(99,102,241,0.14);
+	outline-offset: 2px;
+}
+
+/* Cards and surfaces */
+.bg-card { background: var(--card-bg) !important; }
+.feature-card { background: var(--card-bg) !important; border-color: var(--border) !important; }
+
+/* Headings and text use the base --text color; ensure contrasts */
+h1, h2, h3, h4, h5, h6 {
+	color: var(--text) !important;
+}
+
+/* Ensure hero headings keep their intended contrast (they live on a strong gradient) */
+.hero h1,
+.hero h2,
+.hero h3 {
+	color: white !important;
+}
+
+/* Hero paragraph contrast */
+.hero p {
+	color: rgba(255,255,255,0.9) !important;
+}
+
+
+/* Card and text helpers used by components */
+.bg-card { background: var(--card-bg) !important; }
+.text-card-foreground { color: var(--card-foreground) !important; }
+.text-muted-foreground { color: var(--muted) !important; }
+
+/* (Button helper consolidated above) */
+
+/* Category icon wrapper - used in Home.jsx */
+.category-icon { background-image: var(--accent-1) !important; }
+
+/* About hero and feature cards */
+.hero { background-image: var(--accent-1) !important; color: white !important; }
+.feature-card { background: var(--card-bg) !important; color: var(--card-foreground) !important; }
+
+/* card title coloring: default + hover via group */
+.card-title {
+	color: var(--title-color) !important;
+}
+.group:hover .card-title,
+.group:focus-within .card-title {
+	color: var(--title-hover) !important;
+}
+
