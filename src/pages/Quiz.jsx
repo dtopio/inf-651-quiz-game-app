@@ -38,20 +38,15 @@ function saveProgress(categoryKey, data) {
       getProgressKey(categoryKey),
       JSON.stringify(data)
     );
-  } catch {
-    // ignore
-  }
+  } catch {}
 }
 
 function clearProgress(categoryKey) {
   if (typeof window === "undefined") return;
   try {
     window.localStorage.removeItem(getProgressKey(categoryKey));
-  } catch {
-    // ignore
-  }
+  } catch {}
 }
-
 
 export default function Quiz() {
   const navigate = useNavigate();
@@ -75,6 +70,7 @@ export default function Quiz() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   
   const [showResumePrompt, setShowResumePrompt] = useState(false);
+  const [showQuitPrompt, setShowQuitPrompt] = useState(false);
 
   const currentQuestion = questions[currentIndex];
 
@@ -161,19 +157,15 @@ export default function Quiz() {
       timestamp: Date.now()
     });
   };
-  const handleBackClick = () => {
-    const hasAnswers = Object.keys(answers).length > 0;
 
-    if (hasAnswers && !isSubmitted) {
-      setShowResumePrompt(true);
-    } else {
-      navigate(-1);
-    }
+  const handleBackClick = () => {
+    setShowQuitPrompt(true);
   };
 
 
   const handleQuit = () => {
     clearProgress(categoryKey);
+    setShowResumePrompt(false);
     navigate("/");
   };
 
@@ -323,27 +315,59 @@ export default function Quiz() {
           </div>
         </div>
 
-        {showResumePrompt && !isSubmitted ? (
-          <div className="bg-white rounded-3xl shadow-xl border border-slate-100 px-6 py-6 md:px-10 md:py-8">
+        {showQuitPrompt ? (
+          <div className="bg-white rounded-3xl shadow-xl border border-slate-100 px-6 py-8 md:px-10 md:py-10">
             <h2 className="text-xl font-semibold text-slate-900 mb-3">
-              Continue your {categoryTitle} quiz?
+              Quit this quiz?
             </h2>
+
             <p className="text-sm text-slate-600 mb-6">
-              We found an unfinished {categoryTitle} quiz. Do you want to continue
-              where you left off or start a new quiz?
+              If you quit now, your current progress will be lost. 
+              Are you sure you want to exit this quiz?
             </p>
+
             <div className="flex gap-3">
               <button
+                onClick={() => setShowQuitPrompt(false)}
+                className="flex-1 rounded-xl px-4 py-3 font-semibold text-sm md:text-base border bg-white text-slate-800 border-slate-300 hover:bg-slate-50"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleQuit}
+                className="flex-1 rounded-xl px-4 py-3 font-semibold text-sm md:text-base border bg-red-600 text-white border-red-600 hover:bg-red-700"
+              >
+                Quit Quiz
+              </button>
+
+            </div>
+          </div>
+        ) : showResumePrompt && !isSubmitted ? (
+          <div className="bg-white rounded-3xl shadow-xl border border-slate-100 px-6 py-8 md:px-10 md:py-10 mb-6">
+
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-2xl font-semibold text-slate-900">
+                Continue your {categoryTitle} quiz?
+              </h2>
+            </div>
+
+            <p className="text-sm text-slate-600 mb-8 leading-relaxed">
+              We found an unfinished {categoryTitle} quiz.  
+              Do you want to continue where you left off, start a new quiz, or quit?
+            </p>
+
+            <div className="flex gap-4">
+              <button
                 onClick={handleResume}
-                className="flex-1 rounded-xl px-4 py-3 font-semibold text-sm md:text-base border bg-indigo-600 text-white border-indigo-600 hover:bg-indigo-700"
+                className="flex-1 rounded-xl px-4 py-3 font-semibold text-sm md:text-base bg-indigo-600 text-white border border-indigo-600 hover:bg-indigo-700"
               >
                 Continue
               </button>
               <button
-                onClick={handleStartOver}
-                className="flex-1 rounded-xl px-4 py-3 font-semibold text-sm md:text-base border bg-white text-slate-800 border-slate-300 hover:bg-slate-50"
+                onClick={handleQuit}
+                className="flex-1 rounded-xl px-4 py-3 font-semibold text-sm md:text-base border bg-red-600 text-white border-red-600 hover:bg-red-700"
               >
-                Start Over
+                Quit
               </button>
             </div>
           </div>
@@ -354,17 +378,15 @@ export default function Quiz() {
                 Question: {currentIndex + 1}/{totalQuestions}
               </p>
               <button
-                onClick={handleQuit}
+                onClick={() => setShowQuitPrompt(true)}
                 className="text-red-500 font-medium hover:underline"
               >
                 Quit
               </button>
             </div>
-
             <h2 className="text-xl md:text-2xl font-semibold text-slate-900 mb-6 leading-relaxed">
               {currentQuestion.question}
             </h2>
-
             <div className="space-y-3 mb-4">
               {currentQuestion.options.map((option, index) => {
                 const isSelected = answers[currentIndex] === index;
@@ -385,7 +407,6 @@ export default function Quiz() {
                 );
               })}
             </div>
-
             <div className="mt-4 flex justify-between gap-4">
               <button
                 type="button"
@@ -400,7 +421,6 @@ export default function Quiz() {
               >
                 Previous
               </button>
-
               {isLast ? (
                 <button
                   type="button"
@@ -447,7 +467,6 @@ export default function Quiz() {
                 {Math.round((correctCount / totalQuestions) * 100)}%).
               </p>
             </div>
-
             <div className="space-y-4">
               {questions.map((q, index) => {
                 const selectedIndex = answers[index];
@@ -477,11 +496,9 @@ export default function Quiz() {
                         {isCorrect ? "Correct" : "Incorrect"}
                       </span>
                     </div>
-
                     <h3 className="text-base md:text-lg font-semibold text-slate-900 mb-4">
                       {q.question}
                     </h3>
-
                     <div className="space-y-2 mb-4">
                       {q.options.map((option, optIndex) => {
                         const isSelected = selectedIndex === optIndex;
@@ -542,4 +559,3 @@ export default function Quiz() {
     </div>
   );
 }
-
