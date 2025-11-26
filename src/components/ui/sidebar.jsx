@@ -8,84 +8,80 @@ import {
   StarIcon,
   Cog6ToothIcon,
   InformationCircleIcon,
+  XMarkIcon,
+  Bars3Icon,
 } from "@heroicons/react/24/outline";
 
-export const Sidebar = React.forwardRef(({ className, ...props }, ref) => {
-  const [isOpen, setIsOpen] = React.useState(false);
+export const Sidebar = React.forwardRef(
+  ({ className, isOpen, onToggle, ...props }, ref) => {
+    return (
+      <>
+        {/* Hamburger thingy */}
+        <button
+          className="
+            fixed top-5 left-5 z-50 
+            p-2 bg-purple-700 text-white 
+            rounded-md shadow-lg
+          "
+          onClick={onToggle}
+        >
+          {isOpen ? (
+            <XMarkIcon className="w-6 h-6" />
+          ) : (
+            <Bars3Icon className="w-6 h-6" />
+          )}
+        </button>
 
-  return (
-    <>
-      {/* Mobile Hamburger */}
-      <button
-        className="fixed top-4 left-4 z-50 p-2 bg-purple-700 text-white rounded-md md:hidden"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        {isOpen ? "✖" : "☰"}
-      </button>
+        {/* Sidebar */}
+        <div
+          ref={ref}
+          className={cn(
+            "fixed top-0 left-0 h-screen w-64",
+            "bg-gradient-to-b from-purple-700/70 to-purple-900/70 backdrop-blur-xl",
+            "border-r border-purple-300/20 shadow-2xl",
+            "transition-transform duration-300",
+            isOpen ? "translate-x-0" : "-translate-x-full",
+            "z-40",
+            className
+          )}
+          {...props}
+        >
+          <SidebarHeader>Quiz Game</SidebarHeader>
 
-      {/* Sidebar */}
-      <div
-        ref={ref}
-        className={cn(
-          // --- SIZE ---
-          "w-64 min-h-screen shadow-2xl",
+          <nav className="flex flex-col mt-6 gap-2 px-4">
+            <SidebarLink to="/" icon={<HomeIcon className="w-5 h-5" />}>
+              Home
+            </SidebarLink>
 
-          // --- BACKGROUND STYLING ---
-          "bg-gradient-to-b from-purple-700/70 to-purple-900/70 backdrop-blur-xl",
-          "border-r border-purple-300/20",
+            <SidebarLink
+              to="/quiz"
+              icon={<QuestionMarkCircleIcon className="w-5 h-5" />}
+            >
+              Quiz
+            </SidebarLink>
 
-          // --- MOBILE: fixed and slides in/out ---
-          isOpen
-            ? "fixed top-0 left-0 translate-x-0"
-            : "fixed top-0 left-0 -translate-x-full",
+            <SidebarLink to="/score" icon={<StarIcon className="w-5 h-5" />}>
+              Score
+            </SidebarLink>
 
-          // --- DESKTOP: fixed -- keeps sidebar pinned and prevents layout shift ---
-          "md:fixed md:top-0 md:left-0 md:translate-x-0",
+            <SidebarLink
+              to="/settings"
+              icon={<Cog6ToothIcon className="w-5 h-5" />}
+            >
+              Settings
+            </SidebarLink>
 
-
-          // --- TRANSITIONS ---
-          "transition-transform duration-300",
-
-          className
-        )}
-        {...props}
-      >
-        <SidebarHeader>Quiz Game</SidebarHeader>
-
-        <nav className="flex flex-col mt-6 gap-2 px-4">
-          <SidebarLink to="/" icon={<HomeIcon className="w-5 h-5" />}>
-            Home
-          </SidebarLink>
-
-          <SidebarLink
-            to="/quiz"
-            icon={<QuestionMarkCircleIcon className="w-5 h-5" />}
-          >
-            Quiz
-          </SidebarLink>
-
-          <SidebarLink to="/score" icon={<StarIcon className="w-5 h-5" />}>
-            Score
-          </SidebarLink>
-
-          <SidebarLink
-            to="/settings"
-            icon={<Cog6ToothIcon className="w-5 h-5" />}
-          >
-            Settings
-          </SidebarLink>
-
-          <SidebarLink
-            to="/about"
-            icon={<InformationCircleIcon className="w-5 h-5" />}
-          >
-            About
-          </SidebarLink>
-        </nav>
-      </div>
-    </>
-  );
-});
+            <SidebarLink
+              to="/about"
+              icon={<InformationCircleIcon className="w-5 h-5" />}
+            >
+              About
+            </SidebarLink>
+          </nav>
+        </div>
+      </>
+    );
+  });
 Sidebar.displayName = "Sidebar";
 
 export const SidebarHeader = React.forwardRef(
@@ -93,7 +89,7 @@ export const SidebarHeader = React.forwardRef(
     <div
       ref={ref}
       className={cn(
-        "p-6 text-2xl font-bold tracking-wide text-white/90",
+        "p-6 pl-20 text-2xl font-bold tracking-wide text-white/90",
         "border-b border-white/20",
         className
       )}
