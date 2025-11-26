@@ -14,6 +14,12 @@ import {
 
 export const Sidebar = React.forwardRef(
   ({ className, isOpen, onToggle, ...props }, ref) => {
+    const handleNavClick = () => {
+      if (!onToggle) return;
+      if (typeof window !== "undefined" && window.innerWidth < 768) {
+        onToggle();
+      }
+    };
     return (
       <>
         {/* Hamburger thingy */}
@@ -49,24 +55,26 @@ export const Sidebar = React.forwardRef(
           <SidebarHeader>Quiz Game</SidebarHeader>
 
           <nav className="flex flex-col mt-6 gap-2 px-4">
-            <SidebarLink to="/" icon={<HomeIcon className="w-5 h-5" />}>
+            <SidebarLink to="/" icon={<HomeIcon className="w-5 h-5" />} onClick={handleNavClick}>
               Home
             </SidebarLink>
 
             <SidebarLink
               to="/quiz"
-              icon={<QuestionMarkCircleIcon className="w-5 h-5" />}
+              icon={<QuestionMarkCircleIcon className="w-5 h-5" /> }
+              onClick={handleNavClick}
             >
               Quiz
             </SidebarLink>
 
-            <SidebarLink to="/score" icon={<StarIcon className="w-5 h-5" />}>
+            <SidebarLink to="/score" icon={<StarIcon className="w-5 h-5" />} onClick={handleNavClick}>
               Score
             </SidebarLink>
 
             <SidebarLink
               to="/settings"
               icon={<Cog6ToothIcon className="w-5 h-5" />}
+              onClick={handleNavClick}
             >
               Settings
             </SidebarLink>
@@ -74,6 +82,7 @@ export const Sidebar = React.forwardRef(
             <SidebarLink
               to="/about"
               icon={<InformationCircleIcon className="w-5 h-5" />}
+              onClick={handleNavClick}
             >
               About
             </SidebarLink>
@@ -100,10 +109,11 @@ export const SidebarHeader = React.forwardRef(
 SidebarHeader.displayName = "SidebarHeader";
 
 export const SidebarLink = React.forwardRef(
-  ({ className, to, icon, children, ...props }, ref) => (
+  ({ className, to, icon, children,onClick, ...props }, ref) => (
     <NavLink
       ref={ref}
       to={to}
+      onClick={onClick}
       className={({ isActive }) =>
         cn(
           "flex items-center gap-3 p-3 rounded-lg transition-all",
