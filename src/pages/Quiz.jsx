@@ -4,8 +4,15 @@ import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { QUESTION_BANK } from '@/data/questions';
 import { useQuizHistory } from "@/context/QuizHistory.jsx";
 import { CATEGORIES } from "@/data/categories";
+import { useSettings } from "@/context/SettingsContext.jsx";
 
-
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardFooter,
+} from "@/components/ui";
 
 const PROGRESS_KEY_PREFIX = "quizProgress-";
 
@@ -31,31 +38,28 @@ function saveProgress(categoryKey, data) {
       getProgressKey(categoryKey),
       JSON.stringify(data)
     );
-  } catch {
-    // ignore
-  }
+  } catch {}
 }
 
 function clearProgress(categoryKey) {
   if (typeof window === "undefined") return;
   try {
     window.localStorage.removeItem(getProgressKey(categoryKey));
-  } catch {
-    // ignore
-  }
+  } catch {}
 }
-
 
 export default function Quiz() {
   const navigate = useNavigate();
   const location = useLocation();
   const { addQuizResult } = useQuizHistory();
 
-  const passedCategory = location.state?.category;
-  const categoryKey = passedCategory?.key || "science";
-  const categoryTitle = passedCategory?.title || "Science";
+  const passedCategory = location.state?.category || null;
+  const [selectedCategory, setSelectedCategory] = useState(passedCategory);
+  const activeCategory = selectedCategory || passedCategory;
+  const categoryKey = activeCategory?.key || "science";
+  const categoryTitle = activeCategory?.title || "Science";
 
-  const categoryInfo = CATEGORIES.find(c => c.key === categoryKey);
+  const categoryInfo = CATEGORIES.find((c) => c.key === categoryKey);
   const categoryIcon = categoryInfo?.icon;
 
   const questions = QUESTION_BANK[categoryKey] || QUESTION_BANK.science;
@@ -64,18 +68,24 @@ export default function Quiz() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
-
+  
   const [showResumePrompt, setShowResumePrompt] = useState(false);
+  const [showQuitPrompt, setShowQuitPrompt] = useState(false);
 
   const currentQuestion = questions[currentIndex];
 
+  const { listView } = useSettings();
+
+
   useEffect(() => {
+    if (!activeCategory) return;
     if (isSubmitted) return;
+
     const saved = loadProgress(categoryKey);
     if (saved && typeof saved.currentIndex === "number") {
       setShowResumePrompt(true);
     }
-  }, [categoryKey, isSubmitted]);
+  }, [activeCategory, categoryKey, isSubmitted]);
 
   const handleOptionSelect = (optionIndex) => {
     if (isSubmitted) return;
@@ -147,19 +157,15 @@ export default function Quiz() {
       timestamp: Date.now()
     });
   };
-  const handleBackClick = () => {
-    const hasAnswers = Object.keys(answers).length > 0;
 
-    if (hasAnswers && !isSubmitted) {
-      setShowResumePrompt(true);
-    } else {
-      navigate(-1);
-    }
+  const handleBackClick = () => {
+    setShowQuitPrompt(true);
   };
 
 
   const handleQuit = () => {
     clearProgress(categoryKey);
+    setShowResumePrompt(false);
     navigate("/");
   };
 
@@ -173,6 +179,122 @@ export default function Quiz() {
   const isLast = currentIndex === totalQuestions - 1;
   const allAnswered = Object.keys(answers).length === totalQuestions;
 
+  // Choose category screen (if none selected yet)
+  const hasCategory = !!activeCategory;
+
+  if (!hasCategory) {
+    return (
+      <div className="flex justify-center">
+        <div className="w-full max-w-6xl">
+          <div className="mb-12 text-center">
+            <h1 className="mb-4 text-5xl font-extrabold leading-[1.2] pb-1 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+              Pick a Category
+            </h1>
+            <p className="text-lg text-gray-600">
+              Choose a quiz to get started.
+            </p>
+          </div>
+
+          <div
+            className={
+              listView
+                ? "flex flex-col gap-4" // list view
+                : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10" // grid view
+            }
+          >
+            {CATEGORIES.map((category) => {
+              const description =
+                category.description ||
+                `Test your knowledge in ${category.title.toLowerCase()}.`;
+
+              return listView ? (
+                // ----- LIST MODE -----
+                <button
+                  key={category.key}
+                  onClick={() => {
+                    setSelectedCategory(category);
+                    setIsSubmitted(false);
+                    setCurrentIndex(0);
+                    setAnswers({});
+                    setShowResumePrompt(false);
+                  }}
+                  className="
+                    w-full flex items-center gap-4 p-4 
+                    bg-white border border-slate-200 rounded-xl 
+                    shadow-sm hover:shadow-md hover:-translate-y-[2px]
+                    transition-all
+                    text-left
+                  "
+                >
+                  <span className="text-3xl">{category.icon}</span>
+
+                  <div>
+                    <p className="text-lg font-semibold text-slate-900">
+                      {category.title}
+                    </p>
+                    <p className="text-sm text-slate-600">{description}</p>
+                  </div>
+
+                  <span className="ml-auto text-indigo-600 font-semibold">
+                    →
+                  </span>
+                </button>
+              ) : (
+                // ----- GRID MODE -----
+                <Card
+                  key={category.key}
+                  className="group h-80 flex flex-col bg-white border 
+                  border-gray-200 rounded-2xl shadow-lg hover:shadow-2xl 
+                  hover:-translate-y-2 transition-all duration-300 cursor-pointer w-full"
+                >
+                  <CardHeader className="flex-1 flex flex-col items-center justify-between p-6">
+                    <div className="w-20 h-20 flex items-center justify-center rounded-2xl 
+                      bg-gradient-to-br from-indigo-500 to-purple-600 shadow-lg 
+                      transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3"
+                    >
+                      <span className="text-4xl">{category.icon}</span>
+                    </div>
+
+                    <div className="flex flex-col items-center">
+                      <CardTitle className="text-2xl font-bold text-center text-gray-900 
+                        group-hover:text-indigo-600 transition-colors"
+                      >
+                        {category.title}
+                      </CardTitle>
+
+                      <CardDescription className="text-sm text-center text-gray-600 leading-relaxed mt-1">
+                        {description}
+                      </CardDescription>
+                    </div>
+                  </CardHeader>
+
+                  <CardFooter className="p-6 pt-0 flex justify-center">
+                    <button
+                      className="px-6 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 
+                      text-white text-sm font-semibold rounded-lg shadow-md 
+                      hover:shadow-xl hover:scale-105 transition-all duration-200"
+                      onClick={() => {
+                        setSelectedCategory(category);
+                        setIsSubmitted(false);
+                        setCurrentIndex(0);
+                        setAnswers({});
+                        setShowResumePrompt(false);
+                      }}
+                    >
+                      Start Quiz →
+                    </button>
+                  </CardFooter>
+                </Card>
+              );
+            })}
+          </div>
+
+        </div>
+      </div>
+    );
+  }
+
+  // Quiz 
   return (
     <div className="flex justify-center">
       <div className="w-full max-w-2xl">
@@ -193,27 +315,59 @@ export default function Quiz() {
           </div>
         </div>
 
-        {showResumePrompt && !isSubmitted ? (
-          <div className="bg-white rounded-3xl shadow-xl border border-slate-100 px-6 py-6 md:px-10 md:py-8">
+        {showQuitPrompt ? (
+          <div className="bg-white rounded-3xl shadow-xl border border-slate-100 px-6 py-8 md:px-10 md:py-10">
             <h2 className="text-xl font-semibold text-slate-900 mb-3">
-              Continue your {categoryTitle} quiz?
+              Quit this quiz?
             </h2>
+
             <p className="text-sm text-slate-600 mb-6">
-              We found an unfinished {categoryTitle} quiz. Do you want to continue
-              where you left off or start a new quiz?
+              If you quit now, your current progress will be lost. 
+              Are you sure you want to exit this quiz?
             </p>
+
             <div className="flex gap-3">
               <button
+                onClick={() => setShowQuitPrompt(false)}
+                className="flex-1 rounded-xl px-4 py-3 font-semibold text-sm md:text-base border bg-white text-slate-800 border-slate-300 hover:bg-slate-50"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleQuit}
+                className="flex-1 rounded-xl px-4 py-3 font-semibold text-sm md:text-base border bg-red-600 text-white border-red-600 hover:bg-red-700"
+              >
+                Quit Quiz
+              </button>
+
+            </div>
+          </div>
+        ) : showResumePrompt && !isSubmitted ? (
+          <div className="bg-white rounded-3xl shadow-xl border border-slate-100 px-6 py-8 md:px-10 md:py-10 mb-6">
+
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-2xl font-semibold text-slate-900">
+                Continue your {categoryTitle} quiz?
+              </h2>
+            </div>
+
+            <p className="text-sm text-slate-600 mb-8 leading-relaxed">
+              We found an unfinished {categoryTitle} quiz.  
+              Do you want to continue where you left off, start a new quiz, or quit?
+            </p>
+
+            <div className="flex gap-4">
+              <button
                 onClick={handleResume}
-                className="flex-1 rounded-xl px-4 py-3 font-semibold text-sm md:text-base border bg-indigo-600 text-white border-indigo-600 hover:bg-indigo-700"
+                className="flex-1 rounded-xl px-4 py-3 font-semibold text-sm md:text-base bg-indigo-600 text-white border border-indigo-600 hover:bg-indigo-700"
               >
                 Continue
               </button>
               <button
-                onClick={handleStartOver}
-                className="flex-1 rounded-xl px-4 py-3 font-semibold text-sm md:text-base border bg-white text-slate-800 border-slate-300 hover:bg-slate-50"
+                onClick={handleQuit}
+                className="flex-1 rounded-xl px-4 py-3 font-semibold text-sm md:text-base border bg-red-600 text-white border-red-600 hover:bg-red-700"
               >
-                Start Over
+                Quit
               </button>
             </div>
           </div>
@@ -224,17 +378,15 @@ export default function Quiz() {
                 Question: {currentIndex + 1}/{totalQuestions}
               </p>
               <button
-                onClick={handleQuit}
+                onClick={() => setShowQuitPrompt(true)}
                 className="text-red-500 font-medium hover:underline"
               >
                 Quit
               </button>
             </div>
-
             <h2 className="text-xl md:text-2xl font-semibold text-slate-900 mb-6 leading-relaxed">
               {currentQuestion.question}
             </h2>
-
             <div className="space-y-3 mb-4">
               {currentQuestion.options.map((option, index) => {
                 const isSelected = answers[currentIndex] === index;
@@ -255,7 +407,6 @@ export default function Quiz() {
                 );
               })}
             </div>
-
             <div className="mt-4 flex justify-between gap-4">
               <button
                 type="button"
@@ -270,7 +421,6 @@ export default function Quiz() {
               >
                 Previous
               </button>
-
               {isLast ? (
                 <button
                   type="button"
@@ -317,7 +467,6 @@ export default function Quiz() {
                 {Math.round((correctCount / totalQuestions) * 100)}%).
               </p>
             </div>
-
             <div className="space-y-4">
               {questions.map((q, index) => {
                 const selectedIndex = answers[index];
@@ -347,11 +496,9 @@ export default function Quiz() {
                         {isCorrect ? "Correct" : "Incorrect"}
                       </span>
                     </div>
-
                     <h3 className="text-base md:text-lg font-semibold text-slate-900 mb-4">
                       {q.question}
                     </h3>
-
                     <div className="space-y-2 mb-4">
                       {q.options.map((option, optIndex) => {
                         const isSelected = selectedIndex === optIndex;
@@ -412,4 +559,3 @@ export default function Quiz() {
     </div>
   );
 }
-

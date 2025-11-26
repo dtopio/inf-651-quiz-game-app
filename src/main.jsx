@@ -4,12 +4,15 @@ import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App.jsx";
 import { QuizHistoryProvider } from "./context/QuizHistory.jsx";
+import { SettingsProvider } from "./context/SettingsContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <QuizHistoryProvider>
-        <App />
+        <SettingsProvider>
+          <App />
+        </SettingsProvider>
       </QuizHistoryProvider>
     </BrowserRouter>
   </StrictMode>
