@@ -1,6 +1,5 @@
-import { createContext, useContext, useEffect, useState } from "react";
-
-const QuizHistoryContext = createContext(null);
+import { useEffect, useState } from "react";
+import { QuizHistoryContext } from "@/context/QuizHistoryContext.js";
 
 export function QuizHistoryProvider({ children }) {
   const [history, setHistory] = useState(null); // null = still loading
@@ -27,7 +26,6 @@ export function QuizHistoryProvider({ children }) {
     setHistory((prev) => [...prev, result]);
   };
 
-  // NEW ➜ Clear all history
   const clearHistory = () => {
     setHistory([]);               // reset in state
     localStorage.removeItem("quizHistory"); // clear localStorage
@@ -45,8 +43,4 @@ export function QuizHistoryProvider({ children }) {
       {children}
     </QuizHistoryContext.Provider>
   );
-}
-
-export function useQuizHistory() {
-  return useContext(QuizHistoryContext);
 }

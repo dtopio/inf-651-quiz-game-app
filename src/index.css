@@ -1,1 +1,149 @@
 @import "tailwindcss";
+
+/* ============================
+   THEME SYSTEM - CSS VARIABLES
+   ============================ */
+
+/* Light Theme (Default) */
+:root[data-theme="light"],
+:root {
+  --background: linear-gradient(to bottom right, #f8fafc 0%, #ffffff 50%, #eff6ff 100%);
+  --surface: #f8fafc;
+  --card-bg: #ffffff;
+  --text: #1e293b;
+  --text-secondary: #64748b;
+  --muted-foreground: #94a3b8;
+  --border: #e2e8f0;
+  
+  /* Sidebar - matches hero section */
+  --sidebar-bg: linear-gradient(to right, #4f46e5 0%, #9333ea 50%, #ec4899 100%);
+  --sidebar-text: #ffffff;
+  
+  /* Hero section */
+  --hero-bg: linear-gradient(to right, #4f46e5 0%, #9333ea 50%, #ec4899 100%);
+  --hero-text: #ffffff;
+  
+  /* Accents */
+  --accent: #667eea;
+  --accent-hover: #764ba2;
+  
+  /* Active nav color */
+  --nav-active: #9333ea;
+  
+  /* Button colors */
+  --button-primary: #6366f1;
+  --button-primary-hover: #4f46e5;
+  
+  /* Accent gradients for scores, quotes, etc */
+  --accent-gradient: linear-gradient(to right, #4f46e5, #9333ea);
+  --accent-text-gradient: linear-gradient(to right, #6366f1, #9333ea);
+}
+
+/* Dark Theme */
+:root[data-theme="dark"] {
+  --background: #0f172a;
+  --surface: #1e293b;
+  --card-bg: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  --text: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --muted-foreground: #94a3b8;
+  --border: #334155;
+  
+  /* Sidebar - darker smooth gradient transition */
+  --sidebar-bg: linear-gradient(to right, #4c1d95 0%, #6b21a8 50%, #7e22ce 100%);
+  --sidebar-text: #ffffff;
+  
+  /* Hero section - darker smooth gradient transition */
+  --hero-bg: linear-gradient(to right, #3730a3 0%, #5b21b6 50%, #6b21a8 100%);
+  --hero-text: #ffffff;
+  
+  /* Accents */
+  --accent: #a78bfa;
+  --accent-hover: #c4b5fd;
+  
+  /* Active nav color */
+  --nav-active: #a855f7;
+  
+  /* Button colors */
+  --button-primary: #8b5cf6;
+  --button-primary-hover: #7c3aed;
+  
+  /* Accent gradients for scores, quotes, etc - matching sidebar/hero tones */
+  --accent-gradient: linear-gradient(to right, #4c1d95, #7e22ce);
+  --accent-text-gradient: linear-gradient(to right, #7c3aed, #a855f7);
+}
+
+/* Ash Theme */
+:root[data-theme="ash"] {
+  --background: linear-gradient(to bottom right, #27272a 0%, #1c1c1f 50%, #262626 100%);
+  --surface: #27272a;
+  --card-bg: linear-gradient(135deg, #27272a 0%, #1c1c1f 100%);
+  --text: #fafaf9;
+  --text-secondary: #d4d4d8;
+  --muted-foreground: #a1a1aa;
+  --border: #3f3f46;
+  
+  /* Sidebar - darker ash gradient matching background */
+  --sidebar-bg: linear-gradient(to right, #27272a 0%, #3f3f46 50%, #52525b 100%);
+  --sidebar-text: #e4e4e7;
+  
+  /* Hero section - darker ash gradient matching background */
+  --hero-bg: linear-gradient(to right, #27272a 0%, #3f3f46 50%, #52525b 100%);
+  --hero-text: #e4e4e7;
+  
+  /* Accents - muted zinc/neutral */
+  --accent: #a1a1aa;
+  --accent-hover: #d4d4d8;
+  
+  /* Active nav color */
+  --nav-active: #71717a;
+  
+  /* Button colors */
+  --button-primary: #71717a;
+  --button-primary-hover: #52525b;
+  
+  /* Accent gradients for scores, quotes, etc - neutral ash tones */
+  --accent-gradient: linear-gradient(to right, #52525b, #71717a);
+  --accent-text-gradient: linear-gradient(to right, #71717a, #a1a1aa);
+}
+
+/* Christmas Theme */
+:root[data-theme="christmas"] {
+  --background: linear-gradient(to bottom right, #f8f9fa 0%, #ffffff 50%, #f1f3f5 100%);
+  --surface: #ffffff;
+  --card-bg: #ffffff;
+  --text: #1a1a1a;
+  --text-secondary: #495057;
+  --muted-foreground: #6c757d;
+  --border: #dee2e6;
+  
+  /* Sidebar - solid Christmas green */
+  --sidebar-bg: #0b5e15;
+  --sidebar-text: #ffffff;
+  
+  /* Hero section - solid Christmas green */
+  --hero-bg: #0b5e15;
+  --hero-text: #ffffff;
+  
+  /* Accents - Christmas red */
+  --accent: #c92a2a;
+  --accent-hover: #a61e1e;
+  
+  /* Active nav color */
+  --nav-active: #0b5e15;
+  
+  /* Button colors */
+  --button-primary: #0b5e15;
+  --button-primary-hover: #084510;
+  
+  /* Accent gradients for scores, quotes, etc */
+  --accent-gradient: #0b5e15;
+  --accent-text-gradient: #0b5e15;
+  
+  /* Christmas-specific variables for present-style cards */
+  --christmas-present-red: linear-gradient(135deg, #e03131 0%, #c92a2a 100%);
+  --christmas-present-green: linear-gradient(135deg, #37b24d 0%, #2f9e44 100%);
+  --christmas-ribbon-gold: #ffd43b;
+  --christmas-ribbon-white: #ffffff;
+  --christmas-bow-shadow: rgba(201, 42, 42, 0.3);
+}
