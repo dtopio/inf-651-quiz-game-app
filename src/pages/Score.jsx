@@ -10,7 +10,7 @@ const CATEGORY_ICON_MAP = Object.fromEntries(
 export default function Score() {
   const { history, clearHistory } = useQuizHistory();
 
-  // Nothing taken yet
+  // If no quiz has been taken yet
   if (!history || history.length === 0) {
     return (
       <div className="p-6">

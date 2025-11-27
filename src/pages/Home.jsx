@@ -137,9 +137,12 @@ export default function Home() {
             </h3>
 
             <p
-              className="text-5xl font-extrabold mb-1 bg-clip-text text-transparent"
+              className="text-5xl font-extrabold mb-1"
               style={{ 
-                backgroundImage: 'var(--accent-text-gradient)'
+                color: theme === 'christmas' ? '#0b5e15' : 'transparent',
+                backgroundImage: theme === 'christmas' ? 'none' : 'var(--accent-text-gradient)',
+                backgroundClip: theme === 'christmas' ? 'unset' : 'text',
+                WebkitBackgroundClip: theme === 'christmas' ? 'unset' : 'text'
               }}
             >
               {latest.percentage}%
