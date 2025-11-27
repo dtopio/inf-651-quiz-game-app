@@ -2,7 +2,7 @@ import { useQuizHistory } from "@/hooks/useQuizHistory.js";
 import { CATEGORIES } from "@/data/categories";
 import { TrashIcon } from "@heroicons/react/24/outline";
 
-// Map category → icon (from your categories.js)
+// Map category
 const CATEGORY_ICON_MAP = Object.fromEntries(
   CATEGORIES.map((c) => [c.title, c.icon])
 );
