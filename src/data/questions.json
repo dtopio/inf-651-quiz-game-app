@@ -1,0 +1,1225 @@
+{
+  "science": [
+    {
+      "id": 1,
+      "question": "What is the basic unit of life?",
+      "options": ["Atom", "Cell", "Molecule", "Organ"],
+      "answerIndex": 1,
+      "explanationCorrect": "Cells are the smallest units capable of performing all life processes.",
+      "explanationGenericWrong": "This option is not the fundamental unit of life."
+    },
+    {
+      "id": 2,
+      "question": "What gas do humans need in order to breathe?",
+      "options": ["Helium", "Carbon dioxide", "Oxygen", "Nitrogen"],
+      "answerIndex": 2,
+      "explanationCorrect": "Humans require oxygen for cellular respiration.",
+      "explanationGenericWrong": "This gas is not the one humans use for respiration."
+    },
+    {
+      "id": 3,
+      "question": "Which planet is closest to the Sun?",
+      "options": ["Mercury", "Venus", "Earth", "Mars"],
+      "answerIndex": 0,
+      "explanationCorrect": "Mercury is the nearest planet to the Sun.",
+      "explanationGenericWrong": "This planet is not the closest to the Sun."
+    },
+    {
+      "id": 4,
+      "question": "What is the process by which plants make their own food?",
+      "options": ["Respiration", "Photosynthesis", "Fermentation", "Transpiration"],
+      "answerIndex": 1,
+      "explanationCorrect": "Photosynthesis converts sunlight into chemical energy.",
+      "explanationGenericWrong": "This process is not responsible for food production in plants."
+    },
+    {
+      "id": 5,
+      "question": "What is the center of an atom called?",
+      "options": ["Electron", "Proton", "Nucleus", "Neutron"],
+      "answerIndex": 2,
+      "explanationCorrect": "The nucleus contains protons and neutrons at the center of an atom.",
+      "explanationGenericWrong": "This is not the central region of an atom."
+    },
+    {
+      "id": 6,
+      "question": "Which organ is responsible for filtering blood?",
+      "options": ["Lungs", "Kidneys", "Stomach", "Liver"],
+      "answerIndex": 1,
+      "explanationCorrect": "The kidneys filter waste and excess fluids from blood.",
+      "explanationGenericWrong": "This organ does not filter the blood."
+    },
+    {
+      "id": 7,
+      "question": "What is Earth’s largest natural satellite?",
+      "options": ["Moon", "Io", "Europa", "Titan"],
+      "answerIndex": 0,
+      "explanationCorrect": "Earth has one natural satellite — the Moon.",
+      "explanationGenericWrong": "This is not Earth’s natural satellite."
+    },
+    {
+      "id": 8,
+      "question": "Which part of the human body contains alveoli?",
+      "options": ["Heart", "Liver", "Lungs", "Intestines"],
+      "answerIndex": 2,
+      "explanationCorrect": "Alveoli are tiny air sacs in the lungs where gas exchange occurs.",
+      "explanationGenericWrong": "This organ does not contain alveoli."
+    },
+    {
+      "id": 9,
+      "question": "What type of energy is stored in a stretched rubber band?",
+      "options": ["Kinetic", "Nuclear", "Potential", "Thermal"],
+      "answerIndex": 2,
+      "explanationCorrect": "A stretched rubber band stores elastic potential energy.",
+      "explanationGenericWrong": "This type of energy is not stored in stretched objects."
+    },
+    {
+      "id": 10,
+      "question": "Which metal is liquid at room temperature?",
+      "options": ["Iron", "Mercury", "Gold", "Aluminum"],
+      "answerIndex": 1,
+      "explanationCorrect": "Mercury is the only metal that is liquid at room temperature.",
+      "explanationGenericWrong": "This metal is not liquid at room temperature."
+    },
+    {
+      "id": 11,
+      "question": "What is the main gas in Earth’s atmosphere?",
+      "options": ["Oxygen", "Carbon dioxide", "Nitrogen", "Hydrogen"],
+      "answerIndex": 2,
+      "explanationCorrect": "Nitrogen makes up about 78% of the atmosphere.",
+      "explanationGenericWrong": "This gas is not the most abundant in the atmosphere."
+    },
+    {
+      "id": 12,
+      "question": "What type of blood cells fight infections?",
+      "options": ["Red blood cells", "White blood cells", "Platelets", "Plasma"],
+      "answerIndex": 1,
+      "explanationCorrect": "White blood cells are part of the immune system and combat infections.",
+      "explanationGenericWrong": "These blood components do not fight infections."
+    },
+    {
+      "id": 13,
+      "question": "What is the hardest natural substance on Earth?",
+      "options": ["Iron", "Gold", "Diamond", "Quartz"],
+      "answerIndex": 2,
+      "explanationCorrect": "Diamond is the hardest natural material known.",
+      "explanationGenericWrong": "This substance is not the hardest natural material."
+    },
+    {
+      "id": 14,
+      "question": "What do we call the change of solid directly to gas?",
+      "options": ["Melting", "Condensation", "Sublimation", "Evaporation"],
+      "answerIndex": 2,
+      "explanationCorrect": "Sublimation is the transition from solid to gas without becoming liquid.",
+      "explanationGenericWrong": "This process does not describe solid changing directly to gas."
+    },
+    {
+      "id": 15,
+      "question": "Which vitamin is produced when your skin is exposed to sunlight?",
+      "options": ["Vitamin A", "Vitamin C", "Vitamin D", "Vitamin K"],
+      "answerIndex": 2,
+      "explanationCorrect": "Vitamin D is synthesized in the skin under sunlight.",
+      "explanationGenericWrong": "This vitamin is not produced by sunlight exposure."
+    },
+    {
+      "id": 16,
+      "question": "What do we call animals that can live on land and in water?",
+      "options": ["Mammals", "Reptiles", "Amphibians", "Birds"],
+      "answerIndex": 2,
+      "explanationCorrect": "Amphibians can live both in water and on land.",
+      "explanationGenericWrong": "This group of animals does not live both on land and in water."
+    },
+    {
+      "id": 17,
+      "question": "What is the speed of light?",
+      "options": ["300,000 km/s", "150,000 km/s", "1,000 km/s", "3,000 km/s"],
+      "answerIndex": 0,
+      "explanationCorrect": "Light travels at about 300,000 kilometers per second.",
+      "explanationGenericWrong": "This is not the correct speed of light."
+    },
+    {
+      "id": 18,
+      "question": "Which organelle is responsible for making proteins?",
+      "options": ["Ribosome", "Nucleus", "Vacuole", "Lysosome"],
+      "answerIndex": 0,
+      "explanationCorrect": "Ribosomes synthesize proteins from amino acids.",
+      "explanationGenericWrong": "This organelle is not responsible for protein synthesis."
+    },
+    {
+      "id": 19,
+      "question": "What type of rock forms from cooled lava?",
+      "options": ["Sedimentary", "Metamorphic", "Igneous", "Limestone"],
+      "answerIndex": 2,
+      "explanationCorrect": "Igneous rocks form from cooled magma or lava.",
+      "explanationGenericWrong": "This rock type does not form from cooled lava."
+    },
+    {
+      "id": 20,
+      "question": "Which blood type is the universal donor?",
+      "options": ["A", "B", "AB", "O negative"],
+      "answerIndex": 3,
+      "explanationCorrect": "O negative blood can be given to any blood type.",
+      "explanationGenericWrong": "This blood type is not universally compatible for donation."
+    },
+
+    {
+      "id": 21,
+      "question": "What is the process of liquid turning to gas at any temperature?",
+      "options": ["Freezing", "Evaporation", "Boiling", "Condensation"],
+      "answerIndex": 1,
+      "explanationCorrect": "Evaporation occurs at the surface of a liquid at any temperature.",
+      "explanationGenericWrong": "This process does not describe liquid turning into gas at any temperature."
+    },
+    {
+      "id": 22,
+      "question": "What part of the cell is known as the control center?",
+      "options": ["Mitochondria", "Nucleus", "Cell membrane", "Golgi apparatus"],
+      "answerIndex": 1,
+      "explanationCorrect": "The nucleus contains DNA and controls the cell’s activities.",
+      "explanationGenericWrong": "This organelle does not regulate cell activity."
+    },
+    {
+      "id": 23,
+      "question": "What phenomenon causes the sky to appear blue?",
+      "options": ["Reflection", "Refraction", "Scattering", "Absorption"],
+      "answerIndex": 2,
+      "explanationCorrect": "Rayleigh scattering causes shorter blue wavelengths to scatter more in the atmosphere.",
+      "explanationGenericWrong": "This phenomenon does not cause the sky’s blue color."
+    },
+    {
+      "id": 24,
+      "question": "What is the most abundant element in the universe?",
+      "options": ["Oxygen", "Hydrogen", "Carbon", "Helium"],
+      "answerIndex": 1,
+      "explanationCorrect": "Hydrogen makes up about 75% of the universe’s elemental mass.",
+      "explanationGenericWrong": "This element is not the most abundant in the universe."
+    },
+    {
+      "id": 25,
+      "question": "Which of these is a renewable source of energy?",
+      "options": ["Coal", "Oil", "Solar", "Natural gas"],
+      "answerIndex": 2,
+      "explanationCorrect": "Solar energy is renewable and sustainable.",
+      "explanationGenericWrong": "This energy source is not renewable."
+    }
+  ],
+
+
+  "history": [
+    {
+      "id": 1,
+      "question": "Who was the first President of the United States?",
+      "options": ["Thomas Jefferson", "Abraham Lincoln", "George Washington", "John Adams"],
+      "answerIndex": 2,
+      "explanationCorrect": "George Washington served as the first U.S. president from 1789 to 1797.",
+      "explanationGenericWrong": "This person did not serve as the first President of the United States."
+    },
+    {
+      "id": 2,
+      "question": "Which ancient civilization built the pyramids?",
+      "options": ["Romans", "Greeks", "Egyptians", "Persians"],
+      "answerIndex": 2,
+      "explanationCorrect": "The ancient Egyptians constructed the pyramids as tombs for their pharaohs.",
+      "explanationGenericWrong": "This civilization did not build the pyramids."
+    },
+    {
+      "id": 3,
+      "question": "What event started World War I?",
+      "options": ["The bombing of Pearl Harbor", "The assassination of Archduke Franz Ferdinand", "The fall of the Berlin Wall", "The invasion of Poland"],
+      "answerIndex": 1,
+      "explanationCorrect": "The assassination of Archduke Franz Ferdinand in 1914 triggered World War I.",
+      "explanationGenericWrong": "This event did not start World War I."
+    },
+    {
+      "id": 4,
+      "question": "Who is known as the 'Father of Modern Physics'?",
+      "options": ["Isaac Newton", "Albert Einstein", "Nikola Tesla", "Galileo Galilei"],
+      "answerIndex": 1,
+      "explanationCorrect": "Einstein's theories of relativity transformed modern physics.",
+      "explanationGenericWrong": "This person is not known as the Father of Modern Physics."
+    },
+    {
+      "id": 5,
+      "question": "Which empire was ruled by Genghis Khan?",
+      "options": ["The Ottoman Empire", "The Mongol Empire", "The Roman Empire", "The Persian Empire"],
+      "answerIndex": 1,
+      "explanationCorrect": "Genghis Khan founded and expanded the Mongol Empire.",
+      "explanationGenericWrong": "This empire was not ruled by Genghis Khan."
+    },
+    {
+      "id": 6,
+      "question": "In which country did the Renaissance begin?",
+      "options": ["France", "England", "Italy", "Spain"],
+      "answerIndex": 2,
+      "explanationCorrect": "The Renaissance began in Italy during the 14th century.",
+      "explanationGenericWrong": "The Renaissance did not originate in this country."
+    },
+    {
+      "id": 7,
+      "question": "What structure divided Berlin from 1961 to 1989?",
+      "options": ["Iron Curtain", "Berlin Wall", "Great Wall", "Rhine Barrier"],
+      "answerIndex": 1,
+      "explanationCorrect": "The Berlin Wall separated East and West Berlin during the Cold War.",
+      "explanationGenericWrong": "This structure did not divide Berlin during that period."
+    },
+    {
+      "id": 8,
+      "question": "What was the main language of the Roman Empire?",
+      "options": ["Latin", "Greek", "Arabic", "Hebrew"],
+      "answerIndex": 0,
+      "explanationCorrect": "Latin was the official language of the Roman Empire.",
+      "explanationGenericWrong": "This was not the primary language of the Roman Empire."
+    },
+    {
+      "id": 9,
+      "question": "Who discovered the Americas in 1492?",
+      "options": ["Christopher Columbus", "Vasco da Gama", "Ferdinand Magellan", "Marco Polo"],
+      "answerIndex": 0,
+      "explanationCorrect": "Columbus reached the Americas in 1492, marking the beginning of European exploration there.",
+      "explanationGenericWrong": "This explorer did not arrive in the Americas in 1492."
+    },
+    {
+      "id": 10,
+      "question": "Which war ended with the Treaty of Versailles?",
+      "options": ["World War I", "World War II", "Cold War", "Vietnam War"],
+      "answerIndex": 0,
+      "explanationCorrect": "The Treaty of Versailles formally ended World War I in 1919.",
+      "explanationGenericWrong": "This conflict did not end with the Treaty of Versailles."
+    },
+    {
+      "id": 11,
+      "question": "Who was the famous Egyptian queen married to Julius Caesar?",
+      "options": ["Nefertiti", "Cleopatra", "Hatshepsut", "Amunet"],
+      "answerIndex": 1,
+      "explanationCorrect": "Cleopatra VII had alliances with both Julius Caesar and Mark Antony.",
+      "explanationGenericWrong": "This queen was not married to Julius Caesar."
+    },
+    {
+      "id": 12,
+      "question": "The Black Death was a deadly outbreak of what disease?",
+      "options": ["Smallpox", "Influenza", "Bubonic plague", "Tuberculosis"],
+      "answerIndex": 2,
+      "explanationCorrect": "The Black Death was caused by the bubonic plague in the 14th century.",
+      "explanationGenericWrong": "This disease was not responsible for the Black Death."
+    },
+    {
+      "id": 13,
+      "question": "What ancient writing system was used in Egypt?",
+      "options": ["Cuneiform", "Hieroglyphics", "Sanskrit", "Latin"],
+      "answerIndex": 1,
+      "explanationCorrect": "Hieroglyphics were used by ancient Egyptians for religious texts and inscriptions.",
+      "explanationGenericWrong": "This writing system was not used in ancient Egypt."
+    },
+    {
+      "id": 14,
+      "question": "Who led India to independence through nonviolent resistance?",
+      "options": ["Jawaharlal Nehru", "Subhas Chandra Bose", "Mahatma Gandhi", "Indira Gandhi"],
+      "answerIndex": 2,
+      "explanationCorrect": "Gandhi promoted nonviolent civil disobedience to gain independence.",
+      "explanationGenericWrong": "This leader did not lead India through nonviolent resistance."
+    },
+    {
+      "id": 15,
+      "question": "Which civilization built Machu Picchu?",
+      "options": ["Maya", "Aztec", "Inca", "Olmec"],
+      "answerIndex": 2,
+      "explanationCorrect": "Machu Picchu was constructed by the Inca Empire in the 15th century.",
+      "explanationGenericWrong": "This civilization did not build Machu Picchu."
+    },
+    {
+      "id": 16,
+      "question": "Who was the main author of the Declaration of Independence?",
+      "options": ["George Washington", "Benjamin Franklin", "Thomas Jefferson", "Alexander Hamilton"],
+      "answerIndex": 2,
+      "explanationCorrect": "Thomas Jefferson drafted the Declaration of Independence in 1776.",
+      "explanationGenericWrong": "This person did not write the Declaration of Independence."
+    },
+    {
+      "id": 17,
+      "question": "Which country was the first to land humans on the Moon?",
+      "options": ["China", "United States", "Russia", "Japan"],
+      "answerIndex": 1,
+      "explanationCorrect": "The United States landed astronauts on the Moon in 1969 during Apollo 11.",
+      "explanationGenericWrong": "This country did not land the first humans on the Moon."
+    },
+    {
+      "id": 18,
+      "question": "What ancient city was buried by the eruption of Mount Vesuvius?",
+      "options": ["Athens", "Pompeii", "Babylon", "Troy"],
+      "answerIndex": 1,
+      "explanationCorrect": "Pompeii was buried in ash in AD 79 after Mount Vesuvius erupted.",
+      "explanationGenericWrong": "This city was not destroyed by the eruption of Vesuvius."
+    },
+    {
+      "id": 19,
+      "question": "Who was the first emperor of Rome?",
+      "options": ["Julius Caesar", "Augustus", "Nero", "Hadrian"],
+      "answerIndex": 1,
+      "explanationCorrect": "Augustus (formerly Octavian) became Rome’s first emperor in 27 BC.",
+      "explanationGenericWrong": "This person was not the first emperor of Rome."
+    },
+    {
+      "id": 20,
+      "question": "Which revolution began in 1760 and transformed manufacturing?",
+      "options": ["American Revolution", "French Revolution", "Industrial Revolution", "Scientific Revolution"],
+      "answerIndex": 2,
+      "explanationCorrect": "The Industrial Revolution introduced machines and factory production.",
+      "explanationGenericWrong": "This revolution did not transform manufacturing in that period."
+    },
+    {
+      "id": 21,
+      "question": "Which empire built the Colosseum?",
+      "options": ["Greek Empire", "Roman Empire", "Byzantine Empire", "Ottoman Empire"],
+      "answerIndex": 1,
+      "explanationCorrect": "The Roman Empire constructed the Colosseum in the 1st century AD.",
+      "explanationGenericWrong": "This empire did not build the Colosseum."
+    },
+    {
+      "id": 22,
+      "question": "What ship famously sank on its maiden voyage in 1912?",
+      "options": ["Lusitania", "Titanic", "Queen Mary", "Britannic"],
+      "answerIndex": 1,
+      "explanationCorrect": "The Titanic sank after hitting an iceberg in 1912.",
+      "explanationGenericWrong": "This ship did not sink on its maiden voyage in 1912."
+    },
+    {
+      "id": 23,
+      "question": "What major conflict was fought between the North and South regions of the United States?",
+      "options": ["American Civil War", "Cold War", "World War II", "Mexican-American War"],
+      "answerIndex": 0,
+      "explanationCorrect": "The American Civil War was fought from 1861 to 1865 over slavery and states' rights.",
+      "explanationGenericWrong": "This conflict does not describe the war between the North and South U.S. regions."
+    },
+    {
+      "id": 24,
+      "question": "Which empire was known for its road system and messenger relay runners?",
+      "options": ["Inca Empire", "Mongol Empire", "Roman Empire", "Greek Empire"],
+      "answerIndex": 0,
+      "explanationCorrect": "The Inca Empire built extensive roads and used relay runners called chaskis.",
+      "explanationGenericWrong": "This empire was not known for that road and messenger system."
+    },
+    {
+      "id": 25,
+      "question": "Who was the leader of the Soviet Union during World War II?",
+      "options": ["Vladimir Lenin", "Joseph Stalin", "Mikhail Gorbachev", "Leon Trotsky"],
+      "answerIndex": 1,
+      "explanationCorrect": "Joseph Stalin led the Soviet Union through most of World War II.",
+      "explanationGenericWrong": "This person did not lead the Soviet Union during World War II."
+    }
+  ],
+
+
+  "art": [
+    {
+      "id": 1,
+      "question": "Who painted the Mona Lisa?",
+      "options": ["Vincent van Gogh", "Leonardo da Vinci", "Pablo Picasso", "Claude Monet"],
+      "answerIndex": 1,
+      "explanationCorrect": "Leonardo da Vinci painted the Mona Lisa during the Renaissance.",
+      "explanationGenericWrong": "This artist did not paint the Mona Lisa."
+    },
+    {
+      "id": 2,
+      "question": "Which art movement is Salvador Dalí associated with?",
+      "options": ["Surrealism", "Impressionism", "Baroque", "Cubism"],
+      "answerIndex": 0,
+      "explanationCorrect": "Dalí was a key figure in the Surrealist movement.",
+      "explanationGenericWrong": "This movement is not associated with Salvador Dalí."
+    },
+    {
+      "id": 3,
+      "question": "What material is traditionally used in sculpture?",
+      "options": ["Marble", "Paper", "Ink", "Canvas"],
+      "answerIndex": 0,
+      "explanationCorrect": "Marble has been widely used in classical sculpture.",
+      "explanationGenericWrong": "This material is not commonly used for traditional sculpture."
+    },
+    {
+      "id": 4,
+      "question": "Which Dutch artist is famous for his painting 'Starry Night'?",
+      "options": ["Rembrandt", "Van Gogh", "Matisse", "Vermeer"],
+      "answerIndex": 1,
+      "explanationCorrect": "Vincent van Gogh created 'Starry Night' in 1889.",
+      "explanationGenericWrong": "This artist did not paint 'Starry Night'."
+    },
+    {
+      "id": 5,
+      "question": "What does the term 'Renaissance' mean?",
+      "options": ["New style", "Rebirth", "Golden age", "Expression"],
+      "answerIndex": 1,
+      "explanationCorrect": "The Renaissance refers to a 'rebirth' of art, culture, and learning.",
+      "explanationGenericWrong": "This definition does not match the meaning of Renaissance."
+    },
+    {
+      "id": 6,
+      "question": "Pablo Picasso co-founded which art movement?",
+      "options": ["Cubism", "Futurism", "Romanticism", "Realism"],
+      "answerIndex": 0,
+      "explanationCorrect": "Picasso helped develop Cubism with Georges Braque.",
+      "explanationGenericWrong": "Picasso did not co-found this movement."
+    },
+    {
+      "id": 7,
+      "question": "What type of paint dries the slowest?",
+      "options": ["Acrylic", "Oil paint", "Watercolor", "Gouache"],
+      "answerIndex": 1,
+      "explanationCorrect": "Oil paint dries slowly, allowing for blending over long periods.",
+      "explanationGenericWrong": "This paint type does not dry as slowly as oil paint."
+    },
+    {
+      "id": 8,
+      "question": "Which artist is known for cut-out color shapes in his later years?",
+      "options": ["Henri Matisse", "Andy Warhol", "Jackson Pollock", "Edvard Munch"],
+      "answerIndex": 0,
+      "explanationCorrect": "Matisse created famous paper cut-outs during his final creative period.",
+      "explanationGenericWrong": "This artist is not known for cut-out color shapes."
+    },
+    {
+      "id": 9,
+      "question": "What is fresco painting?",
+      "options": ["Painting on fresh plaster", "Painting on wood panels", "Painting with wax", "Painting using ink"],
+      "answerIndex": 0,
+      "explanationCorrect": "Fresco involves applying pigment to wet plaster so it dries into the wall.",
+      "explanationGenericWrong": "This describes a different painting technique."
+    },
+    {
+      "id": 10,
+      "question": "Which famous sculpture is located in Florence and created by Michelangelo?",
+      "options": ["David", "The Thinker", "Venus de Milo", "The Kiss"],
+      "answerIndex": 0,
+      "explanationCorrect": "Michelangelo's 'David' is one of the most iconic Renaissance sculptures.",
+      "explanationGenericWrong": "This sculpture was not created by Michelangelo."
+    },
+    {
+      "id": 11,
+      "question": "What is the main characteristic of Impressionism?",
+      "options": ["Strong lines", "Quick brushstrokes and light effects", "Geometric shapes", "Realistic shading"],
+      "answerIndex": 1,
+      "explanationCorrect": "Impressionism focuses on light, color, and visible brushstrokes.",
+      "explanationGenericWrong": "This characteristic does not define Impressionism."
+    },
+    {
+      "id": 12,
+      "question": "Which artist is known for drip painting?",
+      "options": ["Mark Rothko", "Jackson Pollock", "Frida Kahlo", "Georgia O'Keeffe"],
+      "answerIndex": 1,
+      "explanationCorrect": "Jackson Pollock pioneered drip painting techniques.",
+      "explanationGenericWrong": "This artist is not known for drip painting."
+    },
+    {
+      "id": 13,
+      "question": "What is calligraphy?",
+      "options": ["Decorative handwriting", "Stone carving", "Color mixing", "Digital art"],
+      "answerIndex": 0,
+      "explanationCorrect": "Calligraphy is the art of beautiful and stylized handwriting.",
+      "explanationGenericWrong": "This option does not define calligraphy."
+    },
+    {
+      "id": 14,
+      "question": "Which artist painted 'The Scream'?",
+      "options": ["Paul Cézanne", "Edvard Munch", "Henri Rousseau", "Roy Lichtenstein"],
+      "answerIndex": 1,
+      "explanationCorrect": "'The Scream' is one of Edvard Munch's most iconic works.",
+      "explanationGenericWrong": "This artist did not create 'The Scream'."
+    },
+    {
+      "id": 15,
+      "question": "What art style uses geometric shapes to create abstract forms?",
+      "options": ["Realism", "Cubism", "Gothic", "Surrealism"],
+      "answerIndex": 1,
+      "explanationCorrect": "Cubism breaks down subjects into geometric shapes and planes.",
+      "explanationGenericWrong": "This style does not rely on geometric abstraction."
+    },
+    {
+      "id": 16,
+      "question": "Which period is known for grand, dramatic, and emotional artwork?",
+      "options": ["Baroque", "Minimalism", "Classical", "Dada"],
+      "answerIndex": 0,
+      "explanationCorrect": "Baroque art is known for its dramatic and emotional intensity.",
+      "explanationGenericWrong": "This art period is not known for dramatic emotional themes."
+    },
+    {
+      "id": 17,
+      "question": "What does the term 'portrait' refer to?",
+      "options": ["A landscape scene", "A painting of a person", "An abstract piece", "A sculpture of an animal"],
+      "answerIndex": 1,
+      "explanationCorrect": "A portrait depicts a person, often focusing on the face.",
+      "explanationGenericWrong": "This does not describe what a portrait is."
+    },
+    {
+      "id": 18,
+      "question": "What technique involves carving into a surface to create prints?",
+      "options": ["Engraving", "Watercolor", "Pastel drawing", "Acrylic wash"],
+      "answerIndex": 0,
+      "explanationCorrect": "Engraving cuts lines into a hard surface to hold ink for printing.",
+      "explanationGenericWrong": "This technique is not used for carving print surfaces."
+    },
+    {
+      "id": 19,
+      "question": "Andy Warhol is a key figure in which art movement?",
+      "options": ["Pop Art", "Neo-Classical", "Symbolism", "Expressionism"],
+      "answerIndex": 0,
+      "explanationCorrect": "Warhol popularized Pop Art, which drew from mass culture and consumerism.",
+      "explanationGenericWrong": "This movement is not associated with Andy Warhol."
+    },
+    {
+      "id": 20,
+      "question": "What medium do artists commonly use for sketching?",
+      "options": ["Clay", "Charcoal", "Oil paint", "Enamel"],
+      "answerIndex": 1,
+      "explanationCorrect": "Charcoal is widely used for sketching because it is easy to blend and erase.",
+      "explanationGenericWrong": "This material is not typically used for sketching."
+    },
+    {
+      "id": 21,
+      "question": "Which artist is famous for large flower paintings?",
+      "options": ["Georgia O'Keeffe", "Joan Miró", "Mary Cassatt", "Renoir"],
+      "answerIndex": 0,
+      "explanationCorrect": "Georgia O'Keeffe is well known for her enlarged, detailed flower paintings.",
+      "explanationGenericWrong": "This artist is not known for large flower paintings."
+    },
+    {
+      "id": 22,
+      "question": "What is a mural?",
+      "options": ["A small drawing", "A sculpture on a pedestal", "A painting on a wall or ceiling", "A piece of pottery"],
+      "answerIndex": 2,
+      "explanationCorrect": "A mural is a large artwork painted directly on walls or ceilings.",
+      "explanationGenericWrong": "This does not describe a mural."
+    },
+    {
+      "id": 23,
+      "question": "Which artist cut off part of his ear?",
+      "options": ["Van Gogh", "Monet", "Seurat", "Da Vinci"],
+      "answerIndex": 0,
+      "explanationCorrect": "Van Gogh famously cut off part of his ear during a mental health crisis.",
+      "explanationGenericWrong": "This artist did not cut off part of his ear."
+    },
+    {
+      "id": 24,
+      "question": "Which country is the origin of traditional ukiyo-e woodblock prints?",
+      "options": ["China", "Japan", "South Korea", "Thailand"],
+      "answerIndex": 1,
+      "explanationCorrect": "Ukiyo-e is a classical Japanese art form using woodblock printing.",
+      "explanationGenericWrong": "This country is not the origin of ukiyo-e prints."
+    },
+    {
+      "id": 25,
+      "question": "What is the main purpose of perspective in art?",
+      "options": ["To blend colors", "To create depth", "To flatten shapes", "To add texture"],
+      "answerIndex": 1,
+      "explanationCorrect": "Perspective techniques create the illusion of depth and space in artwork.",
+      "explanationGenericWrong": "This does not describe the purpose of perspective in art."
+    }
+  ],
+
+
+  "geography": [
+    {
+      "id": 1,
+      "question": "What is the largest continent on Earth?",
+      "options": ["Africa", "Asia", "Europe", "North America"],
+      "answerIndex": 1,
+      "explanationCorrect": "Asia is the largest continent both in area and population.",
+      "explanationGenericWrong": "This continent is not the largest on Earth."
+    },
+    {
+      "id": 2,
+      "question": "Which country has the longest coastline?",
+      "options": ["Australia", "Canada", "Russia", "United States"],
+      "answerIndex": 1,
+      "explanationCorrect": "Canada has the longest coastline in the world, stretching over 202,000 km.",
+      "explanationGenericWrong": "This country does not have the longest coastline."
+    },
+    {
+      "id": 3,
+      "question": "What is the capital city of Japan?",
+      "options": ["Seoul", "Tokyo", "Beijing", "Bangkok"],
+      "answerIndex": 1,
+      "explanationCorrect": "Tokyo is the capital of Japan and one of the world’s largest cities.",
+      "explanationGenericWrong": "This city is not the capital of Japan."
+    },
+    {
+      "id": 4,
+      "question": "Which river is the longest in the world?",
+      "options": ["Nile", "Amazon", "Yangtze", "Mississippi"],
+      "answerIndex": 0,
+      "explanationCorrect": "The Nile River in Africa is traditionally considered the longest river.",
+      "explanationGenericWrong": "This river is not the longest in the world."
+    },
+    {
+      "id": 5,
+      "question": "Which desert is the largest in the world?",
+      "options": ["Sahara", "Arabian", "Gobi", "Kalahari"],
+      "answerIndex": 0,
+      "explanationCorrect": "The Sahara Desert in Africa is the largest hot desert on Earth.",
+      "explanationGenericWrong": "This desert is not the largest in the world."
+    },
+    {
+      "id": 6,
+      "question": "Mount Everest is located on the border of which two countries?",
+      "options": ["China and India", "Nepal and China", "India and Nepal", "Bhutan and China"],
+      "answerIndex": 1,
+      "explanationCorrect": "Mount Everest lies on the border between Nepal and China (Tibet).",
+      "explanationGenericWrong": "These two countries do not share Mount Everest."
+    },
+    {
+      "id": 7,
+      "question": "Which is the smallest country in the world by area?",
+      "options": ["Monaco", "San Marino", "Vatican City", "Liechtenstein"],
+      "answerIndex": 2,
+      "explanationCorrect": "Vatican City is the smallest country, both in area and population.",
+      "explanationGenericWrong": "This country is not the smallest in the world."
+    },
+    {
+      "id": 8,
+      "question": "What is the longest mountain range in the world?",
+      "options": ["Rockies", "Andes", "Himalayas", "Alps"],
+      "answerIndex": 1,
+      "explanationCorrect": "The Andes stretch along the western edge of South America and are the longest range.",
+      "explanationGenericWrong": "This mountain range is not the longest in the world."
+    },
+    {
+      "id": 9,
+      "question": "Which ocean is the deepest?",
+      "options": ["Atlantic", "Pacific", "Indian", "Arctic"],
+      "answerIndex": 1,
+      "explanationCorrect": "The Pacific Ocean contains the Mariana Trench, the deepest part of the world's oceans.",
+      "explanationGenericWrong": "This ocean is not the deepest."
+    },
+    {
+      "id": 10,
+      "question": "Which U.S. state is the largest by area?",
+      "options": ["California", "Texas", "Alaska", "Montana"],
+      "answerIndex": 2,
+      "explanationCorrect": "Alaska is the largest U.S. state in terms of area.",
+      "explanationGenericWrong": "This state is not the largest in the United States."
+    },
+    {
+      "id": 11,
+      "question": "Which country is both in Europe and Asia?",
+      "options": ["Russia", "France", "Egypt", "Spain"],
+      "answerIndex": 0,
+      "explanationCorrect": "Russia is a transcontinental country located in both Europe and Asia.",
+      "explanationGenericWrong": "This country is not located in both continents."
+    },
+    {
+      "id": 12,
+      "question": "Which desert is located in northern China and southern Mongolia?",
+      "options": ["Sahara", "Gobi", "Kalahari", "Arabian"],
+      "answerIndex": 1,
+      "explanationCorrect": "The Gobi Desert spans northern China and southern Mongolia.",
+      "explanationGenericWrong": "This desert is not located in China or Mongolia."
+    },
+    {
+      "id": 13,
+      "question": "What is the largest island in the world?",
+      "options": ["Greenland", "Madagascar", "Borneo", "Sumatra"],
+      "answerIndex": 0,
+      "explanationCorrect": "Greenland is the largest island, covering over 2 million square kilometers.",
+      "explanationGenericWrong": "This island is not the largest in the world."
+    },
+    {
+      "id": 14,
+      "question": "Which river flows through Egypt?",
+      "options": ["Nile", "Amazon", "Yangtze", "Mississippi"],
+      "answerIndex": 0,
+      "explanationCorrect": "The Nile River is Egypt’s primary river and the longest in Africa.",
+      "explanationGenericWrong": "This river does not flow through Egypt."
+    },
+    {
+      "id": 15,
+      "question": "Which continent is known as the 'Dark Continent'?",
+      "options": ["Africa", "Asia", "Europe", "South America"],
+      "answerIndex": 0,
+      "explanationCorrect": "Africa was historically called the 'Dark Continent' due to its unexplored regions.",
+      "explanationGenericWrong": "This continent is not referred to as the 'Dark Continent'."
+    },
+    {
+      "id": 16,
+      "question": "What is the capital of Australia?",
+      "options": ["Sydney", "Melbourne", "Canberra", "Perth"],
+      "answerIndex": 2,
+      "explanationCorrect": "Canberra is the capital city of Australia.",
+      "explanationGenericWrong": "This city is not Australia’s capital."
+    },
+    {
+      "id": 17,
+      "question": "Which ocean touches the east coast of Africa?",
+      "options": ["Pacific Ocean", "Atlantic Ocean", "Indian Ocean", "Arctic Ocean"],
+      "answerIndex": 2,
+      "explanationCorrect": "The Indian Ocean borders the eastern coast of Africa.",
+      "explanationGenericWrong": "This ocean does not touch Africa’s east coast."
+    },
+    {
+      "id": 18,
+      "question": "Which country is famous for its fjords?",
+      "options": ["Norway", "Canada", "Brazil", "Egypt"],
+      "answerIndex": 0,
+      "explanationCorrect": "Norway is renowned for its dramatic fjords along the coastline.",
+      "explanationGenericWrong": "This country is not famous for fjords."
+    },
+    {
+      "id": 19,
+      "question": "Which desert is found in northern Africa?",
+      "options": ["Kalahari", "Sahara", "Gobi", "Sonoran"],
+      "answerIndex": 1,
+      "explanationCorrect": "The Sahara Desert is the largest hot desert in northern Africa.",
+      "explanationGenericWrong": "This desert is not located in northern Africa."
+    },
+    {
+      "id": 20,
+      "question": "What is the highest mountain in Africa?",
+      "options": ["Mount Kenya", "Mount Kilimanjaro", "Atlas Mountains", "Drakensberg"],
+      "answerIndex": 1,
+      "explanationCorrect": "Mount Kilimanjaro in Tanzania is Africa’s highest peak.",
+      "explanationGenericWrong": "This mountain is not the tallest in Africa."
+    },
+    {
+      "id": 21,
+      "question": "Which U.S. river is the longest?",
+      "options": ["Mississippi", "Colorado", "Missouri", "Rio Grande"],
+      "answerIndex": 2,
+      "explanationCorrect": "The Missouri River is the longest river in the United States.",
+      "explanationGenericWrong": "This river is not the longest in the U.S."
+    },
+    {
+      "id": 22,
+      "question": "Which country has the largest population in the world?",
+      "options": ["India", "United States", "China", "Indonesia"],
+      "answerIndex": 2,
+      "explanationCorrect": "China has the largest population, with over 1.4 billion people.",
+      "explanationGenericWrong": "This country does not have the largest population."
+    },
+    {
+      "id": 23,
+      "question": "Which sea is the saltiest in the world?",
+      "options": ["Mediterranean Sea", "Red Sea", "Dead Sea", "Baltic Sea"],
+      "answerIndex": 2,
+      "explanationCorrect": "The Dead Sea has extremely high salinity, making it the saltiest sea.",
+      "explanationGenericWrong": "This sea is not the saltiest in the world."
+    },
+    {
+      "id": 24,
+      "question": "Which mountain range separates Europe and Asia?",
+      "options": ["Andes", "Ural Mountains", "Himalayas", "Rockies"],
+      "answerIndex": 1,
+      "explanationCorrect": "The Ural Mountains in Russia mark the boundary between Europe and Asia.",
+      "explanationGenericWrong": "This range does not separate Europe and Asia."
+    },
+    {
+      "id": 25,
+      "question": "Which country has the most time zones?",
+      "options": ["United States", "Russia", "France", "China"],
+      "answerIndex": 2,
+      "explanationCorrect": "France has the most time zones due to its territories around the world.",
+      "explanationGenericWrong": "This country does not have the most time zones."
+    }
+  ],
+
+
+  "technology": [
+    {
+      "id": 1,
+      "question": "What does 'CPU' stand for in computers?",
+      "options": ["Central Processing Unit", "Computer Power Unit", "Central Program Utility", "Computer Processing Unit"],
+      "answerIndex": 0,
+      "explanationCorrect": "CPU stands for Central Processing Unit and acts as the brain of the computer.",
+      "explanationGenericWrong": "This is not the correct meaning of CPU."
+    },
+    {
+      "id": 2,
+      "question": "What is the primary function of RAM in a computer?",
+      "options": ["Permanent storage", "Temporary storage for active tasks", "Processing graphics", "Cooling the CPU"],
+      "answerIndex": 1,
+      "explanationCorrect": "RAM temporarily stores data that the CPU needs for current tasks.",
+      "explanationGenericWrong": "RAM is not used for permanent storage."
+    },
+    {
+      "id": 3,
+      "question": "Which company developed the Windows operating system?",
+      "options": ["Apple", "Microsoft", "Google", "IBM"],
+      "answerIndex": 1,
+      "explanationCorrect": "Microsoft created the Windows operating system.",
+      "explanationGenericWrong": "This company did not develop Windows OS."
+    },
+    {
+      "id": 4,
+      "question": "What does 'HTTP' stand for in website addresses?",
+      "options": ["HyperText Transfer Protocol", "High-Tech Transfer Process", "Hyperlink Text Transmission", "Hyper Transfer Technology Protocol"],
+      "answerIndex": 0,
+      "explanationCorrect": "HTTP stands for HyperText Transfer Protocol, used to transfer web pages over the internet.",
+      "explanationGenericWrong": "This is not the correct meaning of HTTP."
+    },
+    {
+      "id": 5,
+      "question": "Which of these is an example of an input device?",
+      "options": ["Monitor", "Keyboard", "Printer", "Speaker"],
+      "answerIndex": 1,
+      "explanationCorrect": "A keyboard is an input device used to enter data into a computer.",
+      "explanationGenericWrong": "This device is not used for input."
+    },
+    {
+      "id": 6,
+      "question": "Which company created the first smartphone called iPhone?",
+      "options": ["Samsung", "Apple", "Nokia", "Google"],
+      "answerIndex": 1,
+      "explanationCorrect": "Apple released the first iPhone in 2007.",
+      "explanationGenericWrong": "This company did not create the iPhone."
+    },
+    {
+      "id": 7,
+      "question": "What programming language is known for web development alongside HTML and CSS?",
+      "options": ["Python", "JavaScript", "C++", "Swift"],
+      "answerIndex": 1,
+      "explanationCorrect": "JavaScript is widely used for interactive web development.",
+      "explanationGenericWrong": "This language is not typically used for front-end web development."
+    },
+    {
+      "id": 8,
+      "question": "What is the main purpose of a firewall in computer networks?",
+      "options": ["To increase internet speed", "To block malware and unauthorized access", "To store data", "To host websites"],
+      "answerIndex": 1,
+      "explanationCorrect": "A firewall protects computers by blocking unauthorized access and threats.",
+      "explanationGenericWrong": "This is not the primary purpose of a firewall."
+    },
+    {
+      "id": 9,
+      "question": "Which of these is an example of cloud storage?",
+      "options": ["Google Drive", "USB Flash Drive", "CD-ROM", "External Hard Drive"],
+      "answerIndex": 0,
+      "explanationCorrect": "Google Drive stores files online, accessible from anywhere with internet.",
+      "explanationGenericWrong": "This option is not cloud storage."
+    },
+    {
+      "id": 10,
+      "question": "Which company developed the search engine Google?",
+      "options": ["Microsoft", "Apple", "Google", "Yahoo"],
+      "answerIndex": 2,
+      "explanationCorrect": "Google LLC developed and operates the Google search engine.",
+      "explanationGenericWrong": "This company did not create the Google search engine."
+    },
+    {
+      "id": 11,
+      "question": "Which device is used to convert digital signals into analog signals for internet connections?",
+      "options": ["Router", "Modem", "Switch", "Hub"],
+      "answerIndex": 1,
+      "explanationCorrect": "A modem modulates and demodulates signals for internet connectivity.",
+      "explanationGenericWrong": "This device does not convert digital to analog signals."
+    },
+    {
+      "id": 12,
+      "question": "What is an algorithm in computer science?",
+      "options": ["A programming language", "A step-by-step solution to a problem", "A type of computer", "A hardware component"],
+      "answerIndex": 1,
+      "explanationCorrect": "An algorithm is a defined set of instructions to solve a problem or perform a task.",
+      "explanationGenericWrong": "This does not correctly define an algorithm."
+    },
+    {
+      "id": 13,
+      "question": "Which technology allows wireless communication over short distances?",
+      "options": ["Wi-Fi", "Bluetooth", "Ethernet", "Fiber optic"],
+      "answerIndex": 1,
+      "explanationCorrect": "Bluetooth enables short-range wireless data transfer between devices.",
+      "explanationGenericWrong": "This technology does not allow short-range wireless communication."
+    },
+    {
+      "id": 14,
+      "question": "What is the main purpose of an operating system?",
+      "options": ["To provide antivirus protection", "To manage hardware and software resources", "To create websites", "To store photos"],
+      "answerIndex": 1,
+      "explanationCorrect": "Operating systems manage hardware, software, and user interactions on a computer.",
+      "explanationGenericWrong": "This is not the main function of an operating system."
+    },
+    {
+      "id": 15,
+      "question": "Which company developed the programming language Python?",
+      "options": ["Microsoft", "Apple", "Guido van Rossum", "Sun Microsystems"],
+      "answerIndex": 2,
+      "explanationCorrect": "Python was created by Guido van Rossum in 1991.",
+      "explanationGenericWrong": "This company did not develop Python."
+    },
+    {
+      "id": 16,
+      "question": "Which device is used to display output from a computer?",
+      "options": ["Mouse", "Keyboard", "Monitor", "Scanner"],
+      "answerIndex": 2,
+      "explanationCorrect": "A monitor shows visual output from the computer.",
+      "explanationGenericWrong": "This device is not used for output."
+    },
+    {
+      "id": 17,
+      "question": "What does 'URL' stand for?",
+      "options": ["Uniform Resource Locator", "Universal Remote Link", "Unique Reference Line", "Unified Resource Link"],
+      "answerIndex": 0,
+      "explanationCorrect": "URL stands for Uniform Resource Locator, which identifies addresses on the web.",
+      "explanationGenericWrong": "This is not the correct meaning of URL."
+    },
+    {
+      "id": 18,
+      "question": "What is open-source software?",
+      "options": ["Software that is free to use and modify", "Software only for schools", "Software that cannot be copied", "Software for gaming"],
+      "answerIndex": 0,
+      "explanationCorrect": "Open-source software allows anyone to use, study, and modify its source code.",
+      "explanationGenericWrong": "This is not the definition of open-source software."
+    },
+    {
+      "id": 19,
+      "question": "Which type of memory is non-volatile and retains data when the computer is off?",
+      "options": ["RAM", "ROM", "Cache", "Registers"],
+      "answerIndex": 1,
+      "explanationCorrect": "ROM (Read-Only Memory) keeps data even when the computer is powered off.",
+      "explanationGenericWrong": "This type of memory does not retain data when powered off."
+    },
+    {
+      "id": 20,
+      "question": "Which technology is commonly used for online payments?",
+      "options": ["Blockchain", "HTTP", "Bluetooth", "HTML"],
+      "answerIndex": 0,
+      "explanationCorrect": "Blockchain technology underpins secure online payments like cryptocurrencies.",
+      "explanationGenericWrong": "This technology is not commonly used for standard online payments."
+    },
+    {
+      "id": 21,
+      "question": "Which device is used to connect multiple computers in a network?",
+      "options": ["Router", "Switch", "Printer", "Speaker"],
+      "answerIndex": 1,
+      "explanationCorrect": "A network switch connects multiple devices within a network and directs data.",
+      "explanationGenericWrong": "This device does not connect multiple computers in a network."
+    },
+    {
+      "id": 22,
+      "question": "Which company developed the Linux operating system?",
+      "options": ["Linus Torvalds", "Microsoft", "IBM", "Apple"],
+      "answerIndex": 0,
+      "explanationCorrect": "Linux was created by Linus Torvalds in 1991 as an open-source OS.",
+      "explanationGenericWrong": "This company did not develop Linux."
+    },
+    {
+      "id": 23,
+      "question": "Which programming language is mainly used for iOS app development?",
+      "options": ["Java", "Swift", "C#", "Python"],
+      "answerIndex": 1,
+      "explanationCorrect": "Swift is the primary programming language for iOS app development.",
+      "explanationGenericWrong": "This language is not mainly used for iOS apps."
+    },
+    {
+      "id": 24,
+      "question": "Which technology stores data on multiple physical devices to improve reliability?",
+      "options": ["Cloud computing", "RAID", "VPN", "Firewall"],
+      "answerIndex": 1,
+      "explanationCorrect": "RAID (Redundant Array of Independent Disks) uses multiple drives for reliability and speed.",
+      "explanationGenericWrong": "This technology does not store data across multiple devices for reliability."
+    },
+    {
+      "id": 25,
+      "question": "What does 'IoT' stand for?",
+      "options": ["Internet of Things", "Internal of Technology", "Interactive Online Tech", "Integrated Operating Tool"],
+      "answerIndex": 0,
+      "explanationCorrect": "IoT refers to the Internet of Things, where devices are interconnected over the internet.",
+      "explanationGenericWrong": "This is not the correct meaning of IoT."
+    }
+  ],
+
+
+  "sports": [
+    {
+      "id": 1,
+      "question": "Which country won the FIFA World Cup in 2018?",
+      "options": ["Brazil", "Germany", "France", "Argentina"],
+      "answerIndex": 2,
+      "explanationCorrect": "France won the 2018 FIFA World Cup held in Russia.",
+      "explanationGenericWrong": "This country did not win the 2018 World Cup."
+    },
+    {
+      "id": 2,
+      "question": "How many players are on a standard basketball team on the court?",
+      "options": ["5", "6", "7", "11"],
+      "answerIndex": 0,
+      "explanationCorrect": "A basketball team has 5 players on the court at a time.",
+      "explanationGenericWrong": "This is not the correct number of players in basketball on the court."
+    },
+    {
+      "id": 3,
+      "question": "Which country hosts the Tour de France cycling race?",
+      "options": ["Spain", "Italy", "France", "Belgium"],
+      "answerIndex": 2,
+      "explanationCorrect": "The Tour de France is an annual multi-stage bicycle race held in France.",
+      "explanationGenericWrong": "This country does not host the Tour de France."
+    },
+    {
+      "id": 4,
+      "question": "In tennis, what is the term for a score of zero?",
+      "options": ["Ace", "Love", "Deuce", "Fault"],
+      "answerIndex": 1,
+      "explanationCorrect": "In tennis, a score of zero is called 'Love'.",
+      "explanationGenericWrong": "This term does not represent zero in tennis scoring."
+    },
+    {
+      "id": 5,
+      "question": "Which sport uses a shuttlecock?",
+      "options": ["Tennis", "Squash", "Badminton", "Table Tennis"],
+      "answerIndex": 2,
+      "explanationCorrect": "Badminton is played using a shuttlecock.",
+      "explanationGenericWrong": "This sport does not use a shuttlecock."
+    },
+    {
+      "id": 6,
+      "question": "How long is a standard Olympic swimming pool?",
+      "options": ["25 meters", "50 meters", "100 meters", "75 meters"],
+      "answerIndex": 1,
+      "explanationCorrect": "Olympic pools are 50 meters in length.",
+      "explanationGenericWrong": "This is not the official length of an Olympic pool."
+    },
+    {
+      "id": 7,
+      "question": "Which country has won the most Olympic gold medals in history?",
+      "options": ["China", "Russia", "United States", "Germany"],
+      "answerIndex": 2,
+      "explanationCorrect": "The United States has won the most Olympic gold medals historically.",
+      "explanationGenericWrong": "This country has not won the most gold medals in Olympic history."
+    },
+    {
+      "id": 8,
+      "question": "What is the maximum score in a single frame of ten-pin bowling?",
+      "options": ["10", "50", "100", "300"],
+      "answerIndex": 0,
+      "explanationCorrect": "The maximum score in a single frame is 10 pins.",
+      "explanationGenericWrong": "This is not the correct maximum score for a single frame."
+    },
+    {
+      "id": 9,
+      "question": "Which sport is associated with Wimbledon?",
+      "options": ["Tennis", "Cricket", "Golf", "Soccer"],
+      "answerIndex": 0,
+      "explanationCorrect": "Wimbledon is one of the four major tennis Grand Slam tournaments.",
+      "explanationGenericWrong": "This sport is not associated with Wimbledon."
+    },
+    {
+      "id": 10,
+      "question": "Which NFL team has won the most Super Bowls?",
+      "options": ["New England Patriots", "Dallas Cowboys", "Pittsburgh Steelers", "Green Bay Packers"],
+      "answerIndex": 2,
+      "explanationCorrect": "The Pittsburgh Steelers have won 6 Super Bowl titles, tied with New England Patriots.",
+      "explanationGenericWrong": "This team is not the one with the most Super Bowl wins."
+    },
+    {
+      "id": 11,
+      "question": "What is the national sport of Japan?",
+      "options": ["Karate", "Judo", "Sumo Wrestling", "Baseball"],
+      "answerIndex": 2,
+      "explanationCorrect": "Sumo Wrestling is considered the national sport of Japan.",
+      "explanationGenericWrong": "This sport is not the national sport of Japan."
+    },
+    {
+      "id": 12,
+      "question": "How many holes are there in a standard round of golf?",
+      "options": ["9", "18", "12", "24"],
+      "answerIndex": 1,
+      "explanationCorrect": "A standard golf course has 18 holes.",
+      "explanationGenericWrong": "This is not the correct number of holes in golf."
+    },
+    {
+      "id": 13,
+      "question": "Which country won the first FIFA World Cup in 1930?",
+      "options": ["Uruguay", "Brazil", "Argentina", "Italy"],
+      "answerIndex": 0,
+      "explanationCorrect": "Uruguay won the first FIFA World Cup in 1930.",
+      "explanationGenericWrong": "This country did not win the first World Cup."
+    },
+    {
+      "id": 14,
+      "question": "In which sport would you perform a slam dunk?",
+      "options": ["Basketball", "Volleyball", "Handball", "Tennis"],
+      "answerIndex": 0,
+      "explanationCorrect": "A slam dunk is a basketball move where the player jumps and scores by putting the ball directly through the hoop.",
+      "explanationGenericWrong": "This move is not performed in this sport."
+    },
+    {
+      "id": 15,
+      "question": "Which country has the most FIFA World Cup wins?",
+      "options": ["Brazil", "Germany", "Italy", "Argentina"],
+      "answerIndex": 0,
+      "explanationCorrect": "Brazil has won the FIFA World Cup 5 times, the most of any country.",
+      "explanationGenericWrong": "This country does not hold the record for most World Cup wins."
+    },
+    {
+      "id": 16,
+      "question": "Which sport is known as 'the king of sports'?",
+      "options": ["Basketball", "Soccer", "Cricket", "Rugby"],
+      "answerIndex": 1,
+      "explanationCorrect": "Soccer (football) is often called the 'king of sports' because of its global popularity.",
+      "explanationGenericWrong": "This sport is not referred to as the king of sports."
+    },
+    {
+      "id": 17,
+      "question": "Which athlete is famous for winning 23 Grand Slam singles titles in tennis?",
+      "options": ["Roger Federer", "Rafael Nadal", "Serena Williams", "Novak Djokovic"],
+      "answerIndex": 2,
+      "explanationCorrect": "Serena Williams has won 23 Grand Slam singles titles.",
+      "explanationGenericWrong": "This athlete has not won 23 Grand Slam singles titles."
+    },
+    {
+      "id": 18,
+      "question": "Which sport uses the terms 'scrum', 'lineout', and 'try'?",
+      "options": ["Rugby", "Cricket", "Soccer", "Hockey"],
+      "answerIndex": 0,
+      "explanationCorrect": "These terms are part of rugby gameplay.",
+      "explanationGenericWrong": "These terms are not used in this sport."
+    },
+    {
+      "id": 19,
+      "question": "How many players are on a soccer team on the field at a time?",
+      "options": ["10", "11", "12", "9"],
+      "answerIndex": 1,
+      "explanationCorrect": "A soccer team has 11 players on the field.",
+      "explanationGenericWrong": "This is not the correct number of players in soccer."
+    },
+    {
+      "id": 20,
+      "question": "Which country is known for the sport of cricket?",
+      "options": ["India", "Brazil", "Canada", "Norway"],
+      "answerIndex": 0,
+      "explanationCorrect": "Cricket is extremely popular in India, among other countries like England and Australia.",
+      "explanationGenericWrong": "This country is not primarily known for cricket."
+    },
+    {
+      "id": 21,
+      "question": "Which Olympic event combines cross-country skiing and rifle shooting?",
+      "options": ["Biathlon", "Decathlon", "Nordic Combined", "Pentathlon"],
+      "answerIndex": 0,
+      "explanationCorrect": "The Biathlon combines cross-country skiing and shooting.",
+      "explanationGenericWrong": "This event does not combine these sports."
+    },
+    {
+      "id": 22,
+      "question": "Which sport uses a puck?",
+      "options": ["Field Hockey", "Ice Hockey", "Basketball", "Lacrosse"],
+      "answerIndex": 1,
+      "explanationCorrect": "Ice hockey is played with a puck.",
+      "explanationGenericWrong": "This sport does not use a puck."
+    },
+    {
+      "id": 23,
+      "question": "In which sport is the term 'birdie' used?",
+      "options": ["Golf", "Badminton", "Tennis", "Cricket"],
+      "answerIndex": 0,
+      "explanationCorrect": "In golf, a birdie is a score of one stroke under par on a hole.",
+      "explanationGenericWrong": "This term is not used in this sport."
+    },
+    {
+      "id": 24,
+      "question": "Which country hosts the Daytona 500 race?",
+      "options": ["United States", "Italy", "Germany", "Australia"],
+      "answerIndex": 0,
+      "explanationCorrect": "The Daytona 500, a famous NASCAR race, is held in the United States.",
+      "explanationGenericWrong": "This country does not host the Daytona 500."
+    },
+    {
+      "id": 25,
+      "question": "Which sport is known for events called 'fouls', 'free throws', and 'three-pointers'?",
+      "options": ["Basketball", "Soccer", "Handball", "Volleyball"],
+      "answerIndex": 0,
+      "explanationCorrect": "These are terms used in basketball.",
+      "explanationGenericWrong": "These terms are not used in this sport."
+    }
+  ]
+}
