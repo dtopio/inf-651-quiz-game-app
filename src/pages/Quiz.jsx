@@ -768,6 +768,28 @@ export default function Quiz() {
                 );
               })}
             </div>
+            
+            {/* Back to Categories Button */}
+            <div className="mt-6 flex justify-center">
+              <button
+                onClick={() => {
+                  clearLastCategoryKey();
+                  setSelectedCategory(null);
+                  setIsSubmitted(false);
+                  setCurrentIndex(0);
+                  setAnswers({});
+                  setShowResumePrompt(false);
+                }}
+                className="px-8 py-3 rounded-xl font-semibold text-sm md:text-base border shadow-md hover:shadow-xl hover:scale-105 transition-all duration-200"
+                style={{ 
+                  background: 'var(--accent-gradient)', 
+                  color: '#ffffff',
+                  borderColor: 'var(--accent)'
+                }}
+              >
+                Back to Quiz Categories
+              </button>
+            </div>
           </div>
         )}
       </div>

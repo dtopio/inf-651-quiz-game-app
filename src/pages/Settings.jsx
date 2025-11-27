@@ -113,7 +113,7 @@ export default function Settings() {
           onClick={resetAllData}
           className="px-4 py-2 bg-red-600 text-white font-semibold rounded-lg shadow hover:bg-red-700"
         >
-          Reset Quiz History & Progress
+          Reset Quiz History & Settings
         </button>
       </div>
 
