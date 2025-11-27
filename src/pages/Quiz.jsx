@@ -2,9 +2,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { QUESTION_BANK } from '@/data/questions';
-import { useQuizHistory } from "@/context/QuizHistory.jsx";
+import { useQuizHistory } from "@/hooks/useQuizHistory.js";
 import { CATEGORIES } from "@/data/categories";
 import { useSettings } from "@/context/SettingsContext.jsx";
+import { useTheme } from "@/context/ThemeContext.jsx";
 
 import {
   Card,
@@ -30,14 +31,18 @@ function saveLastCategoryKey(categoryKey) {
   if (typeof window === "undefined") return;
   try {
     window.localStorage.setItem(LAST_CATEGORY_KEY, categoryKey);
-  } catch {}
+  } catch {
+    // Ignore localStorage errors
+  }
 }
 
 function clearLastCategoryKey() {
   if (typeof window === "undefined") return;
   try {
     window.localStorage.removeItem(LAST_CATEGORY_KEY);
-  } catch {}
+  } catch {
+    // Ignore localStorage errors
+  }
 }
 
 
@@ -63,20 +68,25 @@ function saveProgress(categoryKey, data) {
       getProgressKey(categoryKey),
       JSON.stringify(data)
     );
-  } catch {}
+  } catch {
+    // Ignore localStorage errors
+  }
 }
 
 function clearProgress(categoryKey) {
   if (typeof window === "undefined") return;
   try {
     window.localStorage.removeItem(getProgressKey(categoryKey));
-  } catch {}
+  } catch {
+    // Ignore localStorage errors
+  }
 }
 
 export default function Quiz() {
   const navigate = useNavigate();
   const location = useLocation();
   const { addQuizResult } = useQuizHistory();
+  const { theme } = useTheme();
 
   const passedCategory = location.state?.category || null;
   const [selectedCategory, setSelectedCategory] = useState(() => {
@@ -167,14 +177,6 @@ export default function Quiz() {
     setShowResumePrompt(false);
   };
 
-  const handleStartOver = () => {
-    clearProgress(categoryKey);
-    setCurrentIndex(0);
-    setAnswers({});
-    setShowResumePrompt(false);
-  };
-
-
   const handleSubmit = () => {
     clearProgress(categoryKey);
     setIsSubmitted(true);
@@ -220,10 +222,18 @@ export default function Quiz() {
       <div className="flex justify-center">
         <div className="w-full max-w-6xl">
           <div className="mb-12 text-center">
-            <h1 className="mb-4 text-5xl font-extrabold leading-[1.2] pb-1 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+            <h1 
+              className="mb-4 text-5xl font-extrabold leading-[1.2] pb-1"
+              style={{ 
+                color: theme === 'christmas' ? '#0b5e15' : 'transparent',
+                backgroundImage: theme === 'christmas' ? 'none' : 'var(--accent-text-gradient)',
+                backgroundClip: theme === 'christmas' ? 'unset' : 'text',
+                WebkitBackgroundClip: theme === 'christmas' ? 'unset' : 'text'
+              }}
+            >
               Pick a Category
             </h1>
-            <p className="text-lg text-gray-600">
+            <p className="text-lg" style={{ color: 'var(--text-secondary)' }}>
               Choose a quiz to get started.
             </p>
           </div>
@@ -235,7 +245,7 @@ export default function Quiz() {
                 : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10" // grid view
             }
           >
-            {CATEGORIES.map((category) => {
+            {CATEGORIES.map((category, index) => {
               const description =
                 category.description ||
                 `Test your knowledge in ${category.title.toLowerCase()}.`;
@@ -254,22 +264,28 @@ export default function Quiz() {
                   }}
                   className="
                     w-full flex items-center gap-4 p-4 
-                    bg-white border border-slate-200 rounded-xl 
+                    rounded-xl 
                     shadow-sm hover:shadow-md hover:-translate-y-[2px]
                     transition-all
                     text-left
                   "
+                  style={{ 
+                    background: 'var(--card-bg)', 
+                    borderColor: 'var(--border)',
+                    borderWidth: '1px',
+                    borderStyle: 'solid'
+                  }}
                 >
                   <span className="text-3xl">{category.icon}</span>
 
                   <div>
-                    <p className="text-lg font-semibold text-slate-900">
+                    <p className="text-lg font-semibold" style={{ color: 'var(--text)' }}>
                       {category.title}
                     </p>
-                    <p className="text-sm text-slate-600">{description}</p>
+                    <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>{description}</p>
                   </div>
 
-                  <span className="ml-auto text-indigo-600 font-semibold">
+                  <span className="ml-auto font-semibold" style={{ color: 'var(--accent)' }}>
                     →
                   </span>
                 </button>
@@ -277,49 +293,112 @@ export default function Quiz() {
                 // ----- GRID MODE -----
                 <Card
                   key={category.key}
-                  className="group h-80 flex flex-col bg-white border 
-                  border-gray-200 rounded-2xl shadow-lg hover:shadow-2xl 
-                  hover:-translate-y-2 transition-all duration-300 cursor-pointer w-full"
+                  className="group h-80 flex flex-col rounded-2xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 cursor-pointer w-full relative overflow-hidden"
+                  style={{ 
+                    background: theme === 'christmas' 
+                      ? (index % 2 === 0 ? 'var(--christmas-present-red)' : 'var(--christmas-present-green)')
+                      : 'var(--card-bg)', 
+                    borderColor: theme === 'christmas' ? 'transparent' : 'var(--border)',
+                    borderWidth: '1px',
+                    borderStyle: 'solid'
+                  }}
                 >
-                  <CardHeader className="flex-1 flex flex-col items-center justify-between p-6">
-                    <div className="w-20 h-20 flex items-center justify-center rounded-2xl 
-                      bg-gradient-to-br from-indigo-500 to-purple-600 shadow-lg 
+                  {/* Christmas Present Wrapper (only shows in christmas theme) */}
+                  {theme === 'christmas' && (
+                    <>
+                      {/* Vertical Ribbon */}
+                      <div 
+                        className="absolute left-1/2 top-0 bottom-0 w-10 -translate-x-1/2 z-0 pointer-events-none"
+                        style={{
+                          background: index % 2 === 0 
+                            ? '#ffffff'
+                            : '#ffd43b',
+                          boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
+                        }}
+                      />
+                      
+                      {/* Horizontal Ribbon */}
+                      <div 
+                        className="absolute left-0 right-0 top-1/3 h-10 z-0 pointer-events-none"
+                        style={{
+                          background: index % 2 === 0 
+                            ? '#ffffff'
+                            : '#ffd43b',
+                          boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
+                        }}
+                      />
+                      
+                      {/* Transparent backdrop for content */}
+                      <div className="absolute inset-0 z-5 pointer-events-none"
+                        style={{
+                          background: 'rgba(0,0,0,0.25)'
+                        }}
+                      />
+                      
+                      {/* Christmas Bow */}
+                      <div className="absolute left-1/2 top-1/3 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none text-4xl drop-shadow-lg">
+                        🎀
+                      </div>
+                    </>
+                  )}
+                  
+                  <CardHeader className="flex-1 flex flex-col items-center justify-between p-6 relative z-10">
+                    <div 
+                      className="w-20 h-20 flex items-center justify-center rounded-2xl shadow-lg 
                       transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3"
-                    >
-                      <span className="text-4xl">{category.icon}</span>
-                    </div>
-
-                    <div className="flex flex-col items-center">
-                      <CardTitle className="text-2xl font-bold text-center text-gray-900 
-                        group-hover:text-indigo-600 transition-colors"
+                      style={{ 
+                          background: theme === 'christmas' 
+                            ? '#ffffff'
+                            : 'var(--accent-gradient)'
+                        }}
                       >
-                        {category.title}
-                      </CardTitle>
+                        <span className="text-4xl">{category.icon}</span>
+                      </div>
 
-                      <CardDescription className="text-sm text-center text-gray-600 leading-relaxed mt-1">
-                        {description}
-                      </CardDescription>
-                    </div>
-                  </CardHeader>
+                      <div className="flex flex-col items-center">
+                        <CardTitle 
+                          className="text-2xl font-bold text-center transition-colors"
+                          style={{ 
+                            color: theme === 'christmas' ? '#ffffff' : 'var(--text)',
+                            textShadow: theme === 'christmas' ? '0 2px 8px rgba(0,0,0,0.5), 0 0 20px rgba(0,0,0,0.3)' : 'none'
+                          }}
+                        >
+                          {category.title}
+                        </CardTitle>
 
-                  <CardFooter className="p-6 pt-0 flex justify-center">
-                    <button
-                      className="px-6 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 
-                      text-white text-sm font-semibold rounded-lg shadow-md 
-                      hover:shadow-xl hover:scale-105 transition-all duration-200"
-                      onClick={() => {
-                        setSelectedCategory(category);
-                        saveLastCategoryKey(category.key);
-                        setIsSubmitted(false);
-                        setCurrentIndex(0);
-                        setAnswers({});
-                        setShowResumePrompt(false);
-                      }}
-                    >
-                      Start Quiz →
-                    </button>
-                  </CardFooter>
-                </Card>
+                        <CardDescription 
+                          className="text-sm text-center leading-relaxed mt-1"
+                          style={{ 
+                            color: theme === 'christmas' ? 'rgba(255,255,255,0.95)' : 'var(--text-secondary)',
+                            textShadow: theme === 'christmas' ? '0 1px 4px rgba(0,0,0,0.6), 0 0 10px rgba(0,0,0,0.4)' : 'none'
+                          }}
+                        >
+                          {description}
+                        </CardDescription>
+                      </div>
+                    </CardHeader>
+
+                    <CardFooter className="p-6 pt-0 flex justify-center relative z-10">
+                      <button
+                        className="px-6 py-2 text-sm font-semibold rounded-lg shadow-md 
+                        hover:shadow-xl hover:scale-105 transition-all duration-200"
+                        style={{ 
+                          background: theme === 'christmas' ? '#ffffff' : 'var(--accent-gradient)',
+                          color: theme === 'christmas' ? (index % 2 === 0 ? '#c92a2a' : '#2f9e44') : '#ffffff'
+                        }}
+                        onClick={() => {
+                          setSelectedCategory(category);
+                          saveLastCategoryKey(category.key);
+                          setIsSubmitted(false);
+                          setCurrentIndex(0);
+                          setAnswers({});
+                          setShowResumePrompt(false);
+                        }}
+                      >
+                        Start Quiz →
+                      </button>
+                    </CardFooter>
+                  </Card>
               );
             })}
           </div>
@@ -335,27 +414,41 @@ export default function Quiz() {
         <div className="flex items-center mb-6 gap-3">
           <button
             onClick={handleBackClick}
-            className="p-2 rounded-full bg-white shadow-sm border hover:shadow-md transition"
+            className="p-2 rounded-full shadow-sm hover:shadow-md transition"
+            style={{ 
+              background: 'var(--card-bg)', 
+              borderColor: 'var(--border)',
+              borderWidth: '1px',
+              borderStyle: 'solid'
+            }}
           >
-            <ArrowLeftIcon className="w-5 h-5 text-slate-700" />
+            <ArrowLeftIcon className="w-5 h-5" style={{ color: 'var(--text-secondary)' }} />
           </button>
 
           <div>
-            <h1 className="text-2xl font-bold text-slate-900 flex items-center gap-2">
+            <h1 className="text-2xl font-bold flex items-center gap-2" style={{ color: 'var(--text)' }}>
               <span className="text-3xl">{categoryIcon}</span>
               {categoryTitle}
             </h1>
-            <p className="text-sm text-slate-500">{totalQuestions} Questions</p>
+            <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>{totalQuestions} Questions</p>
           </div>
         </div>
 
         {showQuitPrompt ? (
-          <div className="bg-white rounded-3xl shadow-xl border border-slate-100 px-6 py-8 md:px-10 md:py-10">
-            <h2 className="text-xl font-semibold text-slate-900 mb-3">
+          <div 
+            className="rounded-3xl shadow-xl px-6 py-8 md:px-10 md:py-10"
+            style={{ 
+              background: 'var(--card-bg)', 
+              borderColor: 'var(--border)',
+              borderWidth: '1px',
+              borderStyle: 'solid'
+            }}
+          >
+            <h2 className="text-xl font-semibold mb-3" style={{ color: 'var(--text)' }}>
               Quit this quiz?
             </h2>
 
-            <p className="text-sm text-slate-600 mb-6">
+            <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>
               If you quit now, your current progress will be lost. 
               Are you sure you want to exit this quiz?
             </p>
@@ -363,7 +456,12 @@ export default function Quiz() {
             <div className="flex gap-3">
               <button
                 onClick={() => setShowQuitPrompt(false)}
-                className="flex-1 rounded-xl px-4 py-3 font-semibold text-sm md:text-base border bg-white text-slate-800 border-slate-300 hover:bg-slate-50"
+                className="flex-1 rounded-xl px-4 py-3 font-semibold text-sm md:text-base border hover:opacity-90"
+                style={{ 
+                  background: 'var(--surface)', 
+                  color: 'var(--text)',
+                  borderColor: 'var(--border)'
+                }}
               >
                 Cancel
               </button>
@@ -377,15 +475,23 @@ export default function Quiz() {
             </div>
           </div>
         ) : showResumePrompt && !isSubmitted ? (
-          <div className="bg-white rounded-3xl shadow-xl border border-slate-100 px-6 py-8 md:px-10 md:py-10 mb-6">
+          <div 
+            className="rounded-3xl shadow-xl px-6 py-8 md:px-10 md:py-10 mb-6"
+            style={{ 
+              background: 'var(--card-bg)', 
+              borderColor: 'var(--border)',
+              borderWidth: '1px',
+              borderStyle: 'solid'
+            }}
+          >
 
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-2xl font-semibold text-slate-900">
+              <h2 className="text-2xl font-semibold" style={{ color: 'var(--text)' }}>
                 Continue your {categoryTitle} quiz?
               </h2>
             </div>
 
-            <p className="text-sm text-slate-600 mb-8 leading-relaxed">
+            <p className="text-sm mb-8 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
               We found an unfinished {categoryTitle} quiz.  
               Do you want to continue where you left off, start a new quiz, or quit?
             </p>
@@ -393,7 +499,11 @@ export default function Quiz() {
             <div className="flex gap-4">
               <button
                 onClick={handleResume}
-                className="flex-1 rounded-xl px-4 py-3 font-semibold text-sm md:text-base bg-indigo-600 text-white border border-indigo-600 hover:bg-indigo-700"
+                className="flex-1 rounded-xl px-4 py-3 font-semibold text-sm md:text-base text-white border hover:opacity-90 transition"
+                style={{ 
+                  background: 'var(--accent-gradient)', 
+                  borderColor: 'var(--accent)'
+                }}
               >
                 Continue
               </button>
@@ -406,9 +516,17 @@ export default function Quiz() {
             </div>
           </div>
         ) : !isSubmitted ? (
-          <div className="bg-white rounded-3xl shadow-xl border border-slate-100 px-6 py-6 md:px-10 md:py-8">
+          <div 
+            className="rounded-3xl shadow-xl px-6 py-6 md:px-10 md:py-8"
+            style={{ 
+              background: 'var(--card-bg)', 
+              borderColor: 'var(--border)',
+              borderWidth: '1px',
+              borderStyle: 'solid'
+            }}
+          >
             <div className="flex items-center justify-between mb-4 text-sm">
-              <p className="text-indigo-700 font-semibold">
+              <p className="font-semibold" style={{ color: 'var(--accent)' }}>
                 Question: {currentIndex + 1}/{totalQuestions}
               </p>
               <button
@@ -418,7 +536,7 @@ export default function Quiz() {
                 Quit
               </button>
             </div>
-            <h2 className="text-xl md:text-2xl font-semibold text-slate-900 mb-6 leading-relaxed">
+            <h2 className="text-xl md:text-2xl font-semibold mb-6 leading-relaxed" style={{ color: 'var(--text)' }}>
               {currentQuestion.question}
             </h2>
             <div className="space-y-3 mb-4">
@@ -432,9 +550,17 @@ export default function Quiz() {
                     className={`w-full text-left rounded-xl border px-4 py-3 md:px-5 md:py-3.5 text-sm md:text-base transition-all shadow-sm
                       ${
                         isSelected
-                          ? "bg-indigo-600 text-white border-indigo-600 shadow-md scale-[1.01]"
-                          : "bg-white text-slate-800 border-slate-200 hover:border-indigo-400 hover:shadow-md"
+                          ? "text-white shadow-md scale-[1.01]"
+                          : "hover:shadow-md"
                       }`}
+                    style={isSelected ? { 
+                      background: 'var(--accent-gradient)', 
+                      borderColor: 'var(--accent)'
+                    } : { 
+                      background: 'var(--surface)', 
+                      color: 'var(--text)',
+                      borderColor: 'var(--border)'
+                    }}
                   >
                     {option}
                   </button>
@@ -449,9 +575,18 @@ export default function Quiz() {
                 className={`flex-1 md:flex-none md:w-40 rounded-xl px-4 py-3 font-semibold text-sm md:text-base border transition
                   ${
                     isFirst
-                      ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed"
-                      : "bg-white text-indigo-700 border-indigo-600 hover:bg-indigo-50"
+                      ? "opacity-50 cursor-not-allowed"
+                      : "hover:opacity-90"
                   }`}
+                style={isFirst ? { 
+                  background: 'var(--surface)', 
+                  color: 'var(--text-secondary)',
+                  borderColor: 'var(--border)'
+                } : { 
+                  background: 'var(--surface)', 
+                  color: 'var(--text)',
+                  borderColor: 'var(--border)'
+                }}
               >
                 Previous
               </button>
@@ -463,9 +598,17 @@ export default function Quiz() {
                   className={`flex-1 md:flex-none md:w-40 rounded-xl px-4 py-3 font-semibold text-sm md:text-base border transition
                     ${
                       !allAnswered
-                        ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed"
-                        : "bg-indigo-600 text-white border-indigo-600 hover:bg-indigo-700"
+                        ? "opacity-50 cursor-not-allowed"
+                        : "text-white hover:opacity-90"
                     }`}
+                  style={!allAnswered ? { 
+                    background: 'var(--surface)', 
+                    color: 'var(--text-secondary)',
+                    borderColor: 'var(--border)'
+                  } : { 
+                    background: 'var(--accent-gradient)', 
+                    borderColor: 'var(--accent)'
+                  }}
                 >
                   Submit Quiz
                 </button>
@@ -477,9 +620,17 @@ export default function Quiz() {
                   className={`flex-1 md:flex-none md:w-40 rounded-xl px-4 py-3 font-semibold text-sm md:text-base border transition
                     ${
                       typeof answers[currentIndex] === "undefined"
-                        ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed"
-                        : "bg-indigo-600 text-white border-indigo-600 hover:bg-indigo-700"
+                        ? "opacity-50 cursor-not-allowed"
+                        : "text-white hover:opacity-90"
                     }`}
+                  style={typeof answers[currentIndex] === "undefined" ? { 
+                    background: 'var(--surface)', 
+                    color: 'var(--text-secondary)',
+                    borderColor: 'var(--border)'
+                  } : { 
+                    background: 'var(--accent-gradient)', 
+                    borderColor: 'var(--accent)'
+                  }}
                 >
                   Next
                 </button>
@@ -488,11 +639,19 @@ export default function Quiz() {
           </div>
         ) : (
           <div>
-            <div className="mb-6 bg-white rounded-2xl shadow border border-slate-100 px-6 py-4">
-              <h2 className="text-xl font-semibold text-slate-900 mb-1">
+            <div 
+              className="mb-6 rounded-2xl shadow px-6 py-4"
+              style={{ 
+                background: 'var(--card-bg)', 
+                borderColor: 'var(--border)',
+                borderWidth: '1px',
+                borderStyle: 'solid'
+              }}
+            >
+              <h2 className="text-xl font-semibold mb-1" style={{ color: 'var(--text)' }}>
                 Your Result
               </h2>
-              <p className="text-slate-700">
+              <p style={{ color: 'var(--text-secondary)' }}>
                 You answered{" "}
                 <span className="font-semibold">
                   {correctCount} / {totalQuestions}
@@ -514,10 +673,16 @@ export default function Quiz() {
                 return (
                   <div
                     key={q.id}
-                    className="bg-white rounded-2xl shadow border border-slate-100 px-6 py-5"
+                    className="rounded-2xl shadow px-6 py-5"
+                    style={{ 
+                      background: 'var(--card-bg)', 
+                      borderColor: 'var(--border)',
+                      borderWidth: '1px',
+                      borderStyle: 'solid'
+                    }}
                   >
                     <div className="flex items-center justify-between mb-2">
-                      <p className="text-xs font-medium text-slate-500">
+                      <p className="text-xs font-medium" style={{ color: 'var(--muted-foreground)' }}>
                         Question {index + 1} / {totalQuestions}
                       </p>
                       <span
@@ -530,7 +695,7 @@ export default function Quiz() {
                         {isCorrect ? "Correct" : "Incorrect"}
                       </span>
                     </div>
-                    <h3 className="text-base md:text-lg font-semibold text-slate-900 mb-4">
+                    <h3 className="text-base md:text-lg font-semibold mb-4" style={{ color: 'var(--text)' }}>
                       {q.question}
                     </h3>
                     <div className="space-y-2 mb-4">
@@ -549,23 +714,39 @@ export default function Quiz() {
                           styles +=
                             " bg-emerald-50 text-emerald-800 border-emerald-300";
                         } else {
-                          styles += " bg-white text-slate-800 border-slate-200";
+                          styles += " border-slate-200";
                         }
 
                         return (
-                          <div key={optIndex} className={styles}>
+                          <div 
+                            key={optIndex} 
+                            className={styles}
+                            style={
+                              !isSelected && (!isAnswer || isCorrect)
+                                ? { background: 'var(--surface)', color: 'var(--text)', borderColor: 'var(--border)' }
+                                : {}
+                            }
+                          >
                             {option}
                           </div>
                         );
                       })}
                     </div>
 
-                    <div className="rounded-xl bg-slate-50 border border-slate-200 px-4 py-3 text-sm">
-                      <p className="font-semibold mb-1">Feedback</p>
+                    <div 
+                      className="rounded-xl px-4 py-3 text-sm"
+                      style={{ 
+                        background: 'var(--surface)', 
+                        borderColor: 'var(--border)',
+                        borderWidth: '1px',
+                        borderStyle: 'solid'
+                      }}
+                    >
+                      <p className="font-semibold mb-1" style={{ color: 'var(--text)' }}>Feedback</p>
                       {isCorrect ? (
-                        <p className="text-slate-800">{explanationCorrect}</p>
+                        <p style={{ color: 'var(--text-secondary)' }}>{explanationCorrect}</p>
                       ) : (
-                        <div className="space-y-1 text-slate-800">
+                        <div className="space-y-1" style={{ color: 'var(--text-secondary)' }}>
                           <p>
                             You chose:{" "}
                             <span className="font-semibold">
