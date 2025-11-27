@@ -32,18 +32,23 @@ export const Sidebar = React.forwardRef(
           )}
         </button>
 
-        {/* Sidebar */}
+        {/* Sidebar - uses theme-specific gradient and shadow */}
         <div
           ref={ref}
           className={cn(
             "fixed top-0 left-0 h-screen w-64",
-            "bg-gradient-to-b from-purple-700/70 to-purple-900/70 backdrop-blur-xl",
-            "border-r border-purple-300/20 shadow-2xl",
+            "backdrop-blur-xl",
+            "border-r shadow-2xl",
             "transition-transform duration-300",
             isOpen ? "translate-x-0" : "-translate-x-full",
             "z-40",
             className
           )}
+          style={{
+            background: 'var(--sidebar-gradient)',
+            borderColor: 'var(--border)',
+            boxShadow: 'var(--sidebar-shadow)'
+          }}
           {...props}
         >
           <SidebarHeader>Quiz Game</SidebarHeader>
@@ -89,10 +94,14 @@ export const SidebarHeader = React.forwardRef(
     <div
       ref={ref}
       className={cn(
-        "p-6 pl-20 text-2xl font-bold tracking-wide text-white/90",
-        "border-b border-white/20",
+        "p-6 pl-20 text-2xl font-bold tracking-wide",
+        "border-b",
         className
       )}
+      style={{
+        color: 'var(--text)',
+        borderColor: 'var(--border)'
+      }}
       {...props}
     />
   )
@@ -107,12 +116,18 @@ export const SidebarLink = React.forwardRef(
       className={({ isActive }) =>
         cn(
           "flex items-center gap-3 p-3 rounded-lg transition-all",
-          "text-white/90 hover:text-white",
-          "hover:bg-white/10 active:scale-[0.98]",
-          isActive && "bg-white/20 backdrop-blur-md font-semibold shadow-inner",
+          "hover:opacity-90 active:scale-[0.98]",
+          isActive && "backdrop-blur-md font-semibold shadow-inner",
           className
         )
       }
+      style={({ isActive }) => ({
+        color: 'var(--text)',
+        background: isActive ? 'var(--link-active)' : 'transparent',
+        ':hover': {
+          background: 'var(--link-hover)'
+        }
+      })}
       {...props}
     >
       {icon}

@@ -47,12 +47,12 @@ export default function Home() {
 
       <div className="flex flex-col items-center w-full max-w-3xl flex-grow justify-center">
 
-        {/* Greeting */}
-        <p className="text-4xl font-bold text-slate-800 mb-6">
+        {/* Greeting - uses theme text variable */}
+        <p className="text-4xl font-bold mb-6" style={{ color: 'var(--text)' }}>
           {greeting} 👋
         </p>
 
-        {/* HERO */}
+        {/* HERO - keep gradient for impact */}
         <div className="
           bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600
           rounded-3xl p-10 text-white shadow-xl w-full
@@ -76,7 +76,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* START QUIZ BUTTON */}
+        {/* START QUIZ BUTTON - keep blue gradient for action */}
         <button
           onClick={() => navigate("/quiz")}
           className="
@@ -89,20 +89,21 @@ export default function Home() {
           Start Quiz →
         </button>
 
-      {/* LATEST SCORE */}
+      {/* LATEST SCORE - uses theme card background and borders */}
       <div
-        className="
-          mt-10 bg-white rounded-2xl shadow-xl
-          border border-slate-200 p-8 w-full
-        "
+        className="mt-10 rounded-2xl shadow-xl border p-8 w-full"
+        style={{ 
+          background: 'var(--card-bg)',
+          borderColor: 'var(--border)'
+        }}
       >
         {latest ? (
           <>
-            <h2 className="text-xl font-semibold text-slate-700 mb-4">
+            <h2 className="text-xl font-semibold mb-4" style={{ color: 'var(--text)' }}>
               Latest Score
             </h2>
 
-            <h3 className="text-3xl font-bold text-slate-900 mb-2 flex items-center justify-center gap-2">
+            <h3 className="text-3xl font-bold mb-2 flex items-center justify-center gap-2" style={{ color: 'var(--text)' }}>
               <span className="text-4xl">
                 {ICON_MAP[latest.categoryKey] || "📘"}
               </span>
@@ -119,39 +120,42 @@ export default function Home() {
               {latest.percentage}%
             </p>
 
-            <p className="text-xs text-slate-500 mt-3">
+            <p className="text-xs mt-3" style={{ color: 'var(--muted-foreground)' }}>
               {new Date(latest.timestamp).toLocaleString()}
             </p>
           </>
         ) : (
           <>
-            <h2 className="text-xl font-semibold text-slate-700 mb-4">
+            <h2 className="text-xl font-semibold mb-4" style={{ color: 'var(--text)' }}>
               Latest Score
             </h2>
 
-            <p className="text-base text-slate-500">
+            <p className="text-base" style={{ color: 'var(--text-secondary)' }}>
               No quizzes taken yet.
             </p>
 
-            <p className="text-sm text-slate-400 mt-1">
+            <p className="text-sm mt-1" style={{ color: 'var(--muted-foreground)' }}>
               Start your first quiz to see your progress here!
             </p>
           </>
         )}
       </div>
 
-      {/* QUOTE */}
+      {/* QUOTE - uses theme card with backdrop */}
       <div className="mt-8 mb-4">
-        <div className="
-          px-6 py-4 rounded-2xl bg-white/40
-          backdrop-blur-md shadow-md max-w-lg
-        ">
+        <div 
+          className="px-6 py-4 rounded-2xl backdrop-blur-md shadow-md max-w-lg"
+          style={{ 
+            background: 'var(--card-bg)',
+            opacity: 0.9
+          }}
+        >
           <p className="
             text-xl font-semibold
             bg-gradient-to-r from-indigo-500 to-purple-600
             bg-clip-text text-transparent
           ">
-            “{quotes[quoteIndex]}”
+            "{quotes[quoteIndex]}"
           </p>
         </div>
       </div>

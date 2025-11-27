@@ -1,1 +1,64 @@
 @import "tailwindcss";
+
+/* Theme System - CSS Custom Properties */
+:root {
+  /* Light Theme (Default) */
+  --background: linear-gradient(135deg, #ffffff 0%, #e0f2fe 100%);
+  --surface: #f8fafc;
+  --card-bg: #ffffff;
+  --card-gradient: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+  --text: #1e293b;
+  --text-secondary: #475569;
+  --muted-foreground: #64748b;
+  --border: #e2e8f0;
+  --border-light: #f1f5f9;
+  --accent: #3b82f6;
+  --accent-hover: #2563eb;
+  --sidebar-bg: #ffffff;
+  --sidebar-gradient: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  --sidebar-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --link-hover: #f1f5f9;
+  --link-active: #dbeafe;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  --background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+  --surface: #0f172a;
+  --card-bg: #1e293b;
+  --card-gradient: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  --text: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --muted-foreground: #94a3b8;
+  --border: #334155;
+  --border-light: #475569;
+  --accent: #8b5cf6;
+  --accent-hover: #a78bfa;
+  /* Distinct purple gradient for sidebar - stands out from main bg */
+  --sidebar-bg: #1e1b4b;
+  --sidebar-gradient: linear-gradient(180deg, #1e1b4b 0%, #312e81 100%);
+  --sidebar-shadow: 0 4px 6px -1px rgb(139 92 246 / 0.2);
+  --link-hover: #312e81;
+  --link-active: #4c1d95;
+}
+
+/* Ash Theme */
+[data-theme="ash"] {
+  --background: linear-gradient(135deg, #18181b 0%, #27272a 100%);
+  --surface: #18181b;
+  --card-bg: #27272a;
+  --card-gradient: linear-gradient(135deg, #27272a 0%, #18181b 100%);
+  --text: #fafaf9;
+  --text-secondary: #e7e5e4;
+  --muted-foreground: #a8a29e;
+  --border: #3f3f46;
+  --border-light: #52525b;
+  --accent: #64748b;
+  --accent-hover: #94a3b8;
+  /* Darker zinc gradient for sidebar */
+  --sidebar-bg: #27272a;
+  --sidebar-gradient: linear-gradient(180deg, #27272a 0%, #18181b 100%);
+  --sidebar-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.3);
+  --link-hover: #3f3f46;
+  --link-active: #52525b;
+}

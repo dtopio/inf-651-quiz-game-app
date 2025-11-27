@@ -12,7 +12,10 @@ function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   return (
-    <div className="flex h-screen overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50">
+    <div 
+      className="flex h-screen overflow-hidden"
+      style={{ background: 'var(--background)' }}
+    >
 
       {/* Sidebar */}
       <Sidebar
