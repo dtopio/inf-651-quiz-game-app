@@ -1,4 +1,4 @@
-import { useQuizHistory } from "@/context/QuizHistory.jsx";
+import { useQuizHistory } from "@/hooks/useQuizHistory.js";
 import { CATEGORIES } from "@/data/categories";
 import { TrashIcon } from "@heroicons/react/24/outline";
 

@@ -58,6 +58,18 @@ export default function Settings() {
             />
             <span style={{ color: 'var(--text-secondary)' }}>Ash Theme</span>
           </label>
+          
+          <label className="flex items-center gap-3 cursor-pointer">
+            <input
+              type="radio"
+              name="theme"
+              value="christmas"
+              checked={theme === "christmas"}
+              onChange={() => setTheme("christmas")}
+              className="w-4 h-4"
+            />
+            <span style={{ color: 'var(--text-secondary)' }}>🎄 Christmas Theme 🎅</span>
+          </label>
         </div>
       </div>
 

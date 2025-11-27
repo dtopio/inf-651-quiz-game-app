@@ -1,10 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import { useQuizHistory } from "@/context/QuizHistory.jsx";
+import { useQuizHistory } from "@/hooks/useQuizHistory.js";
+import { useTheme } from "@/context/ThemeContext.jsx";
 import { useEffect, useState } from "react";
 
 export default function Home() {
   const navigate = useNavigate();
   const { history } = useQuizHistory();
+  const { theme } = useTheme();
 
   const latest = history?.length ? history[history.length - 1] : null;
 
@@ -50,34 +52,46 @@ export default function Home() {
         {/* Greeting */}
         <p 
           className="text-4xl font-bold mb-6"
-          style={{ color: 'var(--text)' }}
+          style={{ color: theme === 'christmas' ? '#0b5e15' : 'var(--text)' }}
         >
-          {greeting} 👋
+          {greeting} {theme === 'christmas' ? '🎄' : '👋'}
         </p>
 
         {/* HERO */}
         <div 
-          className="rounded-3xl p-10 shadow-xl w-full"
+          className="rounded-3xl p-10 shadow-xl w-full relative overflow-hidden"
           style={{ 
             background: 'var(--hero-bg)',
             color: 'var(--hero-text)'
           }}
         >
-          <div className="flex flex-col items-center gap-4">
+          {/* Christmas decorations */}
+          {theme === 'christmas' && (
+            <>
+              <div className="absolute top-4 left-4 text-3xl animate-pulse">🎄</div>
+              <div className="absolute top-4 right-4 text-3xl animate-pulse">🎁</div>
+              <div className="absolute bottom-4 left-8 text-2xl">⛄</div>
+              <div className="absolute bottom-4 right-8 text-2xl">❄️</div>
+            </>
+          )}
+          
+          <div className="flex flex-col items-center gap-4 relative z-10">
             <div className="
               w-24 h-24 flex items-center justify-center
               rounded-2xl bg-white/20 backdrop-blur-md
               text-5xl shadow-md
             ">
-              🧠
+              {theme === 'christmas' ? '🎅' : '🧠'}
             </div>
 
             <h1 className="text-5xl font-extrabold leading-tight">
-              Welcome to Quiz Game
+              {theme === 'christmas' ? 'Merry Christmas Quiz!' : 'Welcome to Quiz Game'}
             </h1>
 
             <p className="text-base opacity-90 mt-1">
-              A fun way to learn something new every day.
+              {theme === 'christmas' 
+                ? '🎄 Spread joy and knowledge this festive season! 🎁'
+                : 'A fun way to learn something new every day.'}
             </p>
           </div>
         </div>
@@ -174,9 +188,12 @@ export default function Home() {
           }}
         >
           <p 
-            className="text-xl font-semibold bg-clip-text text-transparent"
+            className="text-xl font-semibold"
             style={{ 
-              backgroundImage: 'var(--accent-text-gradient)'
+              color: theme === 'christmas' ? '#0b5e15' : 'transparent',
+              backgroundImage: theme === 'christmas' ? 'none' : 'var(--accent-text-gradient)',
+              backgroundClip: theme === 'christmas' ? 'unset' : 'text',
+              WebkitBackgroundClip: theme === 'christmas' ? 'unset' : 'text'
             }}
           >
             "{quotes[quoteIndex]}"

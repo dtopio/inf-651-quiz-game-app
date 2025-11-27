@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import { useTheme } from "@/context/ThemeContext.jsx";
 import {
   HomeIcon,
   QuestionMarkCircleIcon,
@@ -14,6 +15,7 @@ export function Sidebar() {
   const [open, setOpen] = useState(false);
   const [hideNav, setHideNav] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
+  const { theme } = useTheme();
 
   useEffect(() => {
     let lastY = window.scrollY;
@@ -85,18 +87,21 @@ export function Sidebar() {
                 bg-white/15
               `}
             >
-              🧠
+              {theme === 'christmas' ? '🎅' : '🧠'}
             </div>
 
             <div className="leading-tight">
               <span className="text-xl font-semibold tracking-wide">
-                Quiz Game
+                {theme === 'christmas' ? '🎄 Quiz Game 🎁' : 'Quiz Game'}
               </span>
-              <div className="text-[10px] opacity-80">Learn something new</div>
+              <div className="text-[10px] opacity-80">
+                {theme === 'christmas' ? 'Festive Learning' : 'Learn something new'}
+              </div>
             </div>
           </div>
 
           <nav className="hidden md:flex items-center gap-3">
+            {/* eslint-disable-next-line no-unused-vars */}
             {links.map(({ to, label, icon: Icon }) => (
               <NavLink
                 key={to}
@@ -132,6 +137,7 @@ export function Sidebar() {
         {open && (
           <nav className="md:hidden pb-3">
             <div className="flex flex-col gap-2">
+              {/* eslint-disable-next-line no-unused-vars */}
               {links.map(({ to, label, icon: Icon }) => (
                 <NavLink
                   key={to}

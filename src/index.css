@@ -106,3 +106,44 @@
   --accent-gradient: linear-gradient(to right, #52525b, #71717a);
   --accent-text-gradient: linear-gradient(to right, #71717a, #a1a1aa);
 }
+
+/* Christmas Theme */
+:root[data-theme="christmas"] {
+  --background: linear-gradient(to bottom right, #f8f9fa 0%, #ffffff 50%, #f1f3f5 100%);
+  --surface: #ffffff;
+  --card-bg: #ffffff;
+  --text: #1a1a1a;
+  --text-secondary: #495057;
+  --muted-foreground: #6c757d;
+  --border: #dee2e6;
+  
+  /* Sidebar - solid Christmas green */
+  --sidebar-bg: #0b5e15;
+  --sidebar-text: #ffffff;
+  
+  /* Hero section - solid Christmas green */
+  --hero-bg: #0b5e15;
+  --hero-text: #ffffff;
+  
+  /* Accents - Christmas red */
+  --accent: #c92a2a;
+  --accent-hover: #a61e1e;
+  
+  /* Active nav color */
+  --nav-active: #0b5e15;
+  
+  /* Button colors */
+  --button-primary: #0b5e15;
+  --button-primary-hover: #084510;
+  
+  /* Accent gradients for scores, quotes, etc */
+  --accent-gradient: #0b5e15;
+  --accent-text-gradient: #0b5e15;
+  
+  /* Christmas-specific variables for present-style cards */
+  --christmas-present-red: linear-gradient(135deg, #e03131 0%, #c92a2a 100%);
+  --christmas-present-green: linear-gradient(135deg, #37b24d 0%, #2f9e44 100%);
+  --christmas-ribbon-gold: #ffd43b;
+  --christmas-ribbon-white: #ffffff;
+  --christmas-bow-shadow: rgba(201, 42, 42, 0.3);
+}
