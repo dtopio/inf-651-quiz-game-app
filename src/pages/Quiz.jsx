@@ -1,7 +1,8 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
-import { QUESTION_BANK } from '@/data/questions';
+import questionBank from '@/data/questions.json';
+import { getRandomQuestions } from '@/utils/quizUtils';
 import { useQuizHistory } from "@/hooks/useQuizHistory.js";
 import { CATEGORIES } from "@/data/categories";
 import { useSettings } from "@/context/SettingsContext.jsx";
@@ -105,7 +106,8 @@ export default function Quiz() {
   const categoryInfo = CATEGORIES.find((c) => c.key === categoryKey);
   const categoryIcon = categoryInfo?.icon;
 
-  const questions = QUESTION_BANK[categoryKey] || QUESTION_BANK.science;
+  // State for quiz questions - randomized once per quiz session
+  const [questions, setQuestions] = useState([]);
   const totalQuestions = questions.length;
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -118,6 +120,29 @@ export default function Quiz() {
   const currentQuestion = questions[currentIndex];
 
   const { listView } = useSettings();
+
+  // Load and randomize questions when category changes
+  useEffect(() => {
+    if (!activeCategory) return;
+    
+    // Check if we have saved progress with questions
+    const saved = loadProgress(categoryKey);
+    if (saved && saved.questions && saved.questions.length > 0) {
+      // Use saved questions to maintain consistency
+      setQuestions(saved.questions);
+      return;
+    }
+    
+    // Otherwise, load and randomize new questions
+    const allQuestions = questionBank[categoryKey] || [];
+    const randomized = getRandomQuestions(allQuestions, 10);
+    setQuestions(randomized);
+    
+    // Reset quiz state when category changes
+    setCurrentIndex(0);
+    setAnswers({});
+    setIsSubmitted(false);
+  }, [categoryKey, activeCategory]);
 
 
   useEffect(() => {
@@ -137,6 +162,7 @@ export default function Quiz() {
       saveProgress(categoryKey, {
         currentIndex,
         answers: updated,
+        questions, // Save questions to maintain consistency
       });
       return updated;
     });
@@ -151,6 +177,7 @@ export default function Quiz() {
       saveProgress(categoryKey, {
         currentIndex: newIndex,
         answers,
+        questions, // Save questions to maintain consistency
       });
     }
   };
@@ -163,6 +190,7 @@ export default function Quiz() {
       saveProgress(categoryKey, {
         currentIndex: newIndex,
         answers,
+        questions, // Save questions to maintain consistency
       });
     }
   };
@@ -434,7 +462,21 @@ export default function Quiz() {
           </div>
         </div>
 
-        {showQuitPrompt ? (
+        {!currentQuestion && totalQuestions === 0 ? (
+          <div 
+            className="rounded-3xl shadow-xl px-6 py-8 md:px-10 md:py-10"
+            style={{ 
+              background: 'var(--card-bg)', 
+              borderColor: 'var(--border)',
+              borderWidth: '1px',
+              borderStyle: 'solid'
+            }}
+          >
+            <p className="text-center" style={{ color: 'var(--text-secondary)' }}>
+              Loading questions...
+            </p>
+          </div>
+        ) : showQuitPrompt ? (
           <div 
             className="rounded-3xl shadow-xl px-6 py-8 md:px-10 md:py-10"
             style={{ 
