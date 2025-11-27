@@ -2,7 +2,7 @@ import { useQuizHistory } from "@/hooks/useQuizHistory.js";
 import { CATEGORIES } from "@/data/categories";
 import { TrashIcon } from "@heroicons/react/24/outline";
 
-// Map category → icon (from your categories.js)
+// Map category
 const CATEGORY_ICON_MAP = Object.fromEntries(
   CATEGORIES.map((c) => [c.title, c.icon])
 );
@@ -10,7 +10,7 @@ const CATEGORY_ICON_MAP = Object.fromEntries(
 export default function Score() {
   const { history, clearHistory } = useQuizHistory();
 
-  // Nothing taken yet
+  // If no quiz has been taken yet
   if (!history || history.length === 0) {
     return (
       <div className="p-6">
