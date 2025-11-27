@@ -3,7 +3,12 @@ export default function About() {
     <div className="flex justify-center py-10 px-4">
       <div className="w-full max-w-3xl">
         {/* Header / Hero */}
-        <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 rounded-2xl p-6 mb-6 text-white shadow-lg">
+        <div 
+          className="rounded-2xl p-6 mb-6 text-white shadow-lg"
+          style={{ 
+            background: 'var(--sidebar-bg)'
+          }}
+        >
           <div className="flex items-center gap-4">
             <div className="w-16 h-16 flex items-center justify-center rounded-xl bg-white/20 backdrop-blur-md text-3xl">
               🎯
@@ -22,8 +27,16 @@ export default function About() {
         </div>
 
         {/* Main card */}
-        <div className="bg-white rounded-3xl shadow-xl border border-slate-100 px-6 py-6 md:px-10 md:py-8">
-          <p className="text-sm text-slate-600 mb-6 leading-relaxed">
+        <div 
+          className="rounded-3xl shadow-xl px-6 py-6 md:px-10 md:py-8"
+          style={{ 
+            background: 'var(--card-bg)', 
+            borderColor: 'var(--border)',
+            borderWidth: '1px',
+            borderStyle: 'solid'
+          }}
+        >
+          <p className="text-sm mb-6 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
             This project demonstrates a clean, mobile-first UI for taking
             short quizzes. It supports multiple categories, local progress
             saving, and friendly feedback after submission.
@@ -31,30 +44,54 @@ export default function About() {
 
           {/* Feature cards grid */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-            <div className="p-4 rounded-xl border border-slate-100 bg-gradient-to-b from-white to-slate-50 shadow-sm">
+            <div 
+              className="p-4 rounded-xl shadow-sm"
+              style={{ 
+                background: 'var(--surface)', 
+                borderColor: 'var(--border)',
+                borderWidth: '1px',
+                borderStyle: 'solid'
+              }}
+            >
               <div className="text-2xl mb-2">⚡️</div>
-              <h3 className="text-sm font-semibold text-slate-900">Fast & Lightweight</h3>
-              <p className="text-xs text-slate-600 mt-1">Built with Vite for a snappy dev and user experience.</p>
+              <h3 className="text-sm font-semibold" style={{ color: 'var(--text)' }}>Fast & Lightweight</h3>
+              <p className="text-xs mt-1" style={{ color: 'var(--text-secondary)' }}>Built with Vite for a snappy dev and user experience.</p>
             </div>
 
-            <div className="p-4 rounded-xl border border-slate-100 bg-gradient-to-b from-white to-slate-50 shadow-sm">
+            <div 
+              className="p-4 rounded-xl shadow-sm"
+              style={{ 
+                background: 'var(--surface)', 
+                borderColor: 'var(--border)',
+                borderWidth: '1px',
+                borderStyle: 'solid'
+              }}
+            >
               <div className="text-2xl mb-2">💾</div>
-              <h3 className="text-sm font-semibold text-slate-900">Resume Progress</h3>
-              <p className="text-xs text-slate-600 mt-1">Quiz progress is stored locally so you can pick up where you left off.</p>
+              <h3 className="text-sm font-semibold" style={{ color: 'var(--text)' }}>Resume Progress</h3>
+              <p className="text-xs mt-1" style={{ color: 'var(--text-secondary)' }}>Quiz progress is stored locally so you can pick up where you left off.</p>
             </div>
 
-            <div className="p-4 rounded-xl border border-slate-100 bg-gradient-to-b from-white to-slate-50 shadow-sm">
+            <div 
+              className="p-4 rounded-xl shadow-sm"
+              style={{ 
+                background: 'var(--surface)', 
+                borderColor: 'var(--border)',
+                borderWidth: '1px',
+                borderStyle: 'solid'
+              }}
+            >
               <div className="text-2xl mb-2">🎯</div>
-              <h3 className="text-sm font-semibold text-slate-900">Multiple Categories</h3>
-              <p className="text-xs text-slate-600 mt-1">Try different topics (Science, History, Art, etc.) to challenge yourself.</p>
+              <h3 className="text-sm font-semibold" style={{ color: 'var(--text)' }}>Multiple Categories</h3>
+              <p className="text-xs mt-1" style={{ color: 'var(--text-secondary)' }}>Try different topics (Science, History, Art, etc.) to challenge yourself.</p>
             </div>
           </div>
 
-          <hr className="my-4" />
+          <hr className="my-4" style={{ borderColor: 'var(--border)' }} />
 
           {/* Contributors */}
           <div className="mb-4">
-            <h2 className="text-base font-semibold text-slate-900 mb-3">Creators</h2>
+            <h2 className="text-base font-semibold mb-3" style={{ color: 'var(--text)' }}>Creators</h2>
 
             <div className="flex flex-col sm:flex-row flex-wrap gap-4">
               <div className="flex items-center gap-3">
@@ -62,10 +99,10 @@ export default function About() {
                   DT
                 </div>
                 <div>
-                  <div className="text-sm font-medium text-slate-900">
+                  <div className="text-sm font-medium" style={{ color: 'var(--text)' }}>
                     Danil Top
                   </div>
-                  <div className="text-xs text-slate-500">Contributor</div>
+                  <div className="text-xs" style={{ color: 'var(--muted-foreground)' }}>Contributor</div>
                 </div>
               </div>
 
@@ -74,10 +111,10 @@ export default function About() {
                   PE
                 </div>
                 <div>
-                  <div className="text-sm font-medium text-slate-900">
+                  <div className="text-sm font-medium" style={{ color: 'var(--text)' }}>
                     Pichmarina El
                   </div>
-                  <div className="text-xs text-slate-500">Contributor</div>
+                  <div className="text-xs" style={{ color: 'var(--muted-foreground)' }}>Contributor</div>
                 </div>
               </div>
 
@@ -86,10 +123,10 @@ export default function About() {
                   RT
                 </div>
                 <div>
-                  <div className="text-sm font-medium text-slate-900">
+                  <div className="text-sm font-medium" style={{ color: 'var(--text)' }}>
                     Rothrithyvong Thay
                   </div>
-                  <div className="text-xs text-slate-500">Contributor</div>
+                  <div className="text-xs" style={{ color: 'var(--muted-foreground)' }}>Contributor</div>
                 </div>
               </div>
             </div>

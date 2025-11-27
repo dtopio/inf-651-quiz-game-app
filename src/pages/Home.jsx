@@ -48,15 +48,21 @@ export default function Home() {
       <div className="flex flex-col items-center w-full max-w-3xl flex-grow justify-center">
 
         {/* Greeting */}
-        <p className="text-4xl font-bold text-slate-800 mb-6">
+        <p 
+          className="text-4xl font-bold mb-6"
+          style={{ color: 'var(--text)' }}
+        >
           {greeting} 👋
         </p>
 
         {/* HERO */}
-        <div className="
-          bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600
-          rounded-3xl p-10 text-white shadow-xl w-full
-        ">
+        <div 
+          className="rounded-3xl p-10 shadow-xl w-full"
+          style={{ 
+            background: 'var(--hero-bg)',
+            color: 'var(--hero-text)'
+          }}
+        >
           <div className="flex flex-col items-center gap-4">
             <div className="
               w-24 h-24 flex items-center justify-center
@@ -79,30 +85,37 @@ export default function Home() {
         {/* START QUIZ BUTTON */}
         <button
           onClick={() => navigate("/quiz")}
-          className="
-            w-full mt-8 py-4 text-2xl font-semibold rounded-xl
-            bg-gradient-to-r from-indigo-500 to-blue-600
-            text-white shadow-lg hover:shadow-2xl hover:scale-[1.02]
-            transition-all duration-300
-          "
+          className="w-full mt-8 py-4 text-2xl font-semibold rounded-xl text-white shadow-lg hover:shadow-2xl hover:scale-[1.02] transition-all duration-300"
+          style={{ 
+            background: 'var(--accent-gradient)'
+          }}
         >
           Start Quiz →
         </button>
 
       {/* LATEST SCORE */}
       <div
-        className="
-          mt-10 bg-white rounded-2xl shadow-xl
-          border border-slate-200 p-8 w-full
-        "
+        className="mt-10 rounded-2xl shadow-xl p-8 w-full"
+        style={{ 
+          background: 'var(--card-bg)', 
+          borderColor: 'var(--border)',
+          borderWidth: '1px',
+          borderStyle: 'solid'
+        }}
       >
         {latest ? (
           <>
-            <h2 className="text-xl font-semibold text-slate-700 mb-4">
+            <h2 
+              className="text-xl font-semibold mb-4"
+              style={{ color: 'var(--text-secondary)' }}
+            >
               Latest Score
             </h2>
 
-            <h3 className="text-3xl font-bold text-slate-900 mb-2 flex items-center justify-center gap-2">
+            <h3 
+              className="text-3xl font-bold mb-2 flex items-center justify-center gap-2"
+              style={{ color: 'var(--text)' }}
+            >
               <span className="text-4xl">
                 {ICON_MAP[latest.categoryKey] || "📘"}
               </span>
@@ -110,30 +123,41 @@ export default function Home() {
             </h3>
 
             <p
-              className="
-                text-5xl font-extrabold mb-1
-                bg-gradient-to-r from-indigo-600 to-purple-600
-                bg-clip-text text-transparent
-              "
+              className="text-5xl font-extrabold mb-1 bg-clip-text text-transparent"
+              style={{ 
+                backgroundImage: 'var(--accent-text-gradient)'
+              }}
             >
               {latest.percentage}%
             </p>
 
-            <p className="text-xs text-slate-500 mt-3">
+            <p 
+              className="text-xs mt-3"
+              style={{ color: 'var(--muted-foreground)' }}
+            >
               {new Date(latest.timestamp).toLocaleString()}
             </p>
           </>
         ) : (
           <>
-            <h2 className="text-xl font-semibold text-slate-700 mb-4">
+            <h2 
+              className="text-xl font-semibold mb-4"
+              style={{ color: 'var(--text-secondary)' }}
+            >
               Latest Score
             </h2>
 
-            <p className="text-base text-slate-500">
+            <p 
+              className="text-base"
+              style={{ color: 'var(--muted-foreground)' }}
+            >
               No quizzes taken yet.
             </p>
 
-            <p className="text-sm text-slate-400 mt-1">
+            <p 
+              className="text-sm mt-1"
+              style={{ color: 'var(--muted-foreground)' }}
+            >
               Start your first quiz to see your progress here!
             </p>
           </>
@@ -142,16 +166,20 @@ export default function Home() {
 
       {/* QUOTE */}
       <div className="mt-8 mb-4">
-        <div className="
-          px-6 py-4 rounded-2xl bg-white/40
-          backdrop-blur-md shadow-md max-w-lg
-        ">
-          <p className="
-            text-xl font-semibold
-            bg-gradient-to-r from-indigo-500 to-purple-600
-            bg-clip-text text-transparent
-          ">
-            “{quotes[quoteIndex]}”
+        <div 
+          className="px-6 py-4 rounded-2xl backdrop-blur-md shadow-md max-w-lg"
+          style={{ 
+            background: 'var(--card-bg)',
+            opacity: 0.95
+          }}
+        >
+          <p 
+            className="text-xl font-semibold bg-clip-text text-transparent"
+            style={{ 
+              backgroundImage: 'var(--accent-text-gradient)'
+            }}
+          >
+            "{quotes[quoteIndex]}"
           </p>
         </div>
       </div>

@@ -55,15 +55,18 @@ export function Sidebar() {
     <header
       className={`
         fixed inset-x-0 top-0 z-40
-        bg-gradient-to-r from-purple-600 via-fuchsia-500 to-pink-500
         transition-all duration-500 ease-out
         ${hideNav ? "-translate-y-full opacity-0" : "translate-y-0 opacity-100"}
         ${
           hasScrolled
-            ? "shadow-lg shadow-purple-500/30 backdrop-blur-xl bg-opacity-95"
-            : "shadow-none backdrop-blur-none bg-opacity-100"
+            ? "shadow-lg backdrop-blur-xl"
+            : "shadow-none backdrop-blur-none"
         }
       `}
+      style={{
+        background: 'var(--sidebar-bg)',
+        opacity: hasScrolled ? 0.95 : 1
+      }}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
@@ -73,7 +76,7 @@ export function Sidebar() {
             ${hasScrolled ? "py-2 md:py-2" : "py-3 md:py-4"}
           `}
         >
-          <div className="flex items-center gap-2 text-white">
+          <div className="flex items-center gap-2" style={{ color: 'var(--sidebar-text)' }}>
             <div
               className={`
                 flex items-center justify-center rounded-2xl shadow-md
@@ -99,11 +102,15 @@ export function Sidebar() {
                 key={to}
                 to={to}
                 onClick={handleNavClick}
+                style={({ isActive }) => ({
+                  background: isActive ? '#ffffff' : 'rgba(255, 255, 255, 0.15)',
+                  color: isActive ? 'var(--nav-active)' : 'rgba(255, 255, 255, 0.9)',
+                })}
                 className={({ isActive }) =>
                   [
                     "flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all",
-                    "bg-white/15 text-white/90 hover:bg-white/25 shadow-sm",
-                    isActive && "bg-white text-purple-700 shadow-md",
+                    "hover:bg-white/25 shadow-sm",
+                    isActive && "shadow-md",
                   ].join(" ")
                 }
               >
@@ -114,7 +121,8 @@ export function Sidebar() {
           </nav>
 
           <button
-            className="md:hidden inline-flex items-center justify-center rounded-full bg-white/15 p-2 text-white shadow"
+            className="md:hidden inline-flex items-center justify-center rounded-full bg-white/15 p-2 shadow"
+            style={{ color: 'var(--sidebar-text)' }}
             onClick={() => setOpen((prev) => !prev)}
           >
             {open ? <XMarkIcon className="h-5 w-5" /> : <Bars3Icon className="h-5 w-5" />}
@@ -129,11 +137,15 @@ export function Sidebar() {
                   key={to}
                   to={to}
                   onClick={handleNavClick}
+                  style={({ isActive }) => ({
+                    background: isActive ? '#ffffff' : 'rgba(255, 255, 255, 0.1)',
+                    color: isActive ? 'var(--nav-active)' : 'rgba(255, 255, 255, 0.9)',
+                  })}
                   className={({ isActive }) =>
                     [
                       "flex items-center gap-3 px-4 py-2 rounded-2xl text-sm font-medium",
-                      "bg-white/10 text-white/90 hover:bg-white/20 transition-all",
-                      isActive && "bg-white text-purple-700 shadow-md",
+                      "hover:bg-white/20 transition-all",
+                      isActive && "shadow-md",
                     ].join(" ")
                   }
                 >
