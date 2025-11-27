@@ -15,6 +15,31 @@ import {
 } from "@/components/ui";
 
 const PROGRESS_KEY_PREFIX = "quizProgress-";
+const LAST_CATEGORY_KEY = "lastQuizCategory";
+
+function loadLastCategoryKey() {
+  if (typeof window === "undefined") return null;
+  try {
+    return window.localStorage.getItem(LAST_CATEGORY_KEY);
+  } catch {
+    return null;
+  }
+}
+
+function saveLastCategoryKey(categoryKey) {
+  if (typeof window === "undefined") return;
+  try {
+    window.localStorage.setItem(LAST_CATEGORY_KEY, categoryKey);
+  } catch {}
+}
+
+function clearLastCategoryKey() {
+  if (typeof window === "undefined") return;
+  try {
+    window.localStorage.removeItem(LAST_CATEGORY_KEY);
+  } catch {}
+}
+
 
 function getProgressKey(categoryKey) {
   return `${PROGRESS_KEY_PREFIX}${categoryKey}`;
@@ -54,7 +79,15 @@ export default function Quiz() {
   const { addQuizResult } = useQuizHistory();
 
   const passedCategory = location.state?.category || null;
-  const [selectedCategory, setSelectedCategory] = useState(passedCategory);
+  const [selectedCategory, setSelectedCategory] = useState(() => {
+    if (passedCategory) return passedCategory;
+
+    const storedKey = loadLastCategoryKey();
+    if (!storedKey) return null;
+
+    const found = CATEGORIES.find((c) => c.key === storedKey);
+    return found || null;
+  });
   const activeCategory = selectedCategory || passedCategory;
   const categoryKey = activeCategory?.key || "science";
   const categoryTitle = activeCategory?.title || "Science";
@@ -165,6 +198,7 @@ export default function Quiz() {
 
   const handleQuit = () => {
     clearProgress(categoryKey);
+    clearLastCategoryKey();
     setShowResumePrompt(false);
     navigate("/");
   };
@@ -179,7 +213,6 @@ export default function Quiz() {
   const isLast = currentIndex === totalQuestions - 1;
   const allAnswered = Object.keys(answers).length === totalQuestions;
 
-  // Choose category screen (if none selected yet)
   const hasCategory = !!activeCategory;
 
   if (!hasCategory) {
@@ -213,6 +246,7 @@ export default function Quiz() {
                   key={category.key}
                   onClick={() => {
                     setSelectedCategory(category);
+                    saveLastCategoryKey(category.key);
                     setIsSubmitted(false);
                     setCurrentIndex(0);
                     setAnswers({});
@@ -275,6 +309,7 @@ export default function Quiz() {
                       hover:shadow-xl hover:scale-105 transition-all duration-200"
                       onClick={() => {
                         setSelectedCategory(category);
+                        saveLastCategoryKey(category.key);
                         setIsSubmitted(false);
                         setCurrentIndex(0);
                         setAnswers({});
@@ -294,7 +329,6 @@ export default function Quiz() {
     );
   }
 
-  // Quiz 
   return (
     <div className="flex justify-center">
       <div className="w-full max-w-2xl">

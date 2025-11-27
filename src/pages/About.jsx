@@ -55,27 +55,40 @@ export default function About() {
           {/* Contributors */}
           <div className="mb-4">
             <h2 className="text-base font-semibold text-slate-900 mb-3">Creators</h2>
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center font-semibold">DT</div>
-                <div>
-              <div className="text-sm font-medium text-slate-900">Danil Top</div>
-              <div className="text-xs text-slate-500">Contributor</div>
-                </div>
-              </div>
 
+            <div className="flex flex-col sm:flex-row flex-wrap gap-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-purple-600 text-white flex items-center justify-center font-semibold">PE</div>
+                <div className="w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center font-semibold">
+                  DT
+                </div>
                 <div>
-                  <div className="text-sm font-medium text-slate-900">Pichmarina El</div>
+                  <div className="text-sm font-medium text-slate-900">
+                    Danil Top
+                  </div>
                   <div className="text-xs text-slate-500">Contributor</div>
                 </div>
               </div>
 
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-emerald-600 text-white flex items-center justify-center font-semibold">RT</div>
+                <div className="w-10 h-10 rounded-full bg-purple-600 text-white flex items-center justify-center font-semibold">
+                  PE
+                </div>
                 <div>
-                  <div className="text-sm font-medium text-slate-900">Rothrithyvong Thay</div>
+                  <div className="text-sm font-medium text-slate-900">
+                    Pichmarina El
+                  </div>
+                  <div className="text-xs text-slate-500">Contributor</div>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-emerald-600 text-white flex items-center justify-center font-semibold">
+                  RT
+                </div>
+                <div>
+                  <div className="text-sm font-medium text-slate-900">
+                    Rothrithyvong Thay
+                  </div>
                   <div className="text-xs text-slate-500">Contributor</div>
                 </div>
               </div>

@@ -1,123 +1,150 @@
-import * as React from "react";
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { cn } from "@/lib/utils";
-
 import {
   HomeIcon,
   QuestionMarkCircleIcon,
   StarIcon,
   Cog6ToothIcon,
   InformationCircleIcon,
-  XMarkIcon,
   Bars3Icon,
+  XMarkIcon,
 } from "@heroicons/react/24/outline";
 
-export const Sidebar = React.forwardRef(
-  ({ className, isOpen, onToggle, ...props }, ref) => {
-    return (
-      <>
-        {/* Hamburger thingy */}
-        <button
-          className="
-            fixed top-5 left-5 z-50 
-            p-2 bg-purple-700 text-white 
-            rounded-md shadow-lg
-          "
-          onClick={onToggle}
-        >
-          {isOpen ? (
-            <XMarkIcon className="w-6 h-6" />
-          ) : (
-            <Bars3Icon className="w-6 h-6" />
-          )}
-        </button>
+export function Sidebar() {
+  const [open, setOpen] = useState(false);
+  const [hideNav, setHideNav] = useState(false);
+  const [hasScrolled, setHasScrolled] = useState(false);
 
-        {/* Sidebar */}
-        <div
-          ref={ref}
-          className={cn(
-            "fixed top-0 left-0 h-screen w-64",
-            "bg-gradient-to-b from-purple-700/70 to-purple-900/70 backdrop-blur-xl",
-            "border-r border-purple-300/20 shadow-2xl",
-            "transition-transform duration-300",
-            isOpen ? "translate-x-0" : "-translate-x-full",
-            "z-40",
-            className
-          )}
-          {...props}
-        >
-          <SidebarHeader>Quiz Game</SidebarHeader>
+  useEffect(() => {
+    let lastY = window.scrollY;
 
-          <nav className="flex flex-col mt-6 gap-2 px-4">
-            <SidebarLink to="/" icon={<HomeIcon className="w-5 h-5" />}>
-              Home
-            </SidebarLink>
+    const handleScroll = () => {
+      const currentY = window.scrollY;
 
-            <SidebarLink
-              to="/quiz"
-              icon={<QuestionMarkCircleIcon className="w-5 h-5" />}
-            >
-              Quiz
-            </SidebarLink>
+      setHasScrolled(currentY > 20);
 
-            <SidebarLink to="/score" icon={<StarIcon className="w-5 h-5" />}>
-              Score
-            </SidebarLink>
+      const delta = currentY - lastY;
 
-            <SidebarLink
-              to="/settings"
-              icon={<Cog6ToothIcon className="w-5 h-5" />}
-            >
-              Settings
-            </SidebarLink>
-
-            <SidebarLink
-              to="/about"
-              icon={<InformationCircleIcon className="w-5 h-5" />}
-            >
-              About
-            </SidebarLink>
-          </nav>
-        </div>
-      </>
-    );
-  });
-Sidebar.displayName = "Sidebar";
-
-export const SidebarHeader = React.forwardRef(
-  ({ className, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn(
-        "p-6 pl-20 text-2xl font-bold tracking-wide text-white/90",
-        "border-b border-white/20",
-        className
-      )}
-      {...props}
-    />
-  )
-);
-SidebarHeader.displayName = "SidebarHeader";
-
-export const SidebarLink = React.forwardRef(
-  ({ className, to, icon, children, ...props }, ref) => (
-    <NavLink
-      ref={ref}
-      to={to}
-      className={({ isActive }) =>
-        cn(
-          "flex items-center gap-3 p-3 rounded-lg transition-all",
-          "text-white/90 hover:text-white",
-          "hover:bg-white/10 active:scale-[0.98]",
-          isActive && "bg-white/20 backdrop-blur-md font-semibold shadow-inner",
-          className
-        )
+      if (delta > 10 && currentY > 100) {
+        setHideNav(true);
       }
-      {...props}
+      else if (delta < -10 || currentY < 100) {
+        setHideNav(false);
+      }
+
+      lastY = currentY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const links = [
+    { to: "/", label: "Home", icon: HomeIcon },
+    { to: "/quiz", label: "Quiz", icon: QuestionMarkCircleIcon },
+    { to: "/score", label: "Score", icon: StarIcon },
+    { to: "/settings", label: "Settings", icon: Cog6ToothIcon },
+    { to: "/about", label: "About", icon: InformationCircleIcon },
+  ];
+
+  const handleNavClick = () => {
+    if (window.innerWidth < 768) setOpen(false);
+  };
+
+  return (
+    <header
+      className={`
+        fixed inset-x-0 top-0 z-40
+        bg-gradient-to-r from-purple-600 via-fuchsia-500 to-pink-500
+        transition-all duration-500 ease-out
+        ${hideNav ? "-translate-y-full opacity-0" : "translate-y-0 opacity-100"}
+        ${
+          hasScrolled
+            ? "shadow-lg shadow-purple-500/30 backdrop-blur-xl bg-opacity-95"
+            : "shadow-none backdrop-blur-none bg-opacity-100"
+        }
+      `}
     >
-      {icon}
-      {children}
-    </NavLink>
-  )
-);
-SidebarLink.displayName = "SidebarLink";
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          className={`
+            flex items-center justify-between gap-4
+            transition-all duration-300
+            ${hasScrolled ? "py-2 md:py-2" : "py-3 md:py-4"}
+          `}
+        >
+          <div className="flex items-center gap-2 text-white">
+            <div
+              className={`
+                flex items-center justify-center rounded-2xl shadow-md
+                transition-all duration-300
+                ${hasScrolled ? "h-8 w-8 text-xl" : "h-9 w-9 text-2xl"}
+                bg-white/15
+              `}
+            >
+              🧠
+            </div>
+
+            <div className="leading-tight">
+              <span className="text-xl font-semibold tracking-wide">
+                Quiz Game
+              </span>
+              <div className="text-[10px] opacity-80">Learn something new</div>
+            </div>
+          </div>
+
+          <nav className="hidden md:flex items-center gap-3">
+            {links.map(({ to, label, icon: Icon }) => (
+              <NavLink
+                key={to}
+                to={to}
+                onClick={handleNavClick}
+                className={({ isActive }) =>
+                  [
+                    "flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all",
+                    "bg-white/15 text-white/90 hover:bg-white/25 shadow-sm",
+                    isActive && "bg-white text-purple-700 shadow-md",
+                  ].join(" ")
+                }
+              >
+                <Icon className="h-5 w-5" />
+                {label}
+              </NavLink>
+            ))}
+          </nav>
+
+          <button
+            className="md:hidden inline-flex items-center justify-center rounded-full bg-white/15 p-2 text-white shadow"
+            onClick={() => setOpen((prev) => !prev)}
+          >
+            {open ? <XMarkIcon className="h-5 w-5" /> : <Bars3Icon className="h-5 w-5" />}
+          </button>
+        </div>
+
+        {open && (
+          <nav className="md:hidden pb-3">
+            <div className="flex flex-col gap-2">
+              {links.map(({ to, label, icon: Icon }) => (
+                <NavLink
+                  key={to}
+                  to={to}
+                  onClick={handleNavClick}
+                  className={({ isActive }) =>
+                    [
+                      "flex items-center gap-3 px-4 py-2 rounded-2xl text-sm font-medium",
+                      "bg-white/10 text-white/90 hover:bg-white/20 transition-all",
+                      isActive && "bg-white text-purple-700 shadow-md",
+                    ].join(" ")
+                  }
+                >
+                  <Icon className="h-5 w-5" />
+                  {label}
+                </NavLink>
+              ))}
+            </div>
+          </nav>
+        )}
+      </div>
+    </header>
+  );
+}
