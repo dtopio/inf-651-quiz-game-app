@@ -19,20 +19,23 @@ export function ThemeProvider({ children }) {
   });
 
   useEffect(() => {
-    // Apply theme to document root
     document.documentElement.setAttribute("data-theme", theme);
-    
-    // Save to localStorage
+  }, [theme]);
+
+  const saveTheme = (value) => {
+    const themeToSave = value ?? theme;
+    if (typeof window === "undefined") return;
     try {
-      window.localStorage.setItem(THEME_KEY, theme);
+      window.localStorage.setItem(THEME_KEY, themeToSave);
     } catch {
       // Ignore localStorage errors
     }
-  }, [theme]);
+  };
 
   const value = {
     theme,
     setTheme,
+    saveTheme,
   };
 
   return (
