@@ -1,26 +1,40 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 const SettingsContext = createContext();
 
+const LIST_VIEW_KEY = "settings-listView";
+
 export function SettingsProvider({ children }) {
-  const [listView, setListView] = useState(false);
+  const [listView, setListView] = useState(() => {
+    if (typeof window === "undefined") return false;
+    try {
+      const saved = window.localStorage.getItem(LIST_VIEW_KEY);
+      return saved !== null ? JSON.parse(saved) : false;
+    } catch {
+      return false;
+    }
+  });
 
-  useEffect(() => {
-    const saved = localStorage.getItem("settings-listView");
-    if (saved !== null) setListView(JSON.parse(saved));
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("settings-listView", JSON.stringify(listView));
-  }, [listView]);
+  const saveSettings = () => {
+    if (typeof window === "undefined") return;
+    try {
+      window.localStorage.setItem(LIST_VIEW_KEY, JSON.stringify(listView));
+    } catch {
+      // ignore
+    }
+  };
 
   const resetAllData = () => {
-    localStorage.clear();
+    if (typeof window !== "undefined") {
+      window.localStorage.clear();
+    }
     window.location.reload();
   };
 
   return (
-    <SettingsContext.Provider value={{ listView, setListView, resetAllData }}>
+    <SettingsContext.Provider
+      value={{ listView, setListView, saveSettings, resetAllData }}
+    >
       {children}
     </SettingsContext.Provider>
   );
