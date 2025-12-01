@@ -253,10 +253,10 @@ export default function Quiz() {
             <h1 
               className="mb-4 text-5xl font-extrabold leading-[1.2] pb-1"
               style={{ 
-                color: theme === 'christmas' ? '#0b5e15' : 'transparent',
-                backgroundImage: theme === 'christmas' ? 'none' : 'var(--accent-text-gradient)',
-                backgroundClip: theme === 'christmas' ? 'unset' : 'text',
-                WebkitBackgroundClip: theme === 'christmas' ? 'unset' : 'text'
+                color: theme === 'christmas' ? '#0b5e15' : theme === 'dark' ? '#ffffff' : 'transparent',
+                backgroundImage: theme === 'christmas' || theme === 'dark' ? 'none' : 'var(--accent-text-gradient)',
+                backgroundClip: theme === 'christmas' || theme === 'dark' ? 'unset' : 'text',
+                WebkitBackgroundClip: theme === 'christmas' || theme === 'dark' ? 'unset' : 'text'
               }}
             >
               Pick a Category

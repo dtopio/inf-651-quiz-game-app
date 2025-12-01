@@ -1,6 +1,7 @@
 import { useQuizHistory } from "@/hooks/useQuizHistory.js";
 import { CATEGORIES } from "@/data/categories";
 import { TrashIcon } from "@heroicons/react/24/outline";
+import { useTheme } from "@/context/ThemeContext.jsx";
 
 // Map category
 const CATEGORY_ICON_MAP = Object.fromEntries(
@@ -9,12 +10,21 @@ const CATEGORY_ICON_MAP = Object.fromEntries(
 
 export default function Score() {
   const { history, clearHistory } = useQuizHistory();
+  const { theme } = useTheme();
 
   // If no quiz has been taken yet
   if (!history || history.length === 0) {
     return (
       <div className="p-6">
-        <h1 className="text-3xl font-bold mb-4" style={{ color: 'var(--text)' }}>Your Quiz Scores</h1>
+        <h1 
+          className="text-3xl font-bold mb-4"
+          style={{ 
+            color: theme === 'christmas' ? '#0b5e15' : theme === 'dark' ? '#ffffff' : 'transparent',
+            backgroundImage: theme === 'christmas' || theme === 'dark' ? 'none' : 'var(--accent-text-gradient)',
+            backgroundClip: theme === 'christmas' || theme === 'dark' ? 'unset' : 'text',
+            WebkitBackgroundClip: theme === 'christmas' || theme === 'dark' ? 'unset' : 'text'
+          }}
+        >Your Quiz Scores</h1>
       
         <div 
           className="p-6 rounded-2xl shadow"
@@ -50,7 +60,15 @@ export default function Score() {
     <div className="p-6">
       {/* Title + Clear Button */}
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-3xl font-bold" style={{ color: 'var(--text)' }}>Your Quiz Performance</h1>
+        <h1 
+          className="text-3xl font-bold"
+          style={{ 
+            color: theme === 'christmas' ? '#0b5e15' : theme === 'dark' ? '#ffffff' : 'transparent',
+            backgroundImage: theme === 'christmas' || theme === 'dark' ? 'none' : 'var(--accent-text-gradient)',
+            backgroundClip: theme === 'christmas' || theme === 'dark' ? 'unset' : 'text',
+            WebkitBackgroundClip: theme === 'christmas' || theme === 'dark' ? 'unset' : 'text'
+          }}
+        >Your Quiz Performance</h1>
 
         <button
           onClick={clearHistory}
