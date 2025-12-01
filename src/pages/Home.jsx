@@ -50,12 +50,21 @@ export default function Home() {
       <div className="flex flex-col items-center w-full max-w-3xl flex-grow justify-center">
 
         {/* Greeting */}
-        <p 
-          className="text-4xl font-bold mb-6"
-          style={{ color: theme === 'christmas' ? '#0b5e15' : 'var(--text)' }}
-        >
-          {greeting} {theme === 'christmas' ? '🎄' : '👋'}
-        </p>
+        <div className="text-4xl font-bold mb-6 flex items-center justify-center gap-2">
+          <span
+            style={{ 
+              color: theme === 'christmas' ? '#0b5e15' : theme === 'dark' ? '#ffffff' : 'transparent',
+              backgroundImage: theme === 'christmas' || theme === 'dark' ? 'none' : 'var(--accent-text-gradient)',
+              backgroundClip: theme === 'christmas' || theme === 'dark' ? 'unset' : 'text',
+              WebkitBackgroundClip: theme === 'christmas' || theme === 'dark' ? 'unset' : 'text'
+            }}
+          >
+            {greeting}
+          </span>
+          <span>
+            {theme === 'christmas' ? '🎄' : '👋'}
+          </span>
+        </div>
 
         {/* HERO */}
         <div 
