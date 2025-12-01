@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { useTheme } from "@/context/ThemeContext.jsx";
 import {
   HomeIcon,
@@ -91,7 +91,7 @@ export function Sidebar() {
             ${hasScrolled ? "py-2 md:py-2" : "py-3 md:py-4"}
           `}
         >
-          <div className="flex items-center gap-2" style={{ color: 'var(--sidebar-text)' }}>
+          <Link to="/" className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity" style={{ color: 'var(--sidebar-text)' }}>
             <div
               className={`
                 flex items-center justify-center rounded-2xl shadow-md
@@ -111,7 +111,7 @@ export function Sidebar() {
                 {theme === 'christmas' ? 'Festive Learning' : 'Learn something new'}
               </div>
             </div>
-          </div>
+          </Link>
 
           <nav className="hidden md:flex items-center gap-3">
             {/* eslint-disable-next-line no-unused-vars */}
