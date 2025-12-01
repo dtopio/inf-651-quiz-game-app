@@ -54,6 +54,15 @@ export function Sidebar() {
   };
 
   const handleNavLinkClick = (e, to) => {
+    // Check if Quiz is active and should show confirmation
+    if (window.__quizHasActiveSession && to !== '/quiz') {
+      e.preventDefault();
+      window.__setPendingQuizPath(to);
+      window.__showQuizNavigationConfirm(true);
+      handleNavClick();
+      return;
+    }
+
     // Check if Settings page has unsaved changes
     if (window.__settingsHasUnsavedChanges && to !== '/settings') {
       e.preventDefault();
@@ -64,6 +73,10 @@ export function Sidebar() {
       }
     }
     handleNavClick();
+  };
+
+  const handleLogoClick = (e) => {
+    handleNavLinkClick(e, '/');
   };
 
   return (
@@ -91,7 +104,7 @@ export function Sidebar() {
             ${hasScrolled ? "py-2 md:py-2" : "py-3 md:py-4"}
           `}
         >
-          <Link to="/" className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity" style={{ color: 'var(--sidebar-text)' }}>
+          <Link to="/" onClick={handleLogoClick} className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity" style={{ color: 'var(--sidebar-text)' }}>
             <div
               className={`
                 flex items-center justify-center rounded-2xl shadow-md
