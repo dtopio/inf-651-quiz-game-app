@@ -24,7 +24,12 @@ export default function Settings() {
     <div className="max-w-xl mx-auto">
       <h1
         className="text-3xl font-bold mb-6"
-        style={{ color: "var(--text)" }}
+        style={{
+          color: theme === 'christmas' ? '#0b5e15' : theme === 'dark' ? '#ffffff' : 'transparent',
+          backgroundImage: theme === 'christmas' || theme === 'dark' ? 'none' : 'var(--accent-text-gradient)',
+          backgroundClip: theme === 'christmas' || theme === 'dark' ? 'unset' : 'text',
+          WebkitBackgroundClip: theme === 'christmas' || theme === 'dark' ? 'unset' : 'text'
+        }}
       >
         Settings
       </h1>
