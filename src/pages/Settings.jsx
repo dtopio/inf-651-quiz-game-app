@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSettings } from "@/context/SettingsContext.jsx";
 import { useTheme } from "@/context/ThemeContext.jsx";
 import { ConfirmModal } from "@/components/ui/confirm-modal.jsx";
@@ -6,19 +7,81 @@ import { ConfirmModal } from "@/components/ui/confirm-modal.jsx";
 export default function Settings() {
   const { listView, setListView, saveSettings, resetAllData } = useSettings();
   const { theme, setTheme, saveTheme } = useTheme();
+  const navigate = useNavigate();
   const [saveOpen, setSaveOpen] = useState(false);
   const [resetOpen, setResetOpen] = useState(false);
+  const [navigationOpen, setNavigationOpen] = useState(false);
+  const [pendingPath, setPendingPath] = useState(null);
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+  const [originalTheme] = useState(theme);
+  const [originalListView] = useState(listView);
 
   const handleSaveSettings = () => {
     // kept for backward-compat if called directly
     saveTheme();
     saveSettings();
+    // Reset unsaved changes flag
+    setHasUnsavedChanges(false);
+  };
+
+  const handleDiscardChanges = () => {
+    // Revert to original values without saving
+    setTheme(originalTheme);
+    setListView(originalListView);
+    setHasUnsavedChanges(false);
   };
 
   const handleReset = () => {
     // kept for backward-compat if called directly
     resetAllData();
   };
+
+  // Track unsaved changes
+  useEffect(() => {
+    const themeChanged = theme !== originalTheme;
+    const layoutChanged = listView !== originalListView;
+    setHasUnsavedChanges(themeChanged || layoutChanged);
+  }, [theme, listView, originalTheme, originalListView]);
+
+  // Store pending navigation path globally so sidebar can access it
+  useEffect(() => {
+    if (hasUnsavedChanges) {
+      // Store the current state to prevent navigation
+      window.__settingsHasUnsavedChanges = true;
+      window.__showSettingsConfirm = setNavigationOpen;
+      window.__setPendingSettingsPath = setPendingPath;
+    } else {
+      window.__settingsHasUnsavedChanges = false;
+    }
+  }, [hasUnsavedChanges]);
+
+  // Intercept all navigation and show confirmation if there are unsaved changes
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      if (hasUnsavedChanges) {
+        e.preventDefault();
+        e.returnValue = "";
+        return "";
+      }
+    };
+
+    const handlePopState = (e) => {
+      if (hasUnsavedChanges) {
+        e.preventDefault();
+        setNavigationOpen(true);
+        // Prevent the navigation
+        window.history.pushState(null, "", window.location.pathname);
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, [hasUnsavedChanges]);
 
   return (
     <div className="max-w-xl mx-auto">
@@ -185,6 +248,27 @@ export default function Settings() {
           confirmText="Confirm"
           confirmColor="bg-red-600"
           confirmHover="hover:bg-red-700"
+        />
+
+        <ConfirmModal
+          isOpen={navigationOpen}
+          title="Leave Settings?"
+          message="You're leaving the Settings page. Make sure to save your changes first!"
+          onConfirm={() => {
+            setNavigationOpen(false);
+            handleDiscardChanges();
+            if (pendingPath) {
+              navigate(pendingPath);
+            }
+          }}
+          onCancel={() => {
+            setNavigationOpen(false);
+            setPendingPath(null);
+          }}
+          confirmText="Leave"
+          cancelText="Stay"
+          confirmColor="bg-orange-600"
+          confirmHover="hover:bg-orange-700"
         />
       </div>
     </div>

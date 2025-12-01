@@ -53,6 +53,19 @@ export function Sidebar() {
     if (window.innerWidth < 768) setOpen(false);
   };
 
+  const handleNavLinkClick = (e, to) => {
+    // Check if Settings page has unsaved changes
+    if (window.__settingsHasUnsavedChanges && to !== '/settings') {
+      e.preventDefault();
+      // Trigger the confirmation modal
+      if (window.__showSettingsConfirm) {
+        window.__setPendingSettingsPath(to);
+        window.__showSettingsConfirm(true);
+      }
+    }
+    handleNavClick();
+  };
+
   return (
     <header
       className={`
@@ -106,7 +119,7 @@ export function Sidebar() {
               <NavLink
                 key={to}
                 to={to}
-                onClick={handleNavClick}
+                onClick={(e) => handleNavLinkClick(e, to)}
                 style={({ isActive }) => ({
                   background: isActive ? '#ffffff' : 'rgba(255, 255, 255, 0.15)',
                   color: isActive ? 'var(--nav-active)' : 'rgba(255, 255, 255, 0.9)',
@@ -142,7 +155,7 @@ export function Sidebar() {
                 <NavLink
                   key={to}
                   to={to}
-                  onClick={handleNavClick}
+                  onClick={(e) => handleNavLinkClick(e, to)}
                   style={({ isActive }) => ({
                     background: isActive ? '#ffffff' : 'rgba(255, 255, 255, 0.1)',
                     color: isActive ? 'var(--nav-active)' : 'rgba(255, 255, 255, 0.9)',
