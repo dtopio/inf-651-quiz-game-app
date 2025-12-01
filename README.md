@@ -15,11 +15,14 @@ The app includes **5 main pages/views** and demonstrates basic React concepts li
 * **Score Page**: Shows the user's total score at the end of the quiz.
 * **About Page**: Information about the app and its creators.
 * **Settings Page**: Allows users to reset the quiz or change simple settings (like theme or difficulty).
+* **Quiz History**: Persistent tracking of completed quizzes with scores and timestamps (saved to browser localStorage).
+* **Theme Support**: Light and dark theme toggling for better user experience.
 
 Other functionalities:
 
 * Navigation between pages using React Router.
-* Basic state management using `useState`.
+* Advanced state management using Context API and `useState`.
+* Persistent data storage using browser localStorage.
 * Conditional rendering to show different views based on user progress.
 
 ---
@@ -62,10 +65,13 @@ Other functionalities:
 
 ## Technologies
 
-* ReactJS
-* React Router
-* TailwindCSS for styling
+* ReactJS (v19)
+* React Router (v7) for client-side routing
+* Context API for state management
+* TailwindCSS (v4) for styling with animations
 * `useState` and `useEffect` hooks
+* localStorage API for data persistence
+* Vite for fast development and building
 
 ---
 
@@ -84,6 +90,30 @@ Before you run this project locally, make sure you have:
 - Git to clone and manage the repository.
 
 This project uses Vite as the dev server. The correct command to start the app in development is `npm run dev` (not `npm start`).
+
+---
+
+## Recent Updates
+
+### App Logo & Branding
+- Updated favicon from default Vite logo to custom brain icon (`brain2.png`) for better brand identity
+
+### Quiz History Tracking ✨
+- Added persistent quiz history tracking using localStorage
+- Users can now view their past quiz attempts, scores, and categories taken
+- Quiz history is automatically saved and restored between sessions
+- Users can clear their history from the Settings page
+
+### Code Organization & Clean-up
+- Refactored context management with dedicated providers:
+  - `QuizHistoryContext.jsx` - Quiz history state and persistence
+  - `ThemeContext.jsx` - Theme switching (light/dark mode)
+  - `SettingsContext.jsx` - User settings management
+- Improved component structure with proper separation of concerns
+- Added custom hooks for cleaner component logic (`useQuizHistory.js`)
+- Updated styling with Tailwind CSS for better consistency
+
+---
 
 ## Teammates guide — quick setup
 
