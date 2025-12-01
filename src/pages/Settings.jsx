@@ -1,24 +1,22 @@
+import { useState } from "react";
 import { useSettings } from "@/context/SettingsContext.jsx";
 import { useTheme } from "@/context/ThemeContext.jsx";
+import { ConfirmModal } from "@/components/ui/confirm-modal.jsx";
 
 export default function Settings() {
   const { listView, setListView, saveSettings, resetAllData } = useSettings();
   const { theme, setTheme, saveTheme } = useTheme();
+  const [saveOpen, setSaveOpen] = useState(false);
+  const [resetOpen, setResetOpen] = useState(false);
 
   const handleSaveSettings = () => {
-    const ok = window.confirm("Confirm saving your settings?");
-    if (!ok) return;
-
+    // kept for backward-compat if called directly
     saveTheme();
     saveSettings();
   };
 
   const handleReset = () => {
-    const confirmed = window.confirm(
-      "Are you sure? This action can't be undone."
-    );
-    if (!confirmed) return;
-
+    // kept for backward-compat if called directly
     resetAllData();
   };
 
@@ -147,19 +145,47 @@ export default function Settings() {
 
         <div className="flex flex-col sm:flex-row gap-3">
           <button
-            onClick={handleSaveSettings}
+            onClick={() => setSaveOpen(true)}
             className="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700"
           >
             Save Setting Preference
           </button>
 
           <button
-            onClick={handleReset}
+            onClick={() => setResetOpen(true)}
             className="px-4 py-2 bg-red-600 text-white font-semibold rounded-lg shadow hover:bg-red-700"
           >
             Reset Quiz History &amp; Settings
           </button>
         </div>
+
+        <ConfirmModal
+          isOpen={saveOpen}
+          title="Save settings?"
+          message="Save your current theme and layout settings?"
+          onConfirm={() => {
+            handleSaveSettings();
+            setSaveOpen(false);
+          }}
+          onCancel={() => setSaveOpen(false)}
+          confirmText="Confirm"
+          confirmColor="bg-blue-600"
+          confirmHover="hover:bg-blue-700"
+        />
+
+        <ConfirmModal
+          isOpen={resetOpen}
+          title="Reset all data?"
+          message="Are you sure? This action can't be undone."
+          onConfirm={() => {
+            handleReset();
+            setResetOpen(false);
+          }}
+          onCancel={() => setResetOpen(false)}
+          confirmText="Confirm"
+          confirmColor="bg-red-600"
+          confirmHover="hover:bg-red-700"
+        />
       </div>
     </div>
   );
