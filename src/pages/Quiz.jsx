@@ -14,6 +14,7 @@ import {
   CardTitle,
   CardDescription,
   CardFooter,
+  ConfirmModal,
 } from "@/components/ui";
 
 const PROGRESS_KEY_PREFIX = "quizProgress-";
@@ -115,6 +116,8 @@ export default function Quiz() {
   
   const [showResumePrompt, setShowResumePrompt] = useState(false);
   const [showQuitPrompt, setShowQuitPrompt] = useState(false);
+  const [showNavigationConfirm, setShowNavigationConfirm] = useState(false);
+  const [pendingNavigationPath, setPendingNavigationPath] = useState(null);
 
   const currentQuestion = questions[currentIndex];
 
@@ -153,6 +156,28 @@ export default function Quiz() {
       setShowResumePrompt(true);
     }
   }, [activeCategory, categoryKey, isSubmitted]);
+
+  // Set up global functions for sidebar to trigger navigation confirmation
+  useEffect(() => {
+    if (!activeCategory || isSubmitted) {
+      // If quiz is not active, remove global functions
+      window.__quizHasActiveSession = false;
+      window.__showQuizNavigationConfirm = null;
+      window.__setPendingQuizPath = null;
+      return;
+    }
+
+    // Expose functions that sidebar can call to trigger the modal
+    window.__quizHasActiveSession = true;
+    window.__showQuizNavigationConfirm = setShowNavigationConfirm;
+    window.__setPendingQuizPath = setPendingNavigationPath;
+
+    return () => {
+      window.__quizHasActiveSession = false;
+      window.__showQuizNavigationConfirm = null;
+      window.__setPendingQuizPath = null;
+    };
+  }, [activeCategory, isSubmitted]);
 
   const handleOptionSelect = (optionIndex) => {
     if (isSubmitted) return;
@@ -232,6 +257,21 @@ export default function Quiz() {
     navigate("/");
   };
 
+  const handleNavigationConfirm = () => {
+    // User confirmed they want to leave
+    // Keep the progress saved so they can resume later
+    // Just close the modal and navigate
+    setShowNavigationConfirm(false);
+    if (pendingNavigationPath) {
+      navigate(pendingNavigationPath);
+    }
+  };
+
+  const handleNavigationCancel = () => {
+    // User cancelled navigation, stay on quiz
+    setShowNavigationConfirm(false);
+    setPendingNavigationPath(null);
+  };
 
   const correctCount = questions.reduce((sum, q, index) => {
     const chosen = answers[index];
@@ -833,6 +873,19 @@ export default function Quiz() {
             </div>
           </div>
         )}
+
+        {/* Navigation confirmation modal */}
+        <ConfirmModal
+          isOpen={showNavigationConfirm}
+          title="Leave quiz?"
+          message="Your progress has been saved. You can resume this quiz anytime from where you left off."
+          onConfirm={handleNavigationConfirm}
+          onCancel={handleNavigationCancel}
+          confirmText="Leave"
+          cancelText="Keep Answering"
+          confirmColor="bg-red-600"
+          confirmHover="hover:bg-red-700"
+        />
       </div>
     </div>
   );
