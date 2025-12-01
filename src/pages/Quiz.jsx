@@ -106,7 +106,6 @@ export default function Quiz() {
   const categoryInfo = CATEGORIES.find((c) => c.key === categoryKey);
   const categoryIcon = categoryInfo?.icon;
 
-  // State for quiz questions - randomized once per quiz session
   const [questions, setQuestions] = useState([]);
   const totalQuestions = questions.length;
 

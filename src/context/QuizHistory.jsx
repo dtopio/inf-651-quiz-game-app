@@ -10,7 +10,7 @@ export function QuizHistoryProvider({ children }) {
     if (stored) {
       setHistory(JSON.parse(stored));
     } else {
-      setHistory([]); // no history yet
+      setHistory([]); 
     }
   }, []);
 
@@ -27,8 +27,8 @@ export function QuizHistoryProvider({ children }) {
   };
 
   const clearHistory = () => {
-    setHistory([]);               // reset in state
-    localStorage.removeItem("quizHistory"); // clear localStorage
+    setHistory([]);    
+    localStorage.removeItem("quizHistory");
   };
 
   // Loading state
@@ -38,7 +38,7 @@ export function QuizHistoryProvider({ children }) {
 
   return (
     <QuizHistoryContext.Provider
-      value={{ history, addQuizResult, clearHistory }} // <-- added here
+      value={{ history, addQuizResult, clearHistory }}
     >
       {children}
     </QuizHistoryContext.Provider>
