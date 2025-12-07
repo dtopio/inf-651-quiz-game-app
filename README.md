@@ -8,6 +8,8 @@ The app includes **5 main pages/views** and demonstrates basic React concepts li
 
 ---
 
+Link: https://inf-651-quiz-game-app.vercel.app/
+
 ## Features
 
 * **Home Page**: Introduction and start button to begin the quiz.
